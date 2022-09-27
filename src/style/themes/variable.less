@@ -1,0 +1,14 @@
+@plugin '../plugins/index.js';
+
+@import '../color/colors.less';
+
+@outline-fade: 20%;
+
+// -------- Colors -----------
+// >>> Primary
+@primary-color: @blue-6;
+@primary-color-hover: colorPalette(@primary-color, 5);
+@primary-color-active: colorPalette(@primary-color, 7);
+@primary-color-outline: fade(@base-primary, @outline-fade);
+
+@processing-color: @blue-6;

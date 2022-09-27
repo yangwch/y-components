@@ -1,0 +1,17 @@
+@import '../../style/themes/index.less';
+@import './mixin.less';
+
+@prefix: getPrefix();
+@btn-prefix-cls: ~'@{prefix}-btn';
+
+.@{btn-prefix-cls} {
+  .btn();
+  .btn-default();
+
+  >span {
+    display: inline-block;
+  }
+  &-primary {
+    .btn-primary();
+  }
+}
