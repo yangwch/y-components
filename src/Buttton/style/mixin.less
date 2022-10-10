@@ -1,9 +1,6 @@
-
 .button-size(@height; @padding-horizontal; @font-size; @border-radius) {
-  @padding-vertical: max(
-    (round(((@height - @font-size * @line-height-base) / 2) * 10) / 10) - @border-width-base,
-    0
-  );
+  @padding-vertical: max((round(((@height - @font-size * @line-height-base) / 2) * 10) / 10) - @border-width-base,
+    0);
   height: @height;
   padding: @padding-vertical @padding-horizontal;
   font-size: @font-size;
@@ -14,11 +11,13 @@
 .button-color(@color; @background; @border) {
   color: @color;
   border-color: @border; // a inside Button which only work in Chrome
-  & when not(@background = null) {
+
+  & when not(@background =null) {
     background: @background;
   }
+
   // http://stackoverflow.com/a/17253457
-  > a:only-child {
+  >a:only-child {
     color: currentcolor;
 
     &::after {
@@ -48,9 +47,7 @@
   transition: all 0.3s @ease-in-out;
   user-select: none;
   touch-action: manipulation;
-  .button-size(
-    @btn-height-base; @btn-padding-horizontal-base; @font-size-base; @btn-border-radius-base
-  );
+  .button-size(@btn-height-base; @btn-padding-horizontal-base; @font-size-base; @btn-border-radius-base );
   // > .@{iconfont-css-prefix} {
   //   line-height: 1;
   // }
@@ -73,21 +70,17 @@
   &[disabled] {
     cursor: not-allowed;
 
-    > * {
+    >* {
       pointer-events: none;
     }
   }
 
   &-lg {
-    .button-size(
-      @btn-height-lg; @btn-padding-horizontal-lg; @btn-font-size-lg; @btn-border-radius-base
-    );
+    .button-size(@btn-height-lg; @btn-padding-horizontal-lg; @btn-font-size-lg; @btn-border-radius-base );
   }
 
   &-sm {
-    .button-size(
-      @btn-height-sm; @btn-padding-horizontal-sm; @btn-font-size-sm; @btn-border-radius-sm
-    );
+    .button-size(@btn-height-sm; @btn-padding-horizontal-sm; @btn-font-size-sm; @btn-border-radius-sm );
   }
 }
 
@@ -95,42 +88,44 @@
 // round button
 .btn-round(@btnClassName: btn) {
   .button-size(@btn-circle-size; (@btn-circle-size / 2); @font-size-base; @btn-circle-size);
+
   &.@{btnClassName}-lg {
-    .button-size(
-      @btn-circle-size-lg; (@btn-circle-size-lg / 2); @btn-font-size-lg; @btn-circle-size-lg
-    );
+    .button-size(@btn-circle-size-lg; (@btn-circle-size-lg / 2); @btn-font-size-lg; @btn-circle-size-lg );
   }
+
   &.@{btnClassName}-sm {
-    .button-size(
-      @btn-circle-size-sm; (@btn-circle-size-sm / 2); @font-size-base; @btn-circle-size-sm
-    );
+    .button-size(@btn-circle-size-sm; (@btn-circle-size-sm / 2); @font-size-base; @btn-circle-size-sm );
   }
 }
+
 // square button: the content only contains icon
 .btn-square(@btnClassName: btn) {
   .square(@btn-square-size);
   .button-size(@btn-square-size; 0; @btn-square-only-icon-size; @btn-border-radius-base);
 
-  & > * {
+  &>* {
     font-size: @btn-square-only-icon-size;
   }
+
   &.@{btnClassName}-lg {
     .square(@btn-square-size-lg);
     .button-size(@btn-square-size-lg; 0; @btn-square-only-icon-size-lg; @btn-border-radius-base);
 
-    & > * {
+    &>* {
       font-size: @btn-square-only-icon-size-lg;
     }
   }
+
   &.@{btnClassName}-sm {
     .square(@btn-square-size-sm);
     .button-size(@btn-square-size-sm; 0; @btn-square-only-icon-size-sm; @btn-border-radius-base);
 
-    & > * {
+    &>* {
       font-size: @btn-square-only-icon-size-sm;
     }
   }
 }
+
 // circle button: the content only contains icon
 .btn-circle(@btnClassName: btn) {
   min-width: @btn-height-base;
@@ -138,10 +133,12 @@
   padding-left: 0;
   text-align: center;
   border-radius: 50%;
+
   &.@{btnClassName}-lg {
     min-width: @btn-height-lg;
     border-radius: 50%;
   }
+
   &.@{btnClassName}-sm {
     min-width: @btn-height-sm;
     border-radius: 50%;
@@ -150,6 +147,7 @@
 
 .button-disabled(@color: @btn-disable-color; @background: @btn-disable-bg; @border: @btn-disable-border) {
   &[disabled] {
+
     &,
     &:hover,
     &:focus,
@@ -167,14 +165,15 @@
 
   &:hover,
   &:focus {
-    
-      .button-color(@primary-color-hover; @background; @primary-color-hover);
+
+    .button-color(@primary-color-hover; @background; @primary-color-hover);
   }
 
   &:active {
 
-      .button-color(@primary-color-active; @background; @primary-color-active);
+    .button-color(@primary-color-active; @background; @primary-color-active);
   }
+
   .button-disabled();
 }
 
@@ -197,7 +196,7 @@
     //   );
     // }
     // & when (@theme = variable) {
-      .button-color(@color; @backgroundHover; @backgroundHover);
+    .button-color(@color; @backgroundHover; @backgroundHover);
     // }
   }
 
@@ -213,7 +212,7 @@
     //   );
     // }
     // & when (@theme = variable) {
-      .button-color(@color; @backgroundActive; @backgroundActive);
+    .button-color(@color; @backgroundActive; @backgroundActive);
     // }
   }
 
@@ -231,8 +230,12 @@
     background: @btn-default-bg;
   }
 }
+
 // primary button style
 .btn-primary() {
   .button-variant-primary(@btn-primary-color; @btn-primary-bg; @primary-color-hover; @primary-color-active; );
 }
 
+.btn-danger() {
+  .button-variant-other(@btn-danger-color; @btn-danger-bg; @btn-danger-border; );
+}

@@ -1,12 +1,35 @@
-import React from 'react'
-import { settings } from '../utils/global'
-import './style/index.less'
+import React, { RefObject } from 'react';
+import classNames from 'classnames';
+import { settings } from '../utils/global';
+import { tuple } from '../_utils/type';
+import './style/index.less';
 
-function Button() {
-  const classNames = `${settings.prefix}-btn ${settings.prefix}-btn-primary`
-  return (
-    <button className={classNames}>Button</button>
-  )
+const btn_cls_prefix = settings.prefix;
+
+const ButtonTypes = tuple('default', 'primary', 'ghost', 'dashed', 'link', 'text');
+
+export type ButtonType = typeof ButtonTypes[number];
+
+interface ButtonProps {
+  type?: ButtonType;
+  children: React.ReactNode;
+  danger?: Boolean;
+  disabled?: Boolean;
 }
 
-export default Button
+function Button(props: ButtonProps, ref: React.ForwardedRef<HTMLButtonElement>) {
+  const { type = 'default', children, danger = false, disabled } = props;
+
+  const clsNames = classNames({
+    [`${btn_cls_prefix}-btn`]: true,
+    [`${btn_cls_prefix}-btn-${type}`]: type !== 'default',
+    [`${btn_cls_prefix}-btn-danger`]: !!danger,
+  });
+  return (
+    <button className={clsNames} disabled={!!disabled} ref={ref}>
+      {children}
+    </button>
+  );
+}
+
+export default React.forwardRef(Button);

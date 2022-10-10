@@ -57,11 +57,14 @@ var getValue = function (hsv, i, isLight) {
   return Number(value.toFixed(2));
 };
 
-const colorPalette = function (color, index) {
+const colorPalette = function (colorData, indexData) {
+  const color = colorData.value
+  const index = indexData.value
   const tinycolor = require('tinycolor2');
   var isLight = index <= 6;
   var hsv = tinycolor(color).toHsv();
   var i = isLight ? lightColorCount + 1 - index : index - lightColorCount - 1;
+  // console.log('colorPalette', color, index, hsv);
   return tinycolor({
     h: getHue(hsv, i, isLight),
     s: getSaturation(hsv, i, isLight),

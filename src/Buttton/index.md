@@ -1,12 +1,22 @@
 ## Demo
 
 ```tsx
+import React from 'react';
 
-import React from'react';
+import { Button } from 'y-components';
 
-import { Button } from'y-components';
+export default () => (
+  <div>
+    <p>
+      <Button>Default</Button>  <Button disabled>Disabled</Button>
+    </p>
+    <p>
+      <Button type="primary">Primary</Button>
+    </p>
 
-
-export default () => <Button> a</Button>;
-
+    <p>
+      <Button danger>Danger</Button>
+    </p>
+  </div>
+);
 ```
