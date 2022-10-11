@@ -233,9 +233,14 @@
 
 // primary button style
 .btn-primary() {
-  .button-variant-primary(@btn-primary-color; @btn-primary-bg; @primary-color-hover; @primary-color-active; );
+  .button-variant-primary(@btn-primary-color, @btn-primary-bg, @primary-color-hover, @primary-color-active);
 }
-
+// danger button style
 .btn-danger() {
-  .button-variant-other(@btn-danger-color; @btn-danger-bg; @btn-danger-border; );
+  .button-variant-primary(@btn-danger-color, @btn-danger-bg, @error-color-hover, @error-color-active);
+}
+// dashed button
+.btn-dashed() {
+  .button-variant-other(@btn-default-color, @btn-default-bg, @btn-default-border);
+  border-style: dashed;
 }
