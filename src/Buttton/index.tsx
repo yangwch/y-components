@@ -11,26 +11,41 @@ const ButtonTypes = tuple('default', 'primary', 'ghost', 'dashed', 'link', 'text
 
 export type ButtonType = typeof ButtonTypes[number];
 
-interface ButtonProps {
+interface BaseButtonProps {
   type?: ButtonType;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   danger?: Boolean;
   disabled?: Boolean;
   size?: SizeType;
+  className?: string;
 }
+const ButtonHTMLTypes = tuple('submit', 'button', 'reset');
+export type ButtonHTMLType = typeof ButtonHTMLTypes[number];
+
+export type NativeButtonProps = {
+  htmlType?: ButtonHTMLType;
+  onClick?: React.MouseEventHandler<HTMLElement>;
+} & BaseButtonProps &
+  Omit<React.ButtonHTMLAttributes<any>, 'type' | 'onClick'>;
+
+export type ButtonProps = Partial<NativeButtonProps>;
 
 function Button(props: ButtonProps, ref: React.ForwardedRef<HTMLButtonElement>) {
-  const { type = 'default', children, danger = false, disabled, size } = props;
+  const { type = 'default', children, danger = false, disabled, size, className, ...rest } = props;
 
-  const clsNames = classNames({
-    [`${btn_cls_prefix}-btn`]: true,
-    [`${btn_cls_prefix}-btn-${type}`]: type !== 'default',
-    [`${btn_cls_prefix}-btn-danger`]: !!danger,
-    [`${btn_cls_prefix}-btn-dashed`]: type === 'dashed',
-    [`${btn_cls_prefix}-btn-${sizeClassNameMap[size || 'middle'] || ''}`]: size !== undefined,
-  });
+  const clsNames = classNames(
+    {
+      [`${btn_cls_prefix}-btn`]: true,
+      [`${btn_cls_prefix}-btn-${type}`]: type !== 'default',
+      [`${btn_cls_prefix}-btn-danger`]: !!danger,
+      [`${btn_cls_prefix}-btn-dashed`]: type === 'dashed',
+      [`${btn_cls_prefix}-btn-ghost`]: type === 'ghost',
+      [`${btn_cls_prefix}-btn-${sizeClassNameMap[size || 'middle'] || ''}`]: size !== undefined,
+    },
+    className,
+  );
   return (
-    <button className={clsNames} disabled={!!disabled} ref={ref}>
+    <button className={clsNames} disabled={!!disabled} ref={ref} {...rest}>
       {children}
     </button>
   );

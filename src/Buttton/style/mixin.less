@@ -185,35 +185,35 @@
 
   &:hover,
   &:focus {
-    // & when (@theme = dark) {
-    //   .button-color(
-    //     @color; ~`colorPalette('@{background}', 7) `; ~`colorPalette('@{background}', 7) `
-    //   );
-    // }
-    // & when (not (@theme = dark) and not (@theme = variable)) {
-    //   .button-color(
-    //     @color; ~`colorPalette('@{background}', 5) `; ~`colorPalette('@{background}', 5) `
-    //   );
-    // }
-    // & when (@theme = variable) {
-    .button-color(@color; @backgroundHover; @backgroundHover);
-    // }
+    & when (@theme = dark) {
+      .button-color(
+        @color; colorPalette('@{background}', 7); colorPalette('@{background}', 7)
+      );
+    }
+    & when (not (@theme = dark) and not (@theme = variable)) {
+      .button-color(
+        @color; colorPalette('@{background}', 5); colorPalette('@{background}', 5)
+      );
+    }
+    & when (@theme = variable) {
+      .button-color(@color; @backgroundHover; @backgroundHover);
+    }
   }
 
   &:active {
-    // & when (@theme = dark) {
-    //   .button-color(
-    //     @color; ~`colorPalette('@{background}', 5) `; ~`colorPalette('@{background}', 5) `
-    //   );
-    // }
-    // & when (not (@theme = dark) and not (@theme = variable)) {
-    //   .button-color(
-    //     @color; ~`colorPalette('@{background}', 7) `; ~`colorPalette('@{background}', 7) `
-    //   );
-    // }
-    // & when (@theme = variable) {
-    .button-color(@color; @backgroundActive; @backgroundActive);
-    // }
+    & when (@theme = dark) {
+      .button-color(
+        @color; colorPalette('@{background}', 5); colorPalette('@{background}', 5)
+      );
+    }
+    & when (not (@theme = dark) and not (@theme = variable)) {
+      .button-color(
+        @color; colorPalette('@{background}', 7); colorPalette('@{background}', 7)
+      );
+    }
+    & when (@theme = variable) {
+      .button-color(@color; @backgroundActive; @backgroundActive);
+    }
   }
 
   .button-disabled();
@@ -243,4 +243,8 @@
 .btn-dashed() {
   .button-variant-other(@btn-default-color, @btn-default-bg, @btn-default-border);
   border-style: dashed;
+}
+
+.btn-ghost() {
+  .button-variant-other(@btn-default-ghost-color, @btn-default-ghost-bg, @btn-default-ghost-border);
 }
