@@ -22,7 +22,7 @@ export default () => {
           padding: '20px',
         }}
       >
-          <Button type="ghost">Ghost</Button> &nbsp;
+          <Button type="ghost">Ghost</Button>  
         <Button type="ghost" disabled>
           Ghost Disabled
         </Button>
@@ -42,8 +42,8 @@ import React from 'react';
 import { Button } from 'y-components';
 
 export default () => {
-  const [size, setSize] = React.useState('default');
-  const sizes = ['small', 'default', 'large'];
+  const [size, setSize] = React.useState('middle');
+  const sizes = ['small', 'middle', 'large'];
   return (
     <div>
       <div>
@@ -82,7 +82,7 @@ export default () => {
         <Button size={size} type="ghost">
           Ghost
         </Button>
-        &nbsp;
+         
         <Button size={size} type="ghost" disabled>
           Ghost Disabled
         </Button>
