@@ -5,7 +5,7 @@ import { tuple } from '../_utils/type';
 import './style/index.less';
 import { sizeClassNameMap, SizeType } from '../_utils/size';
 
-const btn_cls_prefix = settings.prefix;
+const cls_prefix = settings.prefix;
 
 const ButtonTypes = tuple('default', 'primary', 'ghost', 'dashed', 'link', 'text');
 
@@ -35,12 +35,12 @@ function Button(props: ButtonProps, ref: React.ForwardedRef<HTMLButtonElement>) 
 
   const clsNames = classNames(
     {
-      [`${btn_cls_prefix}-btn`]: true,
-      [`${btn_cls_prefix}-btn-${type}`]: type !== 'default',
-      [`${btn_cls_prefix}-btn-danger`]: !!danger,
-      [`${btn_cls_prefix}-btn-dashed`]: type === 'dashed',
-      [`${btn_cls_prefix}-btn-ghost`]: type === 'ghost',
-      [`${btn_cls_prefix}-btn-${sizeClassNameMap[size || 'middle'] || ''}`]: size !== undefined,
+      [`${cls_prefix}-btn`]: true,
+      [`${cls_prefix}-btn-${type}`]: type !== 'default',
+      [`${cls_prefix}-btn-danger`]: !!danger,
+      [`${cls_prefix}-btn-dashed`]: type === 'dashed',
+      [`${cls_prefix}-btn-ghost`]: type === 'ghost',
+      [`${cls_prefix}-btn-${sizeClassNameMap[size || 'middle'] || ''}`]: size !== undefined,
     },
     className,
   );

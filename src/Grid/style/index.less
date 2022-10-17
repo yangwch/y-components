@@ -1,0 +1,14 @@
+@import '../../style/themes/index.less';
+
+@prefix: getPrefix();
+
+@row-prefix: ~'@{prefix}-row';
+
+.@{row-prefix} {
+  display: flex;
+  flex-flow: row wrap;
+
+  &-nowrap {
+    flex-wrap: nowrap;
+  }
+}
