@@ -16,8 +16,8 @@ interface RowProps {
 const Row = React.forwardRef<HTMLDivElement, RowProps>((props: RowProps, ref) => {
   const { children, className, style, wrap = true } = props;
   const clsNames = classNames(
+    `${cls_prefix}-row`,
     {
-      [`${cls_prefix}-row`]: true,
       [`${cls_prefix}-row${wrap ? '' : '-nowrap'}`]: wrap === false,
     },
     className,

@@ -7,16 +7,20 @@ import { Row, Col } from 'y-components';
 
 const colStyle = {
   border: '1px solid #ccc',
-  padding: 5
-}
+  padding: 5,
+};
 export default () => {
   return (
     <div>
-      <Row wrap={false}>
-        <Col span={10} style={colStyle}>Col1</Col>
-        <Col span={10} style={colStyle} offset={4}>Col2</Col>
+      <Row>
+        <Col span={10}>
+          <div style={colStyle}>Col 10</div>
+        </Col>
+        <Col span={10} offset={4}>
+          <div style={colStyle}>Col 10 Offset: 4</div>
+        </Col>
       </Row>
     </div>
-  )
-}
+  );
+};
 ```
