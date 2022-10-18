@@ -7,7 +7,6 @@ const cls_prefix = settings.prefix;
 
 interface ColProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
-  children: React.ReactNode;
   style?: CSSProperties;
   span?: number;
   offset?: number;

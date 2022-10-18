@@ -1,14 +1,13 @@
 import classNames from 'classnames';
-import React, { CSSProperties } from 'react';
+import React, { CSSProperties, HTMLAttributes } from 'react';
 import { settings } from '../utils/global';
 import { RowContext } from './RowContext';
 import './style/index.less';
 
 const cls_prefix = settings.prefix;
 
-interface RowProps {
+interface RowProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
-  children: React.ReactNode;
   style?: CSSProperties;
   wrap?: boolean;
 }
