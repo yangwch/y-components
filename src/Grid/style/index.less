@@ -1,4 +1,3 @@
-
 @import './mixin.less';
 
 .@{row-prefix-cls} {
@@ -11,4 +10,28 @@
 
   .makeGridColumns();
   .makeGridColumnsOffset();
+}
+
+@media (min-width: @screen-xs-min) {
+  .makeGridColumns(-xs);
+}
+
+@media (min-width: @screen-sm-min) {
+  .makeGridColumns(-sm);
+}
+
+@media (min-width: @screen-md-min) {
+  .makeGridColumns(-md);
+}
+
+@media (min-width: @screen-lg-min) {
+  .makeGridColumns(-lg);
+}
+
+@media (min-width: @screen-xl-min) {
+  .makeGridColumns(-xl);
+}
+
+@media (min-width: @screen-xxl-min) {
+  .makeGridColumns('-xxl')
 }

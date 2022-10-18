@@ -5,14 +5,14 @@
 @row-prefix-cls: ~'@{prefix}-row';
 @col-prefix-cls: ~'@{prefix}-col';
 
-.loop-grid-columns(@colIndex) when(@colIndex > 0) {
-  .@{col-prefix-cls}-@{colIndex} {
+.loop-grid-columns(@colIndex, @class) when(@colIndex > 0) {
+  .@{col-prefix-cls}@{class}-@{colIndex} {
     display: block;
     min-height: 1px;
     flex: 0 0 percentage(@colIndex / @grid-columns);
   }
 
-  .loop-grid-columns(@colIndex - 1);
+  .loop-grid-columns(@colIndex - 1, @class);
 }
 
 .loop-grid-columns(@colIndex) when(@colIndex =0) {
@@ -21,8 +21,8 @@
   }
 }
 
-.makeGridColumns() {
-  .loop-grid-columns(@grid-columns);
+.makeGridColumns(@class: ~'') {
+  .loop-grid-columns(@grid-columns, @class);
 }
 
 .loop-grid-columns-offset(@offset) when(@offset > 0) {
