@@ -1,0 +1,38 @@
+@import '../../style/themes/index.less';
+
+@prefix: getPrefix();
+
+@row-prefix-cls: ~'@{prefix}-row';
+@col-prefix-cls: ~'@{prefix}-col';
+
+.loop-grid-columns(@colIndex) when(@colIndex > 0) {
+  .@{col-prefix-cls}-@{colIndex} {
+    display: block;
+    min-height: 1px;
+    flex: 0 0 percentage(@colIndex / @grid-columns);
+  }
+
+  .loop-grid-columns(@colIndex - 1);
+}
+
+.loop-grid-columns(@colIndex) when(@colIndex =0) {
+  .@{col-prefix-cls}-@{colIndex} {
+    display: none;
+  }
+}
+
+.makeGridColumns() {
+  .loop-grid-columns(@grid-columns);
+}
+
+.loop-grid-columns-offset(@offset) when(@offset > 0) {
+  .@{col-prefix-cls}-offset-@{offset} {
+    margin-left: percentage(@offset / @grid-columns);
+  }
+
+  .loop-grid-columns-offset(@offset - 1);
+}
+
+.makeGridColumnsOffset() {
+  .loop-grid-columns-offset(@grid-columns);
+}

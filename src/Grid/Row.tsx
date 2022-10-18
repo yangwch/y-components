@@ -10,15 +10,15 @@ interface RowProps {
   className?: string;
   children: React.ReactNode;
   style?: CSSProperties;
-  nowrap?: boolean;
+  wrap?: boolean;
 }
 
 const Row = React.forwardRef<HTMLDivElement, RowProps>((props: RowProps, ref) => {
-  const { children, className, style, nowrap } = props;
+  const { children, className, style, wrap = true } = props;
   const clsNames = classNames(
     {
       [`${cls_prefix}-row`]: true,
-      [`${cls_prefix}-row${nowrap ? '-nowrap' : ''}`]: nowrap,
+      [`${cls_prefix}-row${wrap ? '' : '-nowrap'}`]: wrap === false,
     },
     className,
   );

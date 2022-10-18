@@ -48,7 +48,7 @@ export default () => {
     <div>
       <div>
         {sizes.map((s) => (
-          <label>
+          <label key={s}>
             <input onChange={() => setSize(s)} type="radio" value={s} checked={size === s} /> {s}
           </label>
         ))}
@@ -63,11 +63,9 @@ export default () => {
         <Button size={size} type="primary">
           Primary
         </Button>
-         
-        <Button size={size} type="dashed">
+         <Button size={size} type="dashed">
           Dashed
-        </Button>
-         
+        </Button> 
         <Button size={size} danger>
           Danger
         </Button>
@@ -82,8 +80,7 @@ export default () => {
         <Button size={size} type="ghost">
           Ghost
         </Button>
-         
-        <Button size={size} type="ghost" disabled>
+         <Button size={size} type="ghost" disabled>
           Ghost Disabled
         </Button>
       </p>

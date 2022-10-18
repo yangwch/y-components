@@ -1,14 +1,14 @@
-@import '../../style/themes/index.less';
 
-@prefix: getPrefix();
+@import './mixin.less';
 
-@row-prefix: ~'@{prefix}-row';
-
-.@{row-prefix} {
+.@{row-prefix-cls} {
   display: flex;
   flex-flow: row wrap;
 
   &-nowrap {
     flex-wrap: nowrap;
   }
+
+  .makeGridColumns();
+  .makeGridColumnsOffset();
 }
