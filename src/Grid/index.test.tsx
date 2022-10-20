@@ -7,8 +7,14 @@ import { Row, Col } from './index';
 describe('Button', () => {
   mountTest(() => <Row></Row>);
   mountTest(() => (
-    <Row>
+    <Row wrap={false}>
       <Col></Col>
+    </Row>
+  ));
+  mountTest(() => (
+    <Row>
+      <Col span={1}></Col>
+      <Col span={2}></Col>
     </Row>
   ));
 

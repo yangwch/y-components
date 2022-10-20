@@ -1,4 +1,4 @@
-Basic Grid
+**Basic Grid**
 
 ```tsx
 import React from 'react';
@@ -37,7 +37,7 @@ export default () => {
 };
 ```
 
-Responsive
+**Responsive**
 
 ```tsx
 import React from 'react';
@@ -61,6 +61,67 @@ export default () => {
         </Col>
       </Row>
     </div>
-  )
-}
+  );
+};
+```
+
+**Alignment**
+
+```tsx
+import React from 'react';
+
+import { Row, Col } from 'y-components';
+
+const colStyle = {
+  border: '1px solid #ccc',
+  padding: '5px 0',
+};
+export default () => {
+  return (
+    <div>
+      --Align Top -- Justify Center--
+      <Row align="top" justify="center">
+        <Col span={4}>
+          <div style={{ ...colStyle, height: 50 }}>col xl: 12 sm: 24</div>
+        </Col>
+
+        <Col span={4}>
+          <div style={{ ...colStyle, height: 100 }}>col xl: 12 sm: 24</div>
+        </Col>
+
+        <Col span={4}>
+          <div style={{ ...colStyle, height: 50 }}>col xl: 12 sm: 24</div>
+        </Col>
+      </Row>
+      --Align Middle -- Justify space-around--
+      <Row align="middle" justify="space-around">
+        <Col span={4}>
+          <div style={{ ...colStyle, height: 50 }}>col xl: 12 sm: 24</div>
+        </Col>
+
+        <Col span={4}>
+          <div style={{ ...colStyle, height: 100 }}>col xl: 12 sm: 24</div>
+        </Col>
+
+        <Col span={4}>
+          <div style={{ ...colStyle, height: 50 }}>col xl: 12 sm: 24</div>
+        </Col>
+      </Row>
+      --Align Bottom -- Justify space-between--
+      <Row align="bottom" justify="space-between">
+        <Col span={4}>
+          <div style={{ ...colStyle, height: 50 }}>col xl: 12 sm: 24</div>
+        </Col>
+
+        <Col span={4}>
+          <div style={{ ...colStyle, height: 100 }}>col xl: 12 sm: 24</div>
+        </Col>
+
+        <Col span={4}>
+          <div style={{ ...colStyle, height: 50 }}>col xl: 12 sm: 24</div>
+        </Col>
+      </Row>
+    </div>
+  );
+};
 ```
