@@ -128,3 +128,47 @@ export default () => {
   );
 };
 ```
+**Gutter**
+
+```tsx
+import React from 'react';
+
+import { Row, Col } from 'y-components';
+
+const colStyle = {
+  background: 'rgb(119 145 240)',
+  height: 50,
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  color: '#fff'
+};
+
+const ColumnContent = () => (<div style={colStyle}>Column</div>)
+
+export default () => {
+  return (
+    <div>
+      Gutter
+      <Row gutter={[16, 24]}>
+        <Col span={6}><ColumnContent /></Col>
+        <Col span={6}><ColumnContent /></Col>
+        <Col span={6}><ColumnContent /></Col>
+        <Col span={6}><ColumnContent /></Col>
+
+        <Col span={6}><ColumnContent /></Col>
+        <Col span={6}><ColumnContent /></Col>
+        <Col span={6}><ColumnContent /></Col>
+        <Col span={6}><ColumnContent /></Col>
+      </Row>
+      Another Row
+      <Row gutter={[16, 24]}>
+        <Col span={6}><ColumnContent /></Col>
+        <Col span={6}><ColumnContent /></Col>
+        <Col span={6}><ColumnContent /></Col>
+        <Col span={6}><ColumnContent /></Col>
+      </Row>
+    </div>
+  )
+}
+```

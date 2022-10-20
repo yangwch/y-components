@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import React, { CSSProperties, HTMLAttributes } from 'react';
 import { settings } from '../utils/global';
 import { ResponsiveSizes } from '../_utils/responsive';
+import useRowState from './hooks/useRowState';
 
 const cls_prefix = settings.prefix;
 
@@ -44,8 +45,18 @@ const Col = React.forwardRef<HTMLDivElement, ColProps>((props: ColProps, ref) =>
     responsiveCls,
     className,
   );
+  const colStyle: CSSProperties = {};
+  const { gutter } = useRowState();
+  if (gutter && gutter[0] > 0) {
+    colStyle.paddingLeft = gutter[0];
+    colStyle.paddingRight = gutter[0];
+  }
+  if (gutter && gutter[1] > 0) {
+    colStyle.paddingTop = gutter[1];
+    colStyle.paddingBottom = gutter[1];
+  }
   return (
-    <div className={clsNames} style={style} ref={ref} {...rest}>
+    <div className={clsNames} style={{ ...colStyle, ...style }} ref={ref} {...rest}>
       {children}
     </div>
   );
