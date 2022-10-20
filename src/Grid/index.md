@@ -160,6 +160,11 @@ export default () => {
         <Col span={6}><ColumnContent /></Col>
         <Col span={6}><ColumnContent /></Col>
         <Col span={6}><ColumnContent /></Col>
+
+        <Col span={6}><ColumnContent /></Col>
+        <Col span={6}><ColumnContent /></Col>
+        <Col span={6}><ColumnContent /></Col>
+        <Col span={6}><ColumnContent /></Col>
       </Row>
       Another Row
       <Row gutter={[16, 24]}>
