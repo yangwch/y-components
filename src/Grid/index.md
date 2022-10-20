@@ -6,8 +6,9 @@ import React from 'react';
 import { Row, Col } from 'y-components';
 
 const colStyle = {
-  border: '1px solid #ccc',
+  border: '1px solid blue',
   padding: '5px 0',
+  background: 'rgb(119 145 240)'
 };
 export default () => {
   return (
@@ -45,8 +46,9 @@ import React from 'react';
 import { Row, Col } from 'y-components';
 
 const colStyle = {
-  border: '1px solid #ccc',
+  border: '1px solid blue',
   padding: '5px 0',
+  background: 'rgb(119 145 240)'
 };
 export default () => {
   return (
@@ -73,52 +75,53 @@ import React from 'react';
 import { Row, Col } from 'y-components';
 
 const colStyle = {
-  border: '1px solid #ccc',
+  border: '1px solid blue',
   padding: '5px 0',
+  background: 'rgb(119 145 240)'
 };
 export default () => {
   return (
     <div>
-      --Align Top -- Justify Center--
+      -- Align Top -- Justify Center --
       <Row align="top" justify="center">
         <Col span={4}>
-          <div style={{ ...colStyle, height: 50 }}>col xl: 12 sm: 24</div>
+          <div style={{ ...colStyle, height: 50 }}></div>
         </Col>
 
         <Col span={4}>
-          <div style={{ ...colStyle, height: 100 }}>col xl: 12 sm: 24</div>
+          <div style={{ ...colStyle, height: 100 }}></div>
         </Col>
 
         <Col span={4}>
-          <div style={{ ...colStyle, height: 50 }}>col xl: 12 sm: 24</div>
+          <div style={{ ...colStyle, height: 50 }}></div>
         </Col>
       </Row>
-      --Align Middle -- Justify space-around--
+      -- Align Middle -- Justify space-around --
       <Row align="middle" justify="space-around">
         <Col span={4}>
-          <div style={{ ...colStyle, height: 50 }}>col xl: 12 sm: 24</div>
+          <div style={{ ...colStyle, height: 50 }}></div>
         </Col>
 
         <Col span={4}>
-          <div style={{ ...colStyle, height: 100 }}>col xl: 12 sm: 24</div>
+          <div style={{ ...colStyle, height: 100 }}></div>
         </Col>
 
         <Col span={4}>
-          <div style={{ ...colStyle, height: 50 }}>col xl: 12 sm: 24</div>
+          <div style={{ ...colStyle, height: 50 }}></div>
         </Col>
       </Row>
-      --Align Bottom -- Justify space-between--
+      -- Align Bottom -- Justify space-between --
       <Row align="bottom" justify="space-between">
         <Col span={4}>
-          <div style={{ ...colStyle, height: 50 }}>col xl: 12 sm: 24</div>
+          <div style={{ ...colStyle, height: 50 }}></div>
         </Col>
 
         <Col span={4}>
-          <div style={{ ...colStyle, height: 100 }}>col xl: 12 sm: 24</div>
+          <div style={{ ...colStyle, height: 100 }}></div>
         </Col>
 
         <Col span={4}>
-          <div style={{ ...colStyle, height: 50 }}>col xl: 12 sm: 24</div>
+          <div style={{ ...colStyle, height: 50 }}></div>
         </Col>
       </Row>
     </div>
