@@ -7,23 +7,43 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  color: #000000d9;
   font-size: 14px;
   font-variant: tabular-nums;
-  line-height: 1.5715;
+  line-height: 1;
   list-style: none;
   font-feature-settings: "tnum";
   border-top: 1px solid @divider-color;
+  position: relative;
+
   &-horizontal {
     min-width: 100%;
-    position:relative;
-    margin-top: 1.5715em;
+    margin-top: 1em;
+
     .text {
       transform: translate(0, -50%);
       display: inline-block;
-      margin-left: 20px;
-      padding: 0 1em;
-      background: v
+      margin: 0 @divider-text-margin;
+      padding: 0 @divider-text-padding;
+      background: @component-background;
     }
+  }
+
+  &-vertical {
+    position: relative;
+    display: inline-block;
+    top: -.06em;
+    height: .9em;
+    margin: 0 @divider-vertical-gutter;
+    vertical-align: middle;
+    border-left: 1px solid @divider-color;
+    .text { display: none; }
+  }
+
+  &-center {
+    text-align: center;
+  }
+
+  &-right {
+    text-align: right;
   }
 }
