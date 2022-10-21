@@ -20,6 +20,41 @@ export default () => {
 };
 ```
 
+**Card Size**
+
+```tsx
+import React from 'react';
+import { Card, Divider } from 'y-components';
+
+const sizes = ['default', 'small'];
+const P = ({ children }) => <p style={{ padding: 5, margin: 0 }}>{children}</p>;
+export default () => {
+  const [size, setSize] = React.useState('small');
+  return (
+    <div>
+      <Divider>Card Size</Divider>
+      {sizes.map((s) => (
+        <label key={s}>
+          <input type="radio" checked={size === s} onChange={() => setSize(s)}/> {s}
+        </label>
+      ))}
+      <Card
+        size={size}
+        title="Card Title"
+        extra={<a href="#">More</a>}
+        hoverable
+        style={{ width: 300 }}
+      >
+        <P>Card Content</P>
+        <P>Card Content</P>
+        <P>Card Content</P>
+        <P>Card Content</P>
+      </Card>
+    </div>
+  );
+};
+```
+
 **Without Title**
 
 ```tsx
@@ -46,7 +81,6 @@ export default () => {
         <P>Card Content</P>
         <P>Card Content</P>
       </Card>
-      
     </div>
   );
 };

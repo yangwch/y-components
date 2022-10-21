@@ -5,6 +5,8 @@ import './style/index.less';
 
 const cardPrefix = `${settings.prefix}-card`;
 
+type CardSize = 'default' | 'small';
+
 export interface CardProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
   style?: CSSProperties;
   children?: React.ReactNode;
@@ -13,13 +15,15 @@ export interface CardProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'>
   headStyle?: CSSProperties;
   bodyStyle?: CSSProperties;
   hoverable?: boolean;
+  size?: CardSize;
 }
 
 function Card(props: CardProps) {
-  const { children, title, extra, style, headStyle, bodyStyle, hoverable } = props;
+  const { children, title, extra, style, headStyle, bodyStyle, hoverable, size } = props;
 
   const clsNames = classNames(`${cardPrefix}`, {
     [`${cardPrefix}-hoverable`]: hoverable,
+    [`${cardPrefix}-${size}`]: !!size,
   });
 
   const head = <CardHead title={title} extra={extra} style={headStyle} />;
