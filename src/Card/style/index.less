@@ -1,0 +1,36 @@
+@import '../../style/themes/index.less';
+
+@card-cls: ~'@{prefix}-card';
+@card-hoverable-hover-border: transparent;
+
+.@{card-cls} {
+  box-sizing: border-box;
+  border: @card-border;
+  border-radius: @card-border-radius;
+  background: @card-background;
+
+  &-head {
+    box-sizing: border-box;
+    padding: @card-head-padding;
+    height: @card-head-height;
+    border-bottom: @card-head-border;
+    display: flex;
+    &-title {
+      flex: 1;
+    }
+  }
+
+  &-body {
+    padding: @card-padding-base;
+  }
+
+  &-hoverable {
+    cursor: pointer;
+    transition: box-shadow 0.3s, border-color 0.3s;
+
+    &:hover {
+      border-color: @card-hoverable-hover-border;
+      box-shadow: @card-shadow;
+    }
+  }
+}
