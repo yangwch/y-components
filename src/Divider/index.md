@@ -70,14 +70,14 @@ import { Divider, Button } from 'y-components';
 export default () => {
   return (
     <div>
-      <div> Vertical & Custom Height/Color</div>
-      <p style={{ fontSize: '22px' }}>
+      <div> Vertical & Custom Style</div>
+      <div style={{ fontSize: '22px' }}>
         <span>Left</span>
         <Divider type="vertical" style={{ height: 25 }} />
         <span> Center</span>
-        <Divider type="vertical" style={{ borderColor: 'red' }} />
+        <Divider type="vertical" style={{ borderColor: 'red', margin: '0 30px' }} />
         <span style={{ color: 'red' }}>Right</span>
-      </p>
+      </div>
     </div>
   );
 };
