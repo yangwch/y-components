@@ -2,6 +2,7 @@
 @import './mixin.less';
 
 @btn-prefix-cls: ~'@{prefix}-btn';
+@btn-group-cls: ~'@{prefix}-btn-group';
 
 .@{btn-prefix-cls} {
   .btn();
@@ -10,16 +11,43 @@
   >span {
     display: inline-block;
   }
+
   &-primary {
     .btn-primary();
   }
+
   &-danger {
     .btn-danger();
   }
+
   &-dashed {
     .btn-dashed();
   }
+
   &-ghost {
     .btn-ghost();
+  }
+}
+
+.@{btn-group-cls} {
+  >.@{btn-prefix-cls} {
+    border-radius: 0;
+    border-left-width: @btn-border-width;
+    border-right-width: 0;
+
+    &:first-child {
+      border-radius: @btn-border-radius-base @btn-border-radius-base 0 0;
+    }
+
+    &:last-child {
+      border-right-width: @btn-border-width;
+      border-radius: 0 @btn-border-radius-base @btn-border-radius-base 0;
+    }
+
+    &:hover,
+    &:focus,
+    &:active {
+      border-right-width: @btn-border-width;
+    }
   }
 }

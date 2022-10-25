@@ -4,6 +4,7 @@ import { settings } from '../utils/global';
 import { tuple } from '../_utils/type';
 import './style/index.less';
 import { sizeClassNameMap, SizeType } from '../_utils/size';
+import ButtonGroup from './ButtonGroup';
 
 const cls_prefix = settings.prefix;
 
@@ -30,7 +31,15 @@ export type NativeButtonProps = {
 
 export type ButtonProps = Partial<NativeButtonProps>;
 
-function Button(props: ButtonProps, ref: React.ForwardedRef<HTMLButtonElement>) {
+interface CompoundedComponent
+  extends React.ForwardRefExoticComponent<ButtonProps & React.RefAttributes<HTMLElement>> {
+  Group: typeof ButtonGroup;
+}
+
+const Button = React.forwardRef(function Button(
+  props: ButtonProps,
+  ref: React.ForwardedRef<HTMLButtonElement>,
+) {
   const { type = 'default', children, danger = false, disabled, size, className, ...rest } = props;
 
   const clsNames = classNames(
@@ -49,6 +58,8 @@ function Button(props: ButtonProps, ref: React.ForwardedRef<HTMLButtonElement>) 
       {children}
     </button>
   );
-}
+}) as CompoundedComponent;
 
-export default React.forwardRef(Button);
+Button.Group = ButtonGroup;
+
+export default Button;

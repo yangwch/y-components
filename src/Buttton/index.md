@@ -65,8 +65,7 @@ export default () => {
         </Button>
          <Button size={size} type="dashed">
           Dashed
-        </Button> 
-        <Button size={size} danger>
+        </Button> <Button size={size} danger>
           Danger
         </Button>
       </p>
@@ -89,4 +88,23 @@ export default () => {
     </div>
   );
 };
+```
+
+**ButtonGroup**
+
+```tsx
+import React from 'react';
+
+import { Button } from 'y-components';
+
+export default () => {
+  return (
+    <div>
+      <Button.Group>
+        <Button>Default</Button><Button>Choice</Button>
+        <Button>Default2</Button><Button>Choice2</Button>
+      </Button.Group>
+    </div>
+  )
+}
 ```

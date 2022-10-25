@@ -10,7 +10,7 @@ interface ButtonGroupProps {
   style?: CSSProperties;
   className?: string
 }
-const groupCls = `${settings.prefix}-button-group`
+const groupCls = `${settings.prefix}-btn-group`
 
 
 function ButtonGroup(props: ButtonGroupProps) {
@@ -20,7 +20,7 @@ function ButtonGroup(props: ButtonGroupProps) {
   })
   return (
     <SizeContext.Provider value={customizeSize}>
-      <div className={classes} style={style}>{children}</div>;
+      <div className={classes} style={style}>{children}</div>
     </SizeContext.Provider>
   );
 }
