@@ -32,12 +32,13 @@
 .@{btn-group-cls} {
   >.@{btn-prefix-cls} {
     border-radius: 0;
-    border-left-width: @btn-border-width;
-    border-right-width: 0;
+    border-left-width: 0;
 
     &:first-child {
-      border-radius: @btn-border-radius-base @btn-border-radius-base 0 0;
+      border-left-width: @btn-border-width;
+      border-radius: @btn-border-radius-base 0 0 @btn-border-radius-base;
     }
+    
 
     &:last-child {
       border-right-width: @btn-border-width;
@@ -47,7 +48,22 @@
     &:hover,
     &:focus,
     &:active {
-      border-right-width: @btn-border-width;
+      &:not(:first-child)::before {
+        position: absolute;
+        display: block;
+        position: absolute;
+        z-index: 1;
+        top: -1px;
+        left: -1px;
+        display: block;
+        box-sizing: content-box;
+        width: @btn-border-width;
+        height: 100%;
+        padding: 1px 0;
+        background-color: @primary-color-hover;
+        transition: background-color .3s;
+        content: "";
+      }
     }
   }
 }
