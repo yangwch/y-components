@@ -3,6 +3,8 @@ import useForceUpdate from '../../_utils/useForceUpate';
 import { FieldName, FieldValue, FormInstance, FormState, NamePath } from '../interface';
 
 class FormStore<Values = any> {
+  private initialStore: FormState = {};
+
   private store: FormState = {};
 
   private forceUpdate: () => void = () => {};
@@ -19,6 +21,14 @@ class FormStore<Values = any> {
 
   getFieldValue = (path: NamePath) => {
     return this.store[path];
+  };
+
+  setInitialFieldValues = (store: FormState = {}, reload?: boolean) => {
+    this.initialStore = store;
+    this.store = this.initialStore;
+    if (reload) {
+      this.forceUpdate();
+    }
   };
 
   setFieldValue = (fieldName: FieldName, value: FieldValue) => {

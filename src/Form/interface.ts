@@ -8,6 +8,7 @@ export interface FormInstance<Values = any> {
   getFieldsValue: (paths?: NamePath[]) => Values;
   getFieldValue: (path: NamePath) => FieldValue;
   setFieldValue: (fieldName: FieldName, value: FieldValue) => void;
+  setInitialFieldValues: (fieldsValue: Values, reload?: boolean) => void;
   setFieldsValue: (fieldsValue: Values) => void;
   validateFields: (fieldNames: FieldName[]) => Promise<Values>;
   submit: () => void;
@@ -62,3 +63,5 @@ export interface ValidateMessages {
     mismatch?: ValidateMessage;
   };
 }
+
+export type FormLabelAlign = 'left' | 'right' | 'center'
