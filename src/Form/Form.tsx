@@ -20,5 +20,12 @@ const InternalForm = React.forwardRef<HTMLFormElement, FormProps>(function (prop
   );
 });
 
-const Form = InternalForm;
+interface CompoundedForm
+  extends React.ForwardRefExoticComponent<FormProps & React.RefAttributes<HTMLFormElement>> {
+  userForm: <Values = any>(form?: FormInstance<Values>) => FormInstance<Values>;
+}
+
+const Form = InternalForm as CompoundedForm;
+Form.userForm = useForm;
+
 export default Form;
