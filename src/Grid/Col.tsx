@@ -6,7 +6,7 @@ import useRowState from './hooks/useRowState';
 
 const cls_prefix = settings.prefix;
 
-interface ColProps extends HTMLAttributes<HTMLDivElement> {
+export interface ColProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   style?: CSSProperties;
   span?: number;

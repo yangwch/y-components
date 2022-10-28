@@ -22,10 +22,10 @@ const InternalForm = React.forwardRef<HTMLFormElement, FormProps>(function (prop
 
 interface CompoundedForm
   extends React.ForwardRefExoticComponent<FormProps & React.RefAttributes<HTMLFormElement>> {
-  userForm: <Values = any>(form?: FormInstance<Values>) => FormInstance<Values>;
+  useForm: <Values = any>(form?: FormInstance<Values>) => FormInstance<Values>;
 }
 
 const Form = InternalForm as CompoundedForm;
-Form.userForm = useForm;
+Form.useForm = useForm;
 
 export default Form;
