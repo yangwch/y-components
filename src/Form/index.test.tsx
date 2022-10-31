@@ -8,7 +8,15 @@ describe('Divider', () => {
   mountTest(() => <Form />)
   mountTest(() => <Form>test</Form>)
   mountTest(() =>{
-    const form = Form.userForm()
+    const form = Form.useForm()
     return <Form form={form}/>
+  })
+
+  mountTest(() => {
+    return (
+      <Form>
+        <Form.Item label="姓名" name="name"><input type="text" /></Form.Item>
+      </Form>
+    )
   })
 })

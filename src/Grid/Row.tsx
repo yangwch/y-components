@@ -7,7 +7,7 @@ import './style/index.less';
 const cls_prefix = settings.prefix;
 
 type Alignment = 'top' | 'middle' | 'bottom';
-type Justify = 'start' | 'end' | 'center' | 'space-around' | 'space-between' | 'space-evenly';
+export type Justify = 'start' | 'end' | 'center' | 'space-around' | 'space-between' | 'space-evenly';
 
 interface RowProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;

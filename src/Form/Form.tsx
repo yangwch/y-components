@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { ColProps } from '../Grid/Col';
-import FormProvider, { FormContext } from './FormContext';
+import FormProvider from './FormContext';
+import FormItem from './FormItem';
 import useForm from './hooks/useForm';
 import { FormInstance, FormLabelAlign, FormState } from './interface';
 
@@ -15,10 +16,22 @@ export interface FormProps<Values = any> extends BaseFormProps {
   form?: FormInstance<Values>;
   children?: React.ReactNode | ((form: FormInstance<Values>) => JSX.Element);
   initialValues?: FormState;
+  hideLabels?: boolean;
+  inline?: boolean;
 }
 
 const InternalForm = React.forwardRef<HTMLFormElement, FormProps>(function (props, ref) {
-  const { name, form, children, initialValues = {}, ...rest } = props;
+  const {
+    name,
+    form,
+    children,
+    initialValues = {},
+    labelCol,
+    wrapperCol,
+    hideLabels,
+    inline,
+    ...rest
+  } = props;
   const formInstance = useForm(form);
 
   const mountRef = useRef<boolean>(false);
@@ -26,7 +39,7 @@ const InternalForm = React.forwardRef<HTMLFormElement, FormProps>(function (prop
     mountRef.current = true;
     formInstance.setInitialFieldValues(initialValues, !mountRef.current);
   }
-  const { vertical, labelAlign, labelCol, wrapperCol } = props;
+  const { vertical, labelAlign } = props;
   return (
     <FormProvider
       form={form}
@@ -34,6 +47,8 @@ const InternalForm = React.forwardRef<HTMLFormElement, FormProps>(function (prop
       labelAlign={labelAlign}
       labelCol={labelCol}
       wrapperCol={wrapperCol}
+      hideLabels={hideLabels}
+      inline={inline}
     >
       <form name={name} ref={ref} {...rest}>
         {typeof children === 'function' ? children(formInstance) : children}
@@ -45,9 +60,11 @@ const InternalForm = React.forwardRef<HTMLFormElement, FormProps>(function (prop
 interface CompoundedForm
   extends React.ForwardRefExoticComponent<FormProps & React.RefAttributes<HTMLFormElement>> {
   useForm: <Values = any>(form?: FormInstance<Values>) => FormInstance<Values>;
+  Item: typeof FormItem;
 }
 
 const Form = InternalForm as CompoundedForm;
 Form.useForm = useForm;
+Form.Item = FormItem;
 
 export default Form;

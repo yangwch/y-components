@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import Schema, { Rule } from 'async-validator';
 import { useFormState } from './FormContext';
 import { FieldValue, FormInstance } from './interface';
 import useMountCall from '../_utils/useMountCall';
+import { getFieldName } from './utils/form';
+import classNames from 'classnames';
 import { settings } from '../utils/global';
-import identity from '../_utils/identity';
+import { Col, Row } from '../Grid';
 
 type RenderChildren<Values = any> = (form: FormInstance<Values>) => React.ReactNode;
 
@@ -14,29 +16,47 @@ interface FormItemProps {
   required?: boolean;
   name?: string;
   rule?: Rule;
-  children: ChildrenType;
+  children?: ChildrenType;
   initialValue?: FieldValue;
+  className?: string;
+  style?: CSSProperties;
+  inline?: boolean;
 }
 
-const getFieldName = (name?: string) => {
-  if (!name) {
-    return `${settings.prefix}${identity.create()}`;
-  }
-  return name;
-};
+const formItemPrefix = `${settings.prefix}-form-item`;
+
 
 function FormItem(props: FormItemProps) {
-  const { children, name, initialValue } = props;
+  const { children, name, initialValue, style, className, label } = props;
   const formContext = useFormState();
   if (!formContext || !formContext.form) {
     throw new Error('FormItem should be nested in Form');
   }
 
+  const { form, labelAlign = 'left', labelCol, wrapperCol, hideLabels } = formContext;
+
   const fieldName = getFieldName(name);
   useMountCall(() => {
-    formContext.form?.setFieldValue(fieldName, initialValue);
-  }, [fieldName, formContext.form, initialValue]);
-  return <div>{typeof children === 'function' ? children(formContext.form) : children}</div>;
+    if (form) {
+      form?.setFieldValue(fieldName, initialValue);
+    }
+  }, [fieldName, form, initialValue]);
+
+  const classes = classNames(formItemPrefix, className);
+  if (hideLabels) {
+    return (
+      <div className={classes} style={style}>
+        {typeof children === 'function' ? children(formContext.form) : children}
+      </div>
+    );
+  }
+
+  return (
+    <Row>
+      <Col {...labelCol} style={{ ...labelCol?.style, textAlign: labelAlign}}>{label}</Col>
+      <Col {...wrapperCol}>{typeof children === 'function' ? children(form) : children}</Col>
+    </Row>
+  );
 }
 
 export default FormItem;

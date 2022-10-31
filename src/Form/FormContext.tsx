@@ -9,6 +9,8 @@ export interface FormContextProps {
   wrapperCol?: ColProps;
   // fieldValues: FormState;
   form?: FormInstance<any>;
+  hideLabels?: boolean;
+  inline?: boolean;
 }
 
 export const FormContext = React.createContext<FormContextProps>({
@@ -23,10 +25,12 @@ interface FormProviderProps {
   labelCol?: ColProps;
   wrapperCol?: ColProps;
   children: React.ReactNode;
+  hideLabels?: boolean;
+  inline?: boolean;
 }
 
 export default function FormProvider(props: FormProviderProps) {
-  const { form, children, vertical, labelAlign, labelCol, wrapperCol } = props;
+  const { form, children, vertical, labelAlign, labelCol, wrapperCol, hideLabels, inline } = props;
   return (
     <FormContext.Provider
       value={{
@@ -35,6 +39,8 @@ export default function FormProvider(props: FormProviderProps) {
         labelAlign: labelAlign || 'right',
         labelCol,
         wrapperCol,
+        hideLabels,
+        inline
       }}
     >
       {children}
