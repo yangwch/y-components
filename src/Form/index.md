@@ -7,6 +7,16 @@ import React from 'react';
 
 import { Form } from 'y-components';
 
+const Input = (props) => {
+  const onValueChange = (e) => {
+    const v = e.target.value
+    if (props.onChange) {
+      props.onChange(v)
+    }
+  }
+  return <input {...props} onChange={onValueChange} />
+}
+
 export default () => {
   const form = Form.useForm();
   return (
@@ -26,13 +36,13 @@ export default () => {
         }}
       >
         <Form.Item label="姓名" name="name">
-          <input type="text" />
+          <Input type="text" />
         </Form.Item>
         <Form.Item label="年龄" name="age">
-          <input type="number" />
+          <Input type="number" />
         </Form.Item>
         <Form.Item>
-          <button>提交</button>
+          <button type="submit">提交</button>
         </Form.Item>
       </Form>
     </div>

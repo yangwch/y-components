@@ -1,4 +1,4 @@
-import React, { CSSProperties } from 'react';
+import React, { CSSProperties, useCallback } from 'react';
 import Schema, { Rule } from 'async-validator';
 import { useFormState } from './FormContext';
 import { FieldValue, FormInstance } from './interface';
@@ -41,11 +41,35 @@ function FormItem(props: FormItemProps) {
     }
   }, [fieldName, form, initialValue]);
 
+  const fieldValue = form.getFieldValue(fieldName);
+  const onValueChange = useCallback((value: any) => {
+    const childEle = children && (children as React.ReactElement)
+    if (childEle && childEle.props?.onChange) {
+      childEle.props.onChange(value)
+    }
+    form.setFieldValue(fieldName, value)
+  }, [fieldName, form]);
+
   const classes = classNames(formItemPrefix, className);
+
+  const renderChildNode = () => {
+    if (typeof children === 'function') {
+      return children(form);
+    }
+    if (React.isValidElement(children)) {
+      return React.cloneElement(children, {
+        ...children.props,
+        value: fieldValue,
+        onChange: onValueChange,
+      });
+    } else {
+      console.warn('Form item children is not a valid ReactElement');
+    }
+  };
   if (hideLabels) {
     return (
       <div className={classes} style={style}>
-        {typeof children === 'function' ? children(formContext.form) : children}
+        {renderChildNode()}
       </div>
     );
   }
@@ -55,7 +79,7 @@ function FormItem(props: FormItemProps) {
       <Col {...labelCol} style={{ ...labelCol?.style, textAlign: labelAlign }}>
         {label}
       </Col>
-      <Col {...wrapperCol}>{typeof children === 'function' ? children(form) : children}</Col>
+      <Col {...wrapperCol}>{renderChildNode()}</Col>
     </Row>
   );
 }
