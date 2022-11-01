@@ -25,7 +25,6 @@ interface FormItemProps {
 
 const formItemPrefix = `${settings.prefix}-form-item`;
 
-
 function FormItem(props: FormItemProps) {
   const { children, name, initialValue, style, className, label } = props;
   const formContext = useFormState();
@@ -37,7 +36,7 @@ function FormItem(props: FormItemProps) {
 
   const fieldName = getFieldName(name);
   useMountCall(() => {
-    if (form) {
+    if (form && initialValue !== undefined) {
       form?.setFieldValue(fieldName, initialValue);
     }
   }, [fieldName, form, initialValue]);
@@ -53,7 +52,9 @@ function FormItem(props: FormItemProps) {
 
   return (
     <Row>
-      <Col {...labelCol} style={{ ...labelCol?.style, textAlign: labelAlign}}>{label}</Col>
+      <Col {...labelCol} style={{ ...labelCol?.style, textAlign: labelAlign }}>
+        {label}
+      </Col>
       <Col {...wrapperCol}>{typeof children === 'function' ? children(form) : children}</Col>
     </Row>
   );

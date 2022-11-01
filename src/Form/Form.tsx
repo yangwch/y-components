@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { FormEvent, useCallback, useRef } from 'react';
 import { ColProps } from '../Grid/Col';
 import FormProvider from './FormContext';
 import FormItem from './FormItem';
@@ -18,6 +18,7 @@ export interface FormProps<Values = any> extends BaseFormProps {
   initialValues?: FormState;
   hideLabels?: boolean;
   inline?: boolean;
+  onSubmit?: (e: FormEvent<HTMLFormElement>, values: Values) => void;
 }
 
 const InternalForm = React.forwardRef<HTMLFormElement, FormProps>(function (props, ref) {
@@ -30,6 +31,7 @@ const InternalForm = React.forwardRef<HTMLFormElement, FormProps>(function (prop
     wrapperCol,
     hideLabels,
     inline,
+    onSubmit,
     ...rest
   } = props;
   const formInstance = useForm(form);
@@ -40,6 +42,14 @@ const InternalForm = React.forwardRef<HTMLFormElement, FormProps>(function (prop
     formInstance.setInitialFieldValues(initialValues, !mountRef.current);
   }
   const { vertical, labelAlign } = props;
+  const onFormSubmit = useCallback(
+    (e: FormEvent<HTMLFormElement>) => {
+      if (onSubmit && formInstance) {
+        onSubmit(e, formInstance.getFieldsValue());
+      }
+    },
+    [formInstance, onSubmit],
+  );
   return (
     <FormProvider
       form={form}
@@ -50,7 +60,7 @@ const InternalForm = React.forwardRef<HTMLFormElement, FormProps>(function (prop
       hideLabels={hideLabels}
       inline={inline}
     >
-      <form name={name} ref={ref} {...rest}>
+      <form name={name} ref={ref} onSubmit={onFormSubmit} {...rest}>
         {typeof children === 'function' ? children(formInstance) : children}
       </form>
     </FormProvider>

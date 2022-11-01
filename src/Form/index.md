@@ -11,7 +11,20 @@ export default () => {
   const form = Form.useForm();
   return (
     <div>
-      <Form form={form} labelCol={{ span: 2 }} wrapperCol={{ span: 10 }}>
+      <Form
+        form={form}
+        labelCol={{ span: 2 }}
+        wrapperCol={{ span: 10 }}
+        onSubmit={(e, values) => {
+          e.preventDefault();
+          e.stopPropagation();
+          alert(JSON.stringify(values))
+        }}
+        initialValues={{
+          name: '小明',
+          age: 10
+        }}
+      >
         <Form.Item label="姓名" name="name">
           <input type="text" />
         </Form.Item>
