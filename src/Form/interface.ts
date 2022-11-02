@@ -1,3 +1,5 @@
+import { Rule } from "async-validator";
+
 export type NamePath = string;
 
 export type FieldName = string;
@@ -12,6 +14,7 @@ export interface FormInstance<Values = any> {
   setFieldsValue: (fieldsValue: Values) => void;
   validateFields: (fieldNames: FieldName[]) => Promise<Values>;
   submit: () => void;
+  setFieldRule: (fieldName: FieldName, rule: Rule) => void;
 }
 
 

@@ -7,7 +7,7 @@ const useMountCall = (callback: () => void, deps: any[] = []) => {
       callback();
     }
     mountRef.current = true
-  }, [])
+  }, [deps])
 };
 
 export default useMountCall;

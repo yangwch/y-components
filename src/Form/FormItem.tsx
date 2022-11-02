@@ -1,9 +1,9 @@
-import React, { CSSProperties, useCallback } from 'react';
+import React, { CSSProperties, useCallback, useMemo } from 'react';
 import Schema, { Rule } from 'async-validator';
 import { useFormState } from './FormContext';
 import { FieldValue, FormInstance } from './interface';
 import useMountCall from '../_utils/useMountCall';
-import { getFieldName } from './utils/form';
+import { execIsRequired, getFieldName, getFieldRule } from './utils/form';
 import classNames from 'classnames';
 import { settings } from '../utils/global';
 import { Col, Row } from '../Grid';
@@ -25,8 +25,12 @@ interface FormItemProps {
 
 const formItemPrefix = `${settings.prefix}-form-item`;
 
+const RequiredMark = () => {
+  return <span className={`${formItemPrefix}-required`}>*</span>;
+};
+
 function FormItem(props: FormItemProps) {
-  const { children, name, initialValue, style, className, label } = props;
+  const { children, name, initialValue, style, className, label, rule, required } = props;
   const formContext = useFormState();
   if (!formContext || !formContext.form) {
     throw new Error('FormItem should be nested in Form');
@@ -34,21 +38,30 @@ function FormItem(props: FormItemProps) {
 
   const { form, labelAlign = 'left', labelCol, wrapperCol, hideLabels } = formContext;
 
-  const fieldName = getFieldName(name);
+  const fieldName = useMemo(() => getFieldName(name), [name]);
   useMountCall(() => {
-    if (form && initialValue !== undefined) {
+    if (form && initialValue) {
       form?.setFieldValue(fieldName, initialValue);
     }
   }, [fieldName, form, initialValue]);
 
-  const fieldValue = form.getFieldValue(fieldName);
-  const onValueChange = useCallback((value: any) => {
-    const childEle = children && (children as React.ReactElement)
-    if (childEle && childEle.props?.onChange) {
-      childEle.props.onChange(value)
+  useMountCall(() => {
+    if (form) {
+      form.setFieldRule(fieldName, getFieldRule(required, rule));
     }
-    form.setFieldValue(fieldName, value)
-  }, [fieldName, form]);
+  }, [form, fieldName, required]);
+
+  const fieldValue = form.getFieldValue(fieldName);
+  const onFieldValueChange = useCallback(
+    (value: any) => {
+      const childEle = children && (children as React.ReactElement);
+      if (childEle && childEle.props?.onChange) {
+        childEle.props.onChange(value);
+      }
+      form.setFieldValue(fieldName, value);
+    },
+    [fieldName, form],
+  );
 
   const classes = classNames(formItemPrefix, className);
 
@@ -60,7 +73,7 @@ function FormItem(props: FormItemProps) {
       return React.cloneElement(children, {
         ...children.props,
         value: fieldValue,
-        onChange: onValueChange,
+        onChange: onFieldValueChange,
       });
     } else {
       console.warn('Form item children is not a valid ReactElement');
@@ -74,10 +87,12 @@ function FormItem(props: FormItemProps) {
     );
   }
 
+  const isRequired = execIsRequired(required, rule);
+
   return (
     <Row>
       <Col {...labelCol} style={{ ...labelCol?.style, textAlign: labelAlign }}>
-        {label}
+        {isRequired ? <RequiredMark /> : null} {label}
       </Col>
       <Col {...wrapperCol}>{renderChildNode()}</Col>
     </Row>

@@ -1,6 +1,8 @@
 import { useRef } from 'react';
+import { Rule, ValidateError } from 'async-validator';
 import useForceUpdate from '../../_utils/useForceUpate';
 import { FieldName, FieldValue, FormInstance, FormState, NamePath } from '../interface';
+import Schema from 'async-validator';
 
 class FormStore<Values = any> {
   private initialStore: FormState = {};
@@ -9,6 +11,10 @@ class FormStore<Values = any> {
 
   private forceUpdate: () => void = () => {};
 
+  private rules: Record<string, Rule> = {};
+
+  private errors: Record<string, ValidateError[]> = {};
+
   constructor(updator?: () => void) {
     if (updator) {
       this.forceUpdate = updator;
@@ -16,7 +22,16 @@ class FormStore<Values = any> {
   }
 
   getFieldsValue = (paths?: NamePath[]) => {
-    return this.store;
+    if (!paths) {
+      return this.store;
+    }
+
+    return paths.reduce((prev, path) => {
+      return {
+        ...prev,
+        [path]: this.getFieldValue(path),
+      };
+    }, {});
   };
 
   getFieldValue = (path: NamePath) => {
@@ -47,8 +62,45 @@ class FormStore<Values = any> {
     this.forceUpdate();
   };
 
-  validateFields = (fieldNames: FieldName[]) => {
-    return new Promise(() => Promise.resolve());
+  setErrors = (errors: ValidateError[]) => {
+    const nerrors: Record<string, ValidateError[]> = {};
+    for (let i = 0; i < errors.length; i++) {
+      const error = errors[i];
+      if (error.field) {
+        nerrors[error.field] = (nerrors[error.field] || []).concat(error);
+      }
+    }
+    let notchanged = !this.errors.length && !nerrors.length;
+    this.errors = nerrors;
+    if (!notchanged) {
+      this.forceUpdate();
+    }
+  };
+
+  validateFields = (fieldNames?: FieldName[]) => {
+    const validator = new Schema(this.rules);
+    return new Promise((resolve, reject) => {
+      const values = this.getFieldsValue(fieldNames);
+      validator
+        .validate(values)
+        .then(() => {
+          this.setErrors([]);
+          resolve(values);
+        })
+        .catch((reason) => {
+          const { errors } = reason;
+          this.errors = errors;
+          this.setErrors(errors);
+          reject(reason);
+        });
+    });
+  };
+
+  setFieldRule = (fieldName: string, rule: Rule) => {
+    this.rules = {
+      ...this.rules,
+      [fieldName]: rule,
+    };
   };
 
   submit = () => {};

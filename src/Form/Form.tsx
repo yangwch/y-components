@@ -4,6 +4,7 @@ import FormProvider from './FormContext';
 import FormItem from './FormItem';
 import useForm from './hooks/useForm';
 import { FormInstance, FormLabelAlign, FormState } from './interface';
+import './style/index.less';
 
 type BaseFormProps = Omit<React.FormHTMLAttributes<HTMLFormElement>, 'children' | 'onSubmit'>;
 
