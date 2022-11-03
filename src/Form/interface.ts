@@ -1,4 +1,4 @@
-import { Rule } from "async-validator";
+import { Rule, ValidateError } from "async-validator";
 
 export type NamePath = string;
 
@@ -15,56 +15,9 @@ export interface FormInstance<Values = any> {
   validateFields: (fieldNames: FieldName[]) => Promise<Values>;
   submit: () => void;
   setFieldRule: (fieldName: FieldName, rule: Rule) => void;
-}
-
-
-type ValidateMessage = string | (() => string);
-export interface ValidateMessages {
-  default?: ValidateMessage;
-  required?: ValidateMessage;
-  enum?: ValidateMessage;
-  whitespace?: ValidateMessage;
-  date?: {
-    format?: ValidateMessage;
-    parse?: ValidateMessage;
-    invalid?: ValidateMessage;
-  };
-  types?: {
-    string?: ValidateMessage;
-    method?: ValidateMessage;
-    array?: ValidateMessage;
-    object?: ValidateMessage;
-    number?: ValidateMessage;
-    date?: ValidateMessage;
-    boolean?: ValidateMessage;
-    integer?: ValidateMessage;
-    float?: ValidateMessage;
-    regexp?: ValidateMessage;
-    email?: ValidateMessage;
-    url?: ValidateMessage;
-    hex?: ValidateMessage;
-  };
-  string?: {
-    len?: ValidateMessage;
-    min?: ValidateMessage;
-    max?: ValidateMessage;
-    range?: ValidateMessage;
-  };
-  number?: {
-    len?: ValidateMessage;
-    min?: ValidateMessage;
-    max?: ValidateMessage;
-    range?: ValidateMessage;
-  };
-  array?: {
-    len?: ValidateMessage;
-    min?: ValidateMessage;
-    max?: ValidateMessage;
-    range?: ValidateMessage;
-  };
-  pattern?: {
-    mismatch?: ValidateMessage;
-  };
+  getErrors: () => FormErrors;
 }
 
 export type FormLabelAlign = 'left' | 'right' | 'center'
+
+export type FormErrors = Record<string, ValidateError[]>;

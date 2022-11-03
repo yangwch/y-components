@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { ColProps } from '../Grid/Col';
-import { FormInstance, FormLabelAlign, FormState } from './interface';
+import { FormErrors, FormInstance, FormLabelAlign, FormState } from './interface';
 
 export interface FormContextProps {
   vertical?: boolean;
@@ -11,6 +11,7 @@ export interface FormContextProps {
   form?: FormInstance<any>;
   hideLabels?: boolean;
   inline?: boolean;
+  errors?: FormErrors;
 }
 
 export const FormContext = React.createContext<FormContextProps>({
@@ -40,7 +41,8 @@ export default function FormProvider(props: FormProviderProps) {
         labelCol,
         wrapperCol,
         hideLabels,
-        inline
+        inline,
+        errors: form ? form.getErrors() : {},
       }}
     >
       {children}

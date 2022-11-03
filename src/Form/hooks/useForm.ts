@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { Rule, ValidateError } from 'async-validator';
 import useForceUpdate from '../../_utils/useForceUpate';
-import { FieldName, FieldValue, FormInstance, FormState, NamePath } from '../interface';
+import { FieldName, FieldValue, FormErrors, FormInstance, FormState, NamePath } from '../interface';
 import Schema from 'async-validator';
 
 class FormStore<Values = any> {
@@ -13,7 +13,7 @@ class FormStore<Values = any> {
 
   private rules: Record<string, Rule> = {};
 
-  private errors: Record<string, ValidateError[]> = {};
+  private errors: FormErrors = {};
 
   constructor(updator?: () => void) {
     if (updator) {
@@ -70,12 +70,11 @@ class FormStore<Values = any> {
         nerrors[error.field] = (nerrors[error.field] || []).concat(error);
       }
     }
-    let notchanged = !this.errors.length && !nerrors.length;
     this.errors = nerrors;
-    if (!notchanged) {
-      this.forceUpdate();
-    }
+    this.forceUpdate();
   };
+
+  getErrors = () => this.errors;
 
   validateFields = (fieldNames?: FieldName[]) => {
     const validator = new Schema(this.rules);
