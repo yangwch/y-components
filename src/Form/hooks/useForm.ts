@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { Rule, ValidateError } from 'async-validator';
 import useForceUpdate from '../../_utils/useForceUpate';
-import { FieldName, FieldValue, FormErrors, FormInstance, FormState, NamePath } from '../interface';
+import { FieldName, FieldsChangeListener, FieldValue, FormErrors, FormInstance, FormState, NamePath } from '../interface';
 import Schema from 'async-validator';
 
 class FormStore<Values = any> {
@@ -14,6 +14,8 @@ class FormStore<Values = any> {
   private rules: Record<string, Rule> = {};
 
   private errors: FormErrors = {};
+
+  private fieldChangeListener: FieldsChangeListener | undefined;
 
   constructor(updator?: () => void) {
     if (updator) {
@@ -52,6 +54,7 @@ class FormStore<Values = any> {
       [fieldName]: value,
     };
     this.forceUpdate();
+    this.triggerFieldsChangeListener(fieldName);
   };
 
   setFieldsValue = (fieldsValue: Values) => {
@@ -103,6 +106,16 @@ class FormStore<Values = any> {
   };
 
   submit = () => {};
+
+  setFieldsChangeListender = (cb?: FieldsChangeListener) => {
+    this.fieldChangeListener = cb;
+  };
+
+  triggerFieldsChangeListener = (fieldName: FieldName) => {
+    if (this.fieldChangeListener) {
+      this.fieldChangeListener(fieldName, this.getFieldsValue());
+    }
+  };
 }
 
 function useForm<Values = any>(form?: FormInstance<Values>): FormInstance<Values> {

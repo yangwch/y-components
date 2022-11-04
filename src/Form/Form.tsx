@@ -1,9 +1,14 @@
-import React, { FormEvent, useCallback, useRef } from 'react';
+import React, { FormEvent, useCallback, useEffect, useRef } from 'react';
 import { ColProps } from '../Grid/Col';
 import FormProvider from './FormContext';
 import InternalFormItem from './FormItem';
 import useForm from './hooks/useForm';
-import { FormInstance, FormLabelAlign, FormState } from './interface';
+import {
+  FieldsChangeListener,
+  FormInstance,
+  FormLabelAlign,
+  FormState,
+} from './interface';
 import './style/index.less';
 
 type BaseFormProps = Omit<React.FormHTMLAttributes<HTMLFormElement>, 'children' | 'onSubmit'>;
@@ -20,6 +25,7 @@ export interface FormProps<Values = any> extends BaseFormProps {
   hideLabels?: boolean;
   inline?: boolean;
   onSubmit?: (e: FormEvent<HTMLFormElement>, values: Values) => void;
+  onFieldsChange?: FieldsChangeListener;
 }
 
 const InternalForm = React.forwardRef<HTMLFormElement, FormProps>(function (props, ref) {
@@ -33,6 +39,7 @@ const InternalForm = React.forwardRef<HTMLFormElement, FormProps>(function (prop
     hideLabels,
     inline,
     onSubmit,
+    onFieldsChange,
     ...rest
   } = props;
   const formInstance = useForm(form);
@@ -51,6 +58,9 @@ const InternalForm = React.forwardRef<HTMLFormElement, FormProps>(function (prop
     },
     [formInstance, onSubmit],
   );
+  useEffect(() => {
+    formInstance.setFieldsChangeListender(onFieldsChange);
+  }, [onFieldsChange]);
   return (
     <FormProvider
       form={form}

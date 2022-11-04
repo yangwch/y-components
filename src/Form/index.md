@@ -18,19 +18,21 @@ const Input = (props) => {
 };
 
 export default () => {
+  const [values, setValues] = React.useState()
   const form = Form.useForm();
   const onSubmit = (e) => {
     e.preventDefault();
     e.stopPropagation();
     form.validateFields().then((values) => {
-      alert(`
-        姓名：${values.name}
-        年龄：${values.age}
-      `);
+      setValues(values)
     }).catch(({ errors }) => {
-      alert(`error: ${JSON.stringify(errors)}`)
+      setValues()
     });
   };
+
+  const onFieldsChange = (fieldName, values) => {
+    console.log('onFieldsChange', fieldName, values)
+  }
   return (
     <div>
       <Form
@@ -42,6 +44,7 @@ export default () => {
           name: '小明',
           age: 10,
         }}
+        onFieldsChange={onFieldsChange}
       >
         <Form.Item label="姓名" name="name" rule={{ required: true, type: 'string', message: '姓名是必填项，且长度为2-5',min: 2, max: 5 }}>
           <Input type="text" />
@@ -53,6 +56,12 @@ export default () => {
           <button type="submit">提交</button>
         </Form.Item>
       </Form>
+
+      <div>
+      结果：<br/>
+      &nbsp;&nbsp;姓名：{values?.name}<br/>
+      &nbsp;&nbsp;年龄：{values?.age}
+      </div>
     </div>
   );
 };
