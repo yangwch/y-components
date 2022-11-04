@@ -1,13 +1,37 @@
 import React, { CSSProperties, Fragment, useCallback, useMemo } from 'react';
 import { Rule, ValidateError } from 'async-validator';
+import classNames from 'classnames';
+import { isEqual } from 'lodash-es';
 import { FormContextProps, useFormState } from './FormContext';
 import { FieldValue, FormInstance } from './interface';
 import useMountCall from '../_utils/useMountCall';
 import { execIsRequired, getFieldName, getFieldRule } from './utils/form';
-import classNames from 'classnames';
 import { settings } from '../utils/global';
 import { Col, Row } from '../Grid';
-import { withContext } from './hocs/withContext';
+
+interface WithContextProps {
+  name?: string;
+}
+
+export function withContext(WrappedComponent: React.ComponentType<FormItemProps>) {
+  const hocComponent = (
+    props: WithContextProps & Omit<FormItemProps, 'formContext' | 'errors'>,
+  ) => {
+    const formContext = useFormState();
+    if (!formContext || !formContext.form) {
+      throw new Error('FormItem should be nested in Form');
+    }
+    const form = formContext.form;
+    const { name } = props;
+    const fieldName = useMemo(() => getFieldName(name), [name]);
+    const errors = form.getErrors()[fieldName] || [];
+
+    return (
+      <WrappedComponent {...props} name={fieldName} errors={errors} formContext={formContext} />
+    );
+  };
+  return hocComponent;
+}
 
 type RenderChildren<Values = any> = (form: FormInstance<Values>) => React.ReactNode;
 
@@ -43,7 +67,7 @@ const ErrorLabel = (props: ErrorLabelProps) => {
   return null;
 };
 
-function FormItem(props: FormItemProps) {
+function InternalFormItem(props: FormItemProps) {
   const { children, name, initialValue, style, className, label, rule, required, formContext } =
     props;
 
@@ -138,4 +162,6 @@ function FormItem(props: FormItemProps) {
   );
 }
 
-export default withContext(React.memo(FormItem));
+const WithContext = withContext(React.memo(InternalFormItem, (prev, next) => isEqual(prev, next)));
+
+export default WithContext;

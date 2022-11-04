@@ -1,7 +1,7 @@
 import React, { FormEvent, useCallback, useRef } from 'react';
 import { ColProps } from '../Grid/Col';
 import FormProvider from './FormContext';
-import FormItem from './FormItem';
+import InternalFormItem from './FormItem';
 import useForm from './hooks/useForm';
 import { FormInstance, FormLabelAlign, FormState } from './interface';
 import './style/index.less';
@@ -71,11 +71,11 @@ const InternalForm = React.forwardRef<HTMLFormElement, FormProps>(function (prop
 interface CompoundedForm
   extends React.ForwardRefExoticComponent<FormProps & React.RefAttributes<HTMLFormElement>> {
   useForm: <Values = any>(form?: FormInstance<Values>) => FormInstance<Values>;
-  Item: typeof FormItem;
+  Item: typeof InternalFormItem;
 }
 
 const Form = InternalForm as CompoundedForm;
 Form.useForm = useForm;
-Form.Item = FormItem;
+Form.Item = InternalFormItem;
 
 export default Form;
