@@ -11,6 +11,7 @@ import { Col, Row } from '../Grid';
 
 interface WithContextProps {
   name?: string;
+  initialValue?: FieldValue;
 }
 
 export function withContext(WrappedComponent: React.ComponentType<FormItemProps>) {
@@ -22,12 +23,32 @@ export function withContext(WrappedComponent: React.ComponentType<FormItemProps>
       throw new Error('FormItem should be nested in Form');
     }
     const form = formContext.form;
-    const { name } = props;
+    const { name, initialValue, required, rule } = props;
     const fieldName = useMemo(() => getFieldName(name), [name]);
     const errors = form.getErrors()[fieldName] || [];
 
+    useMountCall(() => {
+      if (form && initialValue && fieldName) {
+        form?.setFieldValue(fieldName, initialValue);
+      }
+    }, [fieldName, form, initialValue]);
+
+    useMountCall(() => {
+      if (form && fieldName) {
+        form.setFieldRule(fieldName, getFieldRule(required, rule));
+      }
+    }, [form, fieldName, required]);
+
+    const fieldValue = form.getFieldValue(fieldName);
+
     return (
-      <WrappedComponent {...props} name={fieldName} errors={errors} formContext={formContext} />
+      <WrappedComponent
+        {...props}
+        value={fieldValue}
+        name={fieldName}
+        errors={errors}
+        formContext={formContext}
+      />
     );
   };
   return hocComponent;
@@ -39,13 +60,12 @@ type ChildrenType<Values = any> = RenderChildren<Values> | React.ReactNode;
 export interface FormItemProps {
   label?: React.ReactNode;
   required?: boolean;
-  name?: string;
+  name: string;
   rule?: Rule;
   children?: ChildrenType;
-  initialValue?: FieldValue;
+  value?: FieldValue;
   className?: string;
   style?: CSSProperties;
-  inline?: boolean;
   formContext: FormContextProps;
   errors: ValidateError[];
 }
@@ -68,45 +88,26 @@ const ErrorLabel = (props: ErrorLabelProps) => {
 };
 
 function InternalFormItem(props: FormItemProps) {
-  const { children, name, initialValue, style, className, label, rule, required, formContext } =
-    props;
+  const { children, name, value, style, className, label, rule, required, formContext } = props;
 
-  const { form, labelAlign = 'left', labelCol, wrapperCol, hideLabels } = formContext;
+  const { form, labelAlign = 'left', labelCol, wrapperCol, hideLabels, inline } = formContext;
   if (!form) {
     return null;
   }
-
-  const fieldName = useMemo(() => getFieldName(name), [name]);
-  useMountCall(() => {
-    if (form && initialValue) {
-      form?.setFieldValue(fieldName, initialValue);
-    }
-  }, [fieldName, form, initialValue]);
-
-  useMountCall(() => {
-    if (form) {
-      form.setFieldRule(fieldName, getFieldRule(required, rule));
-    }
-  }, [form, fieldName, required]);
-
-  const fieldValue = form.getFieldValue(fieldName);
   const onFieldValueChange = useCallback(
     (value: any) => {
-      const childEle = children && (children as React.ReactElement);
-      if (childEle && childEle.props?.onChange) {
-        childEle.props.onChange(value);
-      }
-      form.setFieldValue(fieldName, value);
+      form.setFieldValue(name, value);
     },
-    [fieldName, form],
+    [name, form],
   );
 
-  const errors = form.getErrors()[fieldName] || [];
+  const errors = form.getErrors()[name] || [];
 
   const classes = classNames(
     formItemPrefix,
     {
       [`${formItemPrefix}-error`]: errors?.length > 0,
+      [`${formItemPrefix}-inline`]: !!inline,
     },
     className,
   );
@@ -118,7 +119,7 @@ function InternalFormItem(props: FormItemProps) {
     if (React.isValidElement(children)) {
       return React.cloneElement(children, {
         ...children.props,
-        value: fieldValue,
+        value: value,
         onChange: onFieldValueChange,
       });
     } else {
@@ -134,10 +135,22 @@ function InternalFormItem(props: FormItemProps) {
     return null;
   };
 
-  if (hideLabels) {
+  const isRequired = execIsRequired(required, rule);
+  const renderLabel = () => {
+    const labelIns = hideLabels ? null : label;
+    return (
+      <div className={`${formItemPrefix}-label`}>
+        {isRequired ? <RequiredMark /> : null}
+        {labelIns}
+      </div>
+    );
+  };
+
+  if (hideLabels || inline) {
     return (
       <div className={classes} style={style}>
         <>
+          {renderLabel()}
           {renderInputNode()}
           {renderError()}
         </>
@@ -145,12 +158,10 @@ function InternalFormItem(props: FormItemProps) {
     );
   }
 
-  const isRequired = execIsRequired(required, rule);
-
   return (
-    <Row>
+    <Row className={className}>
       <Col {...labelCol} style={{ ...labelCol?.style, textAlign: labelAlign }}>
-        {isRequired ? <RequiredMark /> : null} {label}
+        {renderLabel()}
       </Col>
       <Col {...wrapperCol}>
         <>

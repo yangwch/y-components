@@ -1,10 +1,10 @@
 import { Rule } from 'async-validator';
-import { settings } from '../../utils/global';
-import identity from '../../_utils/identity';
+// import { settings } from '../../utils/global';
+// import identity from '../../_utils/identity';
 
 export const getFieldName = (name?: string) => {
   if (!name) {
-    return `${settings.prefix}${identity.create()}`;
+    return '';
   }
   return name;
 };

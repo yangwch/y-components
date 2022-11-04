@@ -84,17 +84,15 @@ class FormStore<Values = any> {
     return new Promise((resolve, reject) => {
       const values = this.getFieldsValue(fieldNames);
       validator
-        .validate(values)
-        .then(() => {
-          this.setErrors([]);
-          resolve(values);
+        .validate(values, (errors, fields) => {
+          if (errors) {
+            this.setErrors(errors);
+            reject(errors);
+          } else {
+            this.setErrors([]);
+            resolve(values);
+          }
         })
-        .catch((reason) => {
-          const { errors } = reason;
-          this.errors = errors;
-          this.setErrors(errors);
-          reject(reason);
-        });
     });
   };
 

@@ -3,12 +3,7 @@ import { ColProps } from '../Grid/Col';
 import FormProvider from './FormContext';
 import InternalFormItem from './FormItem';
 import useForm from './hooks/useForm';
-import {
-  FieldsChangeListener,
-  FormInstance,
-  FormLabelAlign,
-  FormState,
-} from './interface';
+import { FieldsChangeListener, FormInstance, FormLabelAlign, FormState } from './interface';
 import './style/index.less';
 
 type BaseFormProps = Omit<React.FormHTMLAttributes<HTMLFormElement>, 'children' | 'onSubmit'>;
@@ -24,7 +19,7 @@ export interface FormProps<Values = any> extends BaseFormProps {
   initialValues?: FormState;
   hideLabels?: boolean;
   inline?: boolean;
-  onSubmit?: (e: FormEvent<HTMLFormElement>, values: Values) => void;
+  onSubmit?: (e: FormEvent<HTMLFormElement>, values: Values, form: FormInstance<Values>) => void;
   onFieldsChange?: FieldsChangeListener;
 }
 
@@ -53,7 +48,7 @@ const InternalForm = React.forwardRef<HTMLFormElement, FormProps>(function (prop
   const onFormSubmit = useCallback(
     (e: FormEvent<HTMLFormElement>) => {
       if (onSubmit && formInstance) {
-        onSubmit(e, formInstance.getFieldsValue());
+        onSubmit(e, formInstance.getFieldsValue(), formInstance);
       }
     },
     [formInstance, onSubmit],
@@ -63,7 +58,7 @@ const InternalForm = React.forwardRef<HTMLFormElement, FormProps>(function (prop
   }, [onFieldsChange]);
   return (
     <FormProvider
-      form={form}
+      form={formInstance}
       vertical={vertical}
       labelAlign={labelAlign}
       labelCol={labelCol}

@@ -2,8 +2,26 @@
 
 @form-cls: ~'@{prefix}-form';
 
+@form-padding: 5px;
+
 .@{form-cls} {
-  &-item-required, &-item-error-message {
-    color: @error-color;
+  &-item {
+    &-required,
+    &-error-message {
+      color: @error-color;
+    }
+
+    &-label {
+      padding: @form-padding;
+      display: inline;
+    }
+
+    &-inline,
+    &-inline .@{form-cls}-item-error-message {
+      display: inline;
+      padding: @form-padding;
+    }
   }
+
+
 }
