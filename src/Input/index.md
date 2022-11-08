@@ -1,0 +1,37 @@
+**Basic Usage**
+
+```jsx
+import React from 'react';
+import { Input } from 'y-components';
+
+export default () => {
+  return <Input placeholder="请输入文字" />;
+};
+```
+
+**Size**
+
+```jsx
+import React from 'react';
+import { Input } from 'y-components';
+
+const sizeList = ['small', 'middle', 'large'];
+
+export default () => {
+  const [size, setSize] = React.useState('middle');
+
+  return (
+    <div>
+      <div>
+        {sizeList.map((s) => (
+          <label>
+            <input type="radio" checked={size === s} onChange={(e) => setSize(s)} />
+            {s}
+          </label>
+        ))}
+      </div>
+      <Input size={size} placeholder="请输入文字" />
+    </div>
+  );
+};
+```

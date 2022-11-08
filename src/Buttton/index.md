@@ -1,6 +1,6 @@
 代码演示
 
-```tsx
+```jsx
 import React from 'react';
 
 import { Button } from 'y-components';
@@ -36,7 +36,7 @@ export default () => {
 
 Button size
 
-```tsx
+```jsx
 import React from 'react';
 
 import { Button } from 'y-components';
@@ -92,7 +92,7 @@ export default () => {
 
 **ButtonGroup**
 
-```tsx
+```jsx
 import React from 'react';
 
 import { Button } from 'y-components';

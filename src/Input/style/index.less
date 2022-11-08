@@ -1,0 +1,20 @@
+@import '../../style/themes/index.less';
+@import './mixins.less';
+
+@prefix: getPrefix();
+@input-prefix-cls: ~'@{prefix}-input';
+
+.@{input-prefix-cls} {
+  .input();
+
+  &-noborder {
+    border: 0;
+  }
+
+  &-sm {
+    .input-sm();
+  }
+  &-lg {
+    .input-lg();
+  }
+}
