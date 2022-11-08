@@ -1,5 +1,33 @@
 @import '../../style/mixins/index.less';
 
+.active () {
+  & when (@theme =dark) {
+    border-color: @input-border-color;
+  }
+
+  & when (not (@theme =dark) and not (@theme =variable)) {
+    border-color: @input-hover-border-color;
+  }
+
+  & when not (@theme =variable) {
+    box-shadow: @input-outline-offset @outline-blur-size @outline-width fade(@input-border-color, @outline-fade);
+  }
+
+  & when (@theme =variable) {
+    border-color: @input-hover-border-color;
+    box-shadow: @input-outline-offset @outline-blur-size @outline-width @outlineColor;
+  }
+
+  // border-right-width: @border-width-base;
+  outline: 0;
+}
+
+// == when hover
+.hover(@color: @input-hover-border-color) {
+  border-color: @color;
+  // border-right-width: @border-width-base;
+}
+
 .input() {
   .reset-component();
   padding: @input-padding-vertical-base @input-padding-horizontal-base;
@@ -12,6 +40,15 @@
   border-radius: @control-border-radius;
   transition: all 0.3s;
   outline: none;
+
+  &:hover {
+    .hover();
+  }
+
+  &:focus,
+  &-focused {
+    .active();
+  }
 }
 
 // size mixins for input
