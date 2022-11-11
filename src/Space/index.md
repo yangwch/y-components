@@ -78,3 +78,33 @@ export default () => {
   );
 };
 ```
+
+**Direction**
+
+```jsx
+import React from 'react';
+
+import { Space, Button, Card } from 'y-components';
+
+export default () => {
+  const [direction, setDirection] = React.useState('vertical');
+  return (
+    <div>
+      <label>
+        <input type="radio" checked={direction === 'vertical'} onChange={() => setDirection('vertical')} /> vertical
+      </label>
+
+      <label>
+        <input type="radio" checked={direction === 'horizontal'} onChange={() => setDirection('horizontal')} /> horizontal
+      </label>
+      <Card style={{ width: 300 }}>
+        <Space direction={direction}>
+          <Button type="dashed">Button</Button>
+          <Button type="dashed">Button</Button>
+          <Button type="dashed">Button</Button>
+        </Space>
+      </Card>
+    </div>
+  );
+};
+```
