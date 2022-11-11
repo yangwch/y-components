@@ -4,9 +4,24 @@
 @spacePrefix: ~'@{prefix}-space';
 
 .@{spacePrefix} {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   &-vertical {
     flex-direction: column;
+  }
+  // align: 'start' | 'end' | 'center' | 'baseline';
+  &-align{
+    &-start {
+      align-items: flex-start;
+    }
+    &-baseline {
+      align-items: baseline;
+    }
+    &-end {
+      align-items: flex-end;
+    }
+    &-center {
+      align-items: center;
+    }
   }
 }
