@@ -4,6 +4,7 @@ interface ItemProps {
   className: string;
   children?: React.ReactNode;
   index: number;
+  style?: React.CSSProperties;
 }
 function Item(props: ItemProps) {
   const { className, index, children } = props;

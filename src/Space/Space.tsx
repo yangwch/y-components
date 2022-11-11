@@ -2,10 +2,12 @@ import classNames from 'classnames';
 import React, { HTMLAttributes } from 'react';
 import { settings } from '../utils/global';
 import Item from './Item';
+import './style/index.less';
+import { getSpaceStyle } from './utils';
 
 const spacePrefix = `${settings.prefix}-space`;
 
-type SpaceSize = number | string;
+export type SpaceSize = number | string;
 
 const defaultSpaceSize = 10;
 
@@ -22,7 +24,7 @@ const Space: React.FC<SpaceProps> = (props: SpaceProps) => {
   const {
     children,
     size = defaultSpaceSize,
-    direction,
+    direction = 'horizontal',
     align,
     wrap = false,
     className,
@@ -46,8 +48,13 @@ const Space: React.FC<SpaceProps> = (props: SpaceProps) => {
     });
   };
 
+  const style: React.CSSProperties = {
+    ...getSpaceStyle(size, direction),
+    flexWrap: wrap ? 'wrap' : 'nowrap',
+  };
+
   return (
-    <div className={classes} {...rest}>
+    <div className={classes} style={style} {...rest}>
       {renderItems()}
     </div>
   );

@@ -1,0 +1,12 @@
+@import '../../style/themes/index.less';
+
+@prefix: getPrefix();
+@spacePrefix: ~'@{prefix}-space';
+
+.@{spacePrefix} {
+  display: flex;
+  align-items: center;
+  &-vertical {
+    flex-direction: column;
+  }
+}
