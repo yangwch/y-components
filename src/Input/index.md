@@ -24,7 +24,7 @@ export default () => {
     <div>
       <div>
         {sizeList.map((s) => (
-          <label>
+          <label key={s}>
             <input type="radio" checked={size === s} onChange={(e) => setSize(s)} />
             {s}
           </label>

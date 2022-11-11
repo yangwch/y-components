@@ -14,16 +14,17 @@ interface InputProps extends React.HTMLAttributes<HTMLInputElement> {
   size?: SizeType;
 }
 
-function InternalInput(props: InputProps) {
+const Input = React.forwardRef(function InternalInput(
+  props: InputProps,
+  ref: React.ForwardedRef<HTMLInputElement>,
+) {
   const { className, value, defaultValue, bordered, disabled, size, ...rest } = props;
   const classes = classNames(className, inputPrefix, {
     [`${inputPrefix}-disabled`]: disabled,
     [`${inputPrefix}-${sizeClassNameMap[size || 'middle']}`]: !!sizeClassNameMap[size || 'middle'],
-    [`${inputPrefix}-noborder`]: !!bordered
+    [`${inputPrefix}-noborder`]: !!bordered,
   });
-  return <input className={classes} disabled={disabled} {...rest} />;
-}
-
-const Input = React.forwardRef(InternalInput);
+  return <input ref={ref} className={classes} disabled={disabled} {...rest} />;
+});
 
 export default Input;
