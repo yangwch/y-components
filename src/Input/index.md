@@ -5,7 +5,16 @@ import React from 'react';
 import { Input } from 'y-components';
 
 export default () => {
-  return <Input placeholder="请输入文字" />;
+  return (
+    <div>
+      <p>
+        <Input placeholder="请输入文字" />
+      </p>
+      <p>
+        <Input placeholder="disabled" disabled />
+      </p>
+    </div>
+  );
 };
 ```
 

@@ -27,6 +27,19 @@
   // border-right-width: @border-width-base;
 }
 
+.disable() {
+  color: @input-disabled-color;
+  background-color: @input-disabled-bg;
+  border-color: @input-border-color;
+  box-shadow: none;
+  cursor: not-allowed;
+  opacity: 1;
+
+  &:hover {
+    .hover(@input-border-color);
+  }
+}
+
 .input() {
   .reset-component();
   padding: @input-padding-vertical-base @input-padding-horizontal-base;
@@ -47,6 +60,10 @@
   &:focus,
   &-focused {
     .active();
+  }
+
+  &-disabled {
+    .disable();
   }
 }
 
