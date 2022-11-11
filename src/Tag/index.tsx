@@ -5,7 +5,7 @@ interface TagProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 function Tag(props: TagProps) {
-  return <div>Tag</div>;
+  return <div>Tag is building</div>;
 }
 
 export default Tag;
