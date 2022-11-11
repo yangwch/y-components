@@ -5,6 +5,14 @@ import React from 'react';
 
 import { Space, Button, Card } from 'y-components';
 
+const Block = () => {
+  return (
+    <div style={{ background: '#ccc', width: 60, height: 50, lineHeight: 3, textAlign: 'center' }}>
+      Block
+    </div>
+  );
+};
+
 export default () => {
   return (
     <div>
@@ -13,28 +21,28 @@ export default () => {
           <Space>
             Space
             <Button type="primary">Primary</Button>
-            <div style={{ background: '#ccc', width: 50, height: 50 }}>Block</div>
+            <Block />
           </Space>
         </Card>
         <Card>
           <Space align="start">
             Align: start
             <Button type="primary">Primary</Button>
-            <div style={{ background: '#ccc', width: 50, height: 50 }}>Block</div>
+            <Block />
           </Space>
         </Card>
         <Card>
           <Space align="end">
             Align: end
             <Button type="primary">Primary</Button>
-            <div style={{ background: '#ccc', width: 50, height: 50 }}>Block</div>
+            <Block />
           </Space>
         </Card>
         <Card>
           <Space align="baseline">
             Align: baseline
             <Button type="primary">Primary</Button>
-            <div style={{ background: '#ccc', width: 50, height: 50 }}>Block</div>
+            <Block />
           </Space>
         </Card>
       </Space>
@@ -50,6 +58,13 @@ import React from 'react';
 
 import { Space, Button, Card } from 'y-components';
 
+const Block = () => {
+  return (
+    <div style={{ background: '#ccc', width: 60, height: 50, lineHeight: 3, textAlign: 'center' }}>
+      Block
+    </div>
+  );
+};
 export default () => {
   return (
     <Card style={{ width: 300 }}>
@@ -57,7 +72,7 @@ export default () => {
         Space
         <Button>Button</Button>
         <Button type="primary">Primary</Button>
-        <div style={{ background: '#ccc', width: 50, height: 50 }}></div>
+        <Block />
       </Space>
     </Card>
   );
