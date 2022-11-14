@@ -11,3 +11,5 @@ export { default as Form } from './Form';
 export { default as Input } from './Input';
 
 export { default as Space } from './Space';
+
+export { default as Tag } from './Tag';

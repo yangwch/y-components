@@ -1,11 +1,3 @@
-import React from 'react';
+import Tag from "./Tag";
 
-interface TagProps extends React.HTMLAttributes<HTMLDivElement> {
-  children: React.ReactNode;
-}
-
-function Tag(props: TagProps) {
-  return <div>Tag is building</div>;
-}
-
-export default Tag;
+export default Tag

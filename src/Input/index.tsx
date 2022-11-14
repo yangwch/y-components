@@ -1,6 +1,6 @@
-import InternalInput from './Input';
+import Input from './Input';
 
 import './style/index.less';
 
 
-export default InternalInput;
+export default Input;
