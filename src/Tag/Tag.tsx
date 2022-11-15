@@ -26,7 +26,9 @@ const Tag: React.FC<TagProps> = React.forwardRef<HTMLDivElement, TagProps>(
       closable,
       ...rest
     } = props;
-    const classes = classNames(tagCls, className);
+    const classes = classNames(tagCls, className, {
+      [`${tagCls}-has-color`]: !!color,
+    });
     const [visible, setVisible] = useState<boolean>('visible' in props ? !!customVisible : true);
 
     if (!visible) {

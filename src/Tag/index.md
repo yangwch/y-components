@@ -1,6 +1,4 @@
-
 **Usage**
-
 
 ```jsx
 import React from 'react';
@@ -13,8 +11,64 @@ export default () => {
       <Tag closable>tag 2</Tag>
       <Tag closable>tag 3</Tag>
       <Tag closable>tag 4</Tag>
-      <Tag closable onClose={e => e.preventDefault()}>preventDefault 5</Tag>
+      <Tag closable color="none" onClose={(e) => e.preventDefault()}>
+        preventDefault 5
+      </Tag>
     </div>
   );
 };
 ```
+
+**Customize**
+
+```jsx
+import React from 'react';
+import { Tag, Input } from 'y-components';
+
+export default () => {
+  const [input, setInput] = React.useState('');
+  const [tags, setTags] = React.useState([]);
+  const onInputPress = (e) => {
+    if (e.key === 'Enter') {
+      console.log('enter', input);
+      React.startTransition(() => {
+        setTags((prevTags) => prevTags.concat(input));
+        setInput('');
+      });
+    }
+  };
+
+  const onCloseTag = (e, index) => {
+    e.preventDefault();
+    setTags((prevTags) => {
+      const nTags = Array.from(prevTags);
+      nTags.splice(index, 1);
+      return nTags;
+    });
+  };
+  return (
+    <div style={{ color: '#fff' }}>
+      <Tag color="red">red</Tag>
+      <Tag color="green">green</Tag>
+      <Tag closable color="yellow" style={{ color: 'black' }} closeIcon="🚫">
+        CUSTOM： color & icon
+      </Tag>
+      {tags.map((tag, i) => (
+        <Tag closable key={i} onClose={(e) => onCloseTag(e, i)}>
+          {tag}
+        </Tag>
+      ))}
+      <Input
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+        size="small"
+        style={{ width: 100, borderStyle: 'dashed' }}
+        placeholder="press enter"
+        onKeyPress={onInputPress}
+      />
+    </div>
+  );
+};
+```
+
+---
