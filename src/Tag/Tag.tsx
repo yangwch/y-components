@@ -41,6 +41,9 @@ const Tag: React.FC<TagProps> = React.forwardRef<HTMLDivElement, TagProps>(
       if (onClose) {
         onClose(e);
       }
+      if (e.defaultPrevented) {
+        return;
+      }
       if (!('visible' in props)) {
         setVisible(!visible);
       }

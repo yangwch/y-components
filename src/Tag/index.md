@@ -13,6 +13,7 @@ export default () => {
       <Tag closable>tag 2</Tag>
       <Tag closable>tag 3</Tag>
       <Tag closable>tag 4</Tag>
+      <Tag closable onClose={e => e.preventDefault()}>preventDefault 5</Tag>
     </div>
   );
 };
