@@ -1,0 +1,30 @@
+@import '../../style/themes/index.less';
+@import '../../style/mixins/reset.less';
+
+@prefix: getPrefix();
+@tag-cls: ~'@{prefix}-tag';
+
+.@{tag-cls} {
+  .reset-component();
+
+  display: inline-block;
+  height: auto;
+  margin-right: 8px;
+  padding: 0 7px;
+  font-size: @tag-font-size;
+  line-height: @tag-line-height;
+  white-space: nowrap;
+  background: @tag-default-bg;
+  border: @border-width-base @border-style-base @border-color-base;
+  border-radius: @tag-border-radius;
+  opacity: 1;
+  transition: all 0.3s;
+
+  &-close-icon {
+    display: inline-block;
+    margin-left: 5px;
+    font-size: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+}

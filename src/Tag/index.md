@@ -10,6 +10,9 @@ export default () => {
   return (
     <div>
       <Tag>tag 1</Tag>
+      <Tag closable>tag 2</Tag>
+      <Tag closable>tag 3</Tag>
+      <Tag closable>tag 4</Tag>
     </div>
   );
 };
