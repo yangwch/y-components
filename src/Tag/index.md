@@ -23,11 +23,29 @@ export default () => {
 
 ```jsx
 import React from 'react';
-import { Tag, Input } from 'y-components';
+import { Tag } from 'y-components';
 
 export default () => {
+  return (
+    <div>
+      <Tag color="red">red</Tag>
+      <Tag color="green">green</Tag>
+      <Tag closable color="yellow" style={{ color: 'black' }} closeIcon="🚫">
+        CUSTOM： color & icon
+      </Tag>
+    </div>
+  );
+};
+```
+
+**Tag List**
+
+```jsx
+import React from 'react';
+import { Tag, Input } from 'y-components';
+export default () => {
   const [input, setInput] = React.useState('');
-  const [tags, setTags] = React.useState([]);
+  const [tags, setTags] = React.useState(['Tag 1', 'Tag2', 'Tag 3']);
   const onInputPress = (e) => {
     if (e.key === 'Enter') {
       console.log('enter', input);
@@ -47,12 +65,7 @@ export default () => {
     });
   };
   return (
-    <div style={{ color: '#fff' }}>
-      <Tag color="red">red</Tag>
-      <Tag color="green">green</Tag>
-      <Tag closable color="yellow" style={{ color: 'black' }} closeIcon="🚫">
-        CUSTOM： color & icon
-      </Tag>
+    <div>
       {tags.map((tag, i) => (
         <Tag closable key={i} onClose={(e) => onCloseTag(e, i)}>
           {tag}
@@ -63,12 +76,10 @@ export default () => {
         onChange={(e) => setInput(e.target.value)}
         size="small"
         style={{ width: 100, borderStyle: 'dashed' }}
-        placeholder="press enter"
+        placeholder="+ New Tag"
         onKeyPress={onInputPress}
       />
     </div>
   );
 };
 ```
-
----
