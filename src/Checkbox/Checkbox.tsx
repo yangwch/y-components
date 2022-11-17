@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import React, { ChangeEvent, CSSProperties, KeyboardEvent, useState } from 'react';
 import { settings } from '../utils/global';
+import './style/index.less';
 
 const prefixCls = `${settings.prefix}-checkbox`;
 
