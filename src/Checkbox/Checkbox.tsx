@@ -58,6 +58,7 @@ const Checkbox: React.FC = React.forwardRef<HTMLSpanElement, CheckBoxProps>(
 
     const classes = classNames(className, prefixCls, {
       [`${prefixCls}-checked`]: checked,
+      [`${prefixCls}-radio`]: type === 'radio',
       [`${prefixCls}-disabled`]: disabled,
     });
 

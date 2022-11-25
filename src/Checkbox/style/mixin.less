@@ -17,6 +17,7 @@
   &-checked &-inner {
     background-color: @checkbox-checked-background;
     border-color: @checkbox-checked-background;
+
     &::after {
       transform: rotate(45deg);
       position: absolute;
@@ -31,6 +32,7 @@
       content: ' ';
     }
   }
+
   &-inner {
     position: relative;
     display: inline-block;
@@ -39,5 +41,36 @@
     border: @checkbox-border-style;
     background-color: @checkbox-background;
     border-radius: @checkbox-border-radius;
+  }
+}
+
+.radiobox(@checkboxCls) {
+  &.@{checkboxCls}-radio {
+    width: @radiobox-width;
+    height: @radiobox-width;
+    border: @checkbox-border-style;
+    border-radius: 50%;
+
+    .@{checkboxCls}-inner {
+      border-width: 0;
+      background: none;
+    }
+
+    &.@{checkboxCls}-checked {
+      background-color: @checkbox-checked-background;
+      border-color: @checkbox-checked-background;
+
+      .@{checkboxCls}-inner::after {
+        border-radius: 50%;
+        border: 0;
+        position: relative;
+        left: 0;
+        top: 0;
+        width: @checkbox-with;
+        height: @checkbox-with;
+        transform: scale(0.5);
+        background-color: @checkbox-background;
+      }
+    }
   }
 }
