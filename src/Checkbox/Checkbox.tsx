@@ -1,6 +1,8 @@
 import classNames from 'classnames';
-import React, { ChangeEvent, CSSProperties, KeyboardEvent, useState } from 'react';
+import React, { ChangeEvent, CSSProperties, KeyboardEvent, useContext, useEffect, useState } from 'react';
 import { settings } from '../utils/global';
+import CheckboxGroup from './Group';
+import GroupContext from './GroupContext';
 import './style/index.less';
 
 const prefixCls = `${settings.prefix}-checkbox`;
@@ -29,7 +31,7 @@ interface CheckBoxProps {
   onKeyPress?: (e: KeyboardEvent<HTMLInputElement>) => void;
 }
 
-const Checkbox: React.FC = React.forwardRef<HTMLSpanElement, CheckBoxProps>(
+const InternalCheckbox: React.FC = React.forwardRef<HTMLSpanElement, CheckBoxProps>(
   (props: CheckBoxProps, ref) => {
     const {
       className,
@@ -51,10 +53,15 @@ const Checkbox: React.FC = React.forwardRef<HTMLSpanElement, CheckBoxProps>(
       onKeyDown,
       onKeyPress,
       autoFocus,
+      checked: customChecked,
     } = props;
     const [checked, setChecked] = useState<boolean>(
       !!('checked' in props ? props.checked : props.defaultChecked),
     );
+
+    useEffect(() => {
+      setChecked(customChecked === true);
+    }, [customChecked, setChecked]);
 
     const classes = classNames(className, prefixCls, {
       [`${prefixCls}-checked`]: checked,
@@ -99,5 +106,47 @@ const Checkbox: React.FC = React.forwardRef<HTMLSpanElement, CheckBoxProps>(
     );
   },
 );
+
+const withGroupContext =
+  (WrappedComponent: React.ComponentType<CheckBoxProps>) => (props: CheckBoxProps) => {
+    const groupState = useContext(GroupContext);
+    if (!groupState) {
+      return <WrappedComponent {...props} />;
+    }
+    const { value } = props;
+    const { disabled, value: groupValues, setChecked, name } = groupState;
+    const onCheckChange = (e: ChangeEvent<HTMLInputElement>) => {
+      const checked = e.target.checked;
+      const getCheckedValues = (prevChecked: string[]): string[] => {
+        if (prevChecked.includes(value)) {
+          if (!checked) {
+            const nvalues = Array.from(prevChecked);
+            nvalues.splice(nvalues.indexOf(value), 1);
+            return nvalues;
+          }
+          return prevChecked;
+        } else if (checked) {
+          return prevChecked.concat(value);
+        }
+        return prevChecked;
+      };
+      setChecked(getCheckedValues(groupValues));
+    };
+    return (
+      <WrappedComponent
+        {...props}
+        name={name}
+        disabled={disabled}
+        checked={groupValues.includes(props.value)}
+        onChange={onCheckChange}
+      />
+    );
+  };
+
+interface CompoundedCheckbox extends React.ForwardRefExoticComponent<CheckBoxProps> {
+  Group: typeof CheckboxGroup;
+}
+const Checkbox = withGroupContext(InternalCheckbox) as CompoundedCheckbox;
+Checkbox.Group = CheckboxGroup;
 
 export default Checkbox;
