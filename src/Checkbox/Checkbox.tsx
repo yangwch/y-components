@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { ChangeEvent, CSSProperties, KeyboardEvent, useContext, useEffect, useState } from 'react';
+import React, { ChangeEvent, CSSProperties, KeyboardEvent, useCallback, useContext, useEffect, useState } from 'react';
 import { settings } from '../utils/global';
 import CheckboxGroup from './Group';
 import GroupContext from './GroupContext';
@@ -115,7 +115,7 @@ const withGroupContext =
     }
     const { value } = props;
     const { disabled, value: groupValues, setChecked, name, type } = groupState;
-    const onCheckChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const onCheckChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
       const checked = e.target.checked;
       const getCheckedValues = (prevChecked: string[]): string[] => {
         if (type === 'radio') {
@@ -134,7 +134,7 @@ const withGroupContext =
         return prevChecked;
       };
       setChecked(getCheckedValues(groupValues));
-    };
+    }, [setChecked, type, value]);
     return (
       <WrappedComponent
         {...props}
