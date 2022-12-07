@@ -1,6 +1,6 @@
 @import '../../style/mixins/reset.less';
 
-.checkbox {
+.checkbox(@checkboxCls) {
   .reset-component();
   white-space: nowrap;
   cursor: pointer;
@@ -41,6 +41,16 @@
     border: @checkbox-border-style;
     background-color: @checkbox-background;
     border-radius: @checkbox-border-radius;
+  }
+
+  &-disabled {
+    .@{checkboxCls}-inner {
+      background-color: @checkbox-checked-disabled-background;
+      border: @checkbox-border-style;
+      &::after {
+        border-color: @checkbox-checked-disabled-color;
+      }
+    }
   }
 }
 
