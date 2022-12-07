@@ -134,7 +134,7 @@ const withGroupContext =
         return prevChecked;
       };
       setChecked(getCheckedValues(groupValues));
-    }, [setChecked, type, value]);
+    }, [setChecked, type, value, groupValues]);
     return (
       <WrappedComponent
         {...props}
