@@ -114,10 +114,13 @@ const withGroupContext =
       return <WrappedComponent {...props} />;
     }
     const { value } = props;
-    const { disabled, value: groupValues, setChecked, name } = groupState;
+    const { disabled, value: groupValues, setChecked, name, type } = groupState;
     const onCheckChange = (e: ChangeEvent<HTMLInputElement>) => {
       const checked = e.target.checked;
       const getCheckedValues = (prevChecked: string[]): string[] => {
+        if (type === 'radio') {
+          return [value]
+        }
         if (prevChecked.includes(value)) {
           if (!checked) {
             const nvalues = Array.from(prevChecked);
@@ -139,6 +142,7 @@ const withGroupContext =
         disabled={disabled}
         checked={groupValues.includes(props.value)}
         onChange={onCheckChange}
+        type={type}
       />
     );
   };

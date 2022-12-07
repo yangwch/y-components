@@ -5,6 +5,7 @@ interface ContextProps {
   name?: string;
   value: string[];
   setChecked: (checkedValues: string[]) => void;
+  type?: 'checkbox' | 'radio';
 }
 
 type ContextValue = ContextProps | null;

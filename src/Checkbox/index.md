@@ -49,7 +49,22 @@ import { Checkbox, Divider } from 'y-components';
 export default () => {
   return (
     <div>
+      <h3>UnControlled</h3>
       <Checkbox.Group defaultValue={['1']}>
+        <label><Checkbox value="1"/> 1</label>
+        <label><Checkbox value="2"/> 2</label>
+        <label><Checkbox value="3"/> 3</label>
+      </Checkbox.Group>
+      <Divider/>
+      <h3>Controlled</h3>
+      <Checkbox.Group value={['1', '2']}>
+        <label><Checkbox value="1"/> 1</label>
+        <label><Checkbox value="2"/> 2</label>
+        <label><Checkbox value="3"/> 3</label>
+      </Checkbox.Group>
+
+      <h3>Radio</h3>
+      <Checkbox.Group defaultValue={'1'} type="radio">
         <label><Checkbox value="1"/> 1</label>
         <label><Checkbox value="2"/> 2</label>
         <label><Checkbox value="3"/> 3</label>

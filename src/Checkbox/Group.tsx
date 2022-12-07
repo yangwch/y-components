@@ -4,18 +4,20 @@ import GroupContext from './GroupContext';
 interface CheckboxGroupProps {
   disabled?: boolean;
   name?: string;
-  defaultValue?: string[];
-  value?: string[];
+  defaultValue?: string[] | string;
+  value?: string[] | string;
   children: React.ReactNode;
-  onChange?: (checkedValue: string[]) => void;
+  onChange?: (checkedValue: string[] | string) => void;
+  type?: 'checkbox' | 'radio';
 }
 
 const CheckboxGroup: React.FC<CheckboxGroupProps> = (props: CheckboxGroupProps) => {
-  const { disabled, name, defaultValue, value, onChange, children } = props;
+  const { disabled, name, defaultValue, value, onChange, children, type } = props;
   const isControlled = 'value' in props;
-  const [checked, setChecked] = useState<string[]>(
-    () => (isControlled ? value : defaultValue) || [],
-  );
+  const [checked, setChecked] = useState<string[]>(() => {
+    const values = (isControlled ? value : defaultValue) || [];
+    return values instanceof Array ? values : (values && [values]) || [];
+  });
 
   const checkHandler = useCallback(
     (values: string[]) => {
@@ -24,14 +26,14 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = (props: CheckboxGroupProps) 
       }
       setChecked(values);
       if (onChange) {
-        onChange(values);
+        onChange(type === 'radio' ? values[0] : values);
       }
     },
-    [onChange, isControlled, setChecked],
+    [onChange, isControlled, setChecked, type],
   );
   return (
     <GroupContext.Provider
-      value={{ disabled: !!disabled, name, value: checked, setChecked: checkHandler }}
+      value={{ disabled: !!disabled, name, value: checked, setChecked: checkHandler, type }}
     >
       {children}
     </GroupContext.Provider>
