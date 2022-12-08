@@ -2,7 +2,7 @@
 
 ```jsx
 import React from 'react';
-import { Input } from 'y-components';
+import { Input } from '@yangwch/y-components';
 
 export default () => {
   return (
@@ -22,7 +22,7 @@ export default () => {
 
 ```jsx
 import React from 'react';
-import { Input } from 'y-components';
+import { Input } from '@yangwch/y-components';
 
 const sizeList = ['small', 'middle', 'large'];
 

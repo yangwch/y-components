@@ -2,7 +2,7 @@
 
 ```jsx
 import React from 'react';
-import { Checkbox } from 'y-components';
+import { Checkbox } from '@yangwch/y-components';
 
 export default () => {
   return (
@@ -18,7 +18,7 @@ export default () => {
 **Radio**
 ```jsx
 import React from 'react';
-import { Checkbox, Divider } from 'y-components';
+import { Checkbox, Divider } from '@yangwch/y-components';
 
 export default () => {
   return (
@@ -44,7 +44,7 @@ export default () => {
 **Group**
 ```jsx
 import React from 'react';
-import { Checkbox, Divider } from 'y-components';
+import { Checkbox, Divider } from '@yangwch/y-components';
 
 export default () => {
   return (

@@ -1,14 +1,14 @@
-# y-components
+# @yangwch/y-components
 
 ## Getting Started
 
 Install dependencies,
 
 ```bash
-$ npm i y-components
+$ npm i @yangwch/y-components
 ```
 
-## Components
+## Components List
 * Button
 * Card
 * Checkbox

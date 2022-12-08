@@ -3,7 +3,7 @@
 ```jsx
 import React from 'react';
 
-import { Button } from 'y-components';
+import { Button } from '@yangwch/y-components';
 
 export default () => {
   return (
@@ -39,7 +39,7 @@ Button size
 ```jsx
 import React from 'react';
 
-import { Button } from 'y-components';
+import { Button } from '@yangwch/y-components';
 
 export default () => {
   const [size, setSize] = React.useState('middle');
@@ -95,7 +95,7 @@ export default () => {
 ```jsx
 import React from 'react';
 
-import { Button } from 'y-components';
+import { Button } from '@yangwch/y-components';
 
 export default () => {
   return (

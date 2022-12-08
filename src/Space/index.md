@@ -3,7 +3,7 @@
 ```jsx
 import React from 'react';
 
-import { Space, Button, Card } from 'y-components';
+import { Space, Button, Card } from '@yangwch/y-components';
 
 const Block = () => {
   return (
@@ -56,7 +56,7 @@ export default () => {
 ```jsx
 import React from 'react';
 
-import { Space, Button, Card } from 'y-components';
+import { Space, Button, Card } from '@yangwch/y-components';
 
 const Block = () => {
   return (
@@ -84,7 +84,7 @@ export default () => {
 ```jsx
 import React from 'react';
 
-import { Space, Button, Card } from 'y-components';
+import { Space, Button, Card } from '@yangwch/y-components';
 
 export default () => {
   const [direction, setDirection] = React.useState('vertical');

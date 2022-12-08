@@ -5,7 +5,7 @@ _---Building---_
 ```jsx
 import React from 'react';
 
-import { Form } from 'y-components';
+import { Form } from '@yangwch/y-components';
 
 const Input = (props) => {
   const onValueChange = (e) => {
@@ -91,7 +91,7 @@ export default () => {
 ```jsx
 import React from 'react';
 
-import { Form } from 'y-components';
+import { Form } from '@yangwch/y-components';
 
 const Input = (props) => {
   const onValueChange = (e) => {

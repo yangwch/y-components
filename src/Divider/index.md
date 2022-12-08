@@ -1,9 +1,9 @@
 **Divider**
 
-```tsx
+```jsx
 import React from 'react';
 
-import { Divider } from 'y-components';
+import { Divider } from '@yangwch/y-components';
 
 const Paragraph = ({ children }) => <p style={{ margin: 0, padding: 0 }}>{children}</p>;
 
@@ -26,10 +26,10 @@ export default () => {
 
 **Inner Text**
 
-```tsx
+```jsx
 import React from 'react';
 
-import { Divider } from 'y-components';
+import { Divider } from '@yangwch/y-components';
 
 const Paragraph = ({ children }) => <p style={{ margin: 0, padding: 0 }}>{children}</p>;
 
@@ -62,10 +62,10 @@ export default () => {
 
 **Orientation**
 
-```tsx
+```jsx
 import React from 'react';
 
-import { Divider, Button } from 'y-components';
+import { Divider, Button } from '@yangwch/y-components';
 
 export default () => {
   return (

@@ -2,7 +2,7 @@
 
 ```jsx
 import React from 'react';
-import { Tag } from 'y-components';
+import { Tag } from '@yangwch/y-components';
 
 export default () => {
   return (
@@ -23,7 +23,7 @@ export default () => {
 
 ```jsx
 import React from 'react';
-import { Tag } from 'y-components';
+import { Tag } from '@yangwch/y-components';
 
 export default () => {
   return (
@@ -42,7 +42,7 @@ export default () => {
 
 ```jsx
 import React from 'react';
-import { Tag, Input } from 'y-components';
+import { Tag, Input } from '@yangwch/y-components';
 export default () => {
   const [input, setInput] = React.useState('');
   const [tags, setTags] = React.useState(['Tag 1', 'Tag2', 'Tag 3']);

@@ -1,9 +1,9 @@
 **Basic Grid**
 
-```tsx
+```jsx
 import React from 'react';
 
-import { Row, Col } from 'y-components';
+import { Row, Col } from '@yangwch/y-components';
 
 const colStyle = {
   border: '1px solid blue',
@@ -40,10 +40,10 @@ export default () => {
 
 **Responsive**
 
-```tsx
+```jsx
 import React from 'react';
 
-import { Row, Col } from 'y-components';
+import { Row, Col } from '@yangwch/y-components';
 
 const colStyle = {
   border: '1px solid blue',
@@ -69,10 +69,10 @@ export default () => {
 
 **Alignment**
 
-```tsx
+```jsx
 import React from 'react';
 
-import { Row, Col } from 'y-components';
+import { Row, Col } from '@yangwch/y-components';
 
 const colStyle = {
   border: '1px solid blue',
@@ -130,10 +130,10 @@ export default () => {
 ```
 **Gutter**
 
-```tsx
+```jsx
 import React from 'react';
 
-import { Row, Col } from 'y-components';
+import { Row, Col } from '@yangwch/y-components';
 
 const colStyle = {
   background: 'rgb(119 145 240)',

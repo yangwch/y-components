@@ -1,10 +1,15 @@
 {
-  "name": "y-components",
-  "version": "0.1.0",
+  "name": "@yangwch/y-components",
+  "version": "0.1.2",
   "author": {
     "email": "fire_snow@163.com",
     "name": "yangwch",
-    "url": "https://github.com/yangwch/y-components"
+    "url": "https://github.com/yangwch/",
+    "github": "https://github.com/yangwch/y-components"
+  },
+  "homepage": "https://github.com/yangwch",
+  "bugs": {
+    "url": "https://github.com/yangwch/y-components/issues"
   },
   "scripts": {
     "start": "dumi dev",

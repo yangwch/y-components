@@ -2,7 +2,7 @@
 
 ```tsx
 import React from 'react';
-import { Card, Divider } from 'y-components';
+import { Card, Divider } from '@yangwch/y-components';
 
 const P = ({ children }) => <p style={{ padding: 5, margin: 0 }}>{children}</p>;
 export default () => {
@@ -24,7 +24,7 @@ export default () => {
 
 ```tsx
 import React from 'react';
-import { Card, Divider } from 'y-components';
+import { Card, Divider } from '@yangwch/y-components';
 
 const sizes = ['default', 'small'];
 const P = ({ children }) => <p style={{ padding: 5, margin: 0 }}>{children}</p>;
@@ -60,7 +60,7 @@ export default () => {
 ```tsx
 import React from 'react';
 
-import { Card, Divider } from 'y-components';
+import { Card, Divider } from '@yangwch/y-components';
 
 const P = ({ children }) => <p style={{ padding: 5, margin: 0 }}>{children}</p>;
 export default () => {
