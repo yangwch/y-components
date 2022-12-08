@@ -82,5 +82,16 @@
         background-color: @checkbox-background;
       }
     }
+    // disabled radio
+    &.@{checkboxCls}-disabled {
+      background-color: @checkbox-disabled-background;
+      &.@{checkboxCls}-checked {
+        border-color: @checkbox-checked-disabled-color;
+        .@{checkboxCls}-inner::after {
+          background-color: @checkbox-checked-disabled-color;
+        }
+      }
+    }
   }
+  
 }
