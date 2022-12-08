@@ -64,7 +64,20 @@ export default () => {
       </Checkbox.Group>
 
       <h3>Radio</h3>
-      <Checkbox.Group defaultValue={'1'} type="radio" disabled>
+      <Checkbox.Group defaultValue={'1'} type="radio">
+        <label><Checkbox value="1"/> 1</label>
+        <label><Checkbox value="2"/> 2</label>
+        <label><Checkbox value="3"/> 3</label>
+      </Checkbox.Group>
+      <Divider />
+      <h3>Disabled</h3>
+      <Checkbox.Group defaultValue={'2'} disabled>
+        <label><Checkbox value="1"/> 1</label>
+        <label><Checkbox value="2"/> 2</label>
+        <label><Checkbox value="3"/> 3</label>
+      </Checkbox.Group>
+      <br/>
+      <Checkbox.Group defaultValue={'2'} type="radio" disabled>
         <label><Checkbox value="1"/> 1</label>
         <label><Checkbox value="2"/> 2</label>
         <label><Checkbox value="3"/> 3</label>
