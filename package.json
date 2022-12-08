@@ -1,7 +1,11 @@
 {
-  "private": true,
   "name": "y-components",
-  "version": "1.0.0",
+  "version": "0.1.0",
+  "author": {
+    "email": "fire_snow@163.com",
+    "name": "yangwch",
+    "url": "https://github.com/yangwch/y-components"
+  },
   "scripts": {
     "start": "dumi dev",
     "docs:build": "dumi build",
