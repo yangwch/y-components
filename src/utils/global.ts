@@ -1,3 +1,3 @@
-import settings from '../../settings.json';
+import settings from '../settings';
 
 export { settings };
