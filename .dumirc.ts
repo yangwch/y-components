@@ -12,8 +12,9 @@ export default defineConfig({
   },
   themeConfig: {
     nav: [
-      { title: 'Components', link: '/components/button'}
+      { title: 'Components', link: '/components/button'},
+      { title: 'Docs', link: '/api'}
     ]
-  }
+  },
   // more config: https://d.umijs.org/config
 });
