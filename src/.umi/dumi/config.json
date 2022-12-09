@@ -1,0 +1,82 @@
+{
+  "menus": {
+    "en-US": {
+      "*": [
+        {
+          "path": "/",
+          "title": "Hello y-components!",
+          "meta": {}
+        },
+        {
+          "title": "Buttton",
+          "path": "/buttton",
+          "meta": {},
+          "children": []
+        },
+        {
+          "title": "Card",
+          "path": "/card",
+          "meta": {},
+          "children": []
+        },
+        {
+          "title": "Checkbox",
+          "path": "/checkbox",
+          "meta": {},
+          "children": []
+        },
+        {
+          "title": "Divider",
+          "path": "/divider",
+          "meta": {},
+          "children": []
+        },
+        {
+          "title": "Form",
+          "path": "/form",
+          "meta": {},
+          "children": []
+        },
+        {
+          "title": "Grid",
+          "path": "/grid",
+          "meta": {},
+          "children": []
+        },
+        {
+          "title": "Input",
+          "path": "/input",
+          "meta": {},
+          "children": []
+        },
+        {
+          "title": "Space",
+          "path": "/space",
+          "meta": {},
+          "children": []
+        },
+        {
+          "title": "Tag",
+          "path": "/tag",
+          "meta": {},
+          "children": []
+        }
+      ]
+    }
+  },
+  "locales": [
+    {
+      "name": "en-US",
+      "label": "English"
+    }
+  ],
+  "navs": {},
+  "title": "@yangwch/y-components",
+  "logo": "https://user-images.githubusercontent.com/9554297/83762004-a0761b00-a6a9-11ea-83b4-9c8ff721d4b8.png",
+  "mode": "doc",
+  "repository": {
+    "url": "",
+    "branch": "master"
+  },
+  "theme": {}
+}

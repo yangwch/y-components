@@ -1,6 +1,6 @@
 **Card**
 
-```tsx
+```jsx
 import React from 'react';
 import { Card, Divider } from '@yangwch/y-components';
 
@@ -22,7 +22,7 @@ export default () => {
 
 **Card Size**
 
-```tsx
+```jsx
 import React from 'react';
 import { Card, Divider } from '@yangwch/y-components';
 
@@ -57,7 +57,7 @@ export default () => {
 
 **Without Title**
 
-```tsx
+```jsx
 import React from 'react';
 
 import { Card, Divider } from '@yangwch/y-components';
