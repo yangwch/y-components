@@ -1,6 +1,10 @@
-_---Building---_
-
-**Basic Usage**
+---
+category: Components
+type: 数据展示
+title: Form
+toc: content
+---
+## Basic Usage
 
 ```jsx
 import React from 'react';
@@ -86,7 +90,7 @@ export default () => {
 };
 ```
 
-**Inline**
+## Inline
 
 ```jsx
 import React from 'react';

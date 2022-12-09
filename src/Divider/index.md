@@ -1,4 +1,10 @@
-**Divider**
+---
+category: Components
+type: 数据展示
+title: Divider
+toc: content
+---
+## Divider
 
 ```jsx
 import React from 'react';
@@ -24,7 +30,7 @@ export default () => {
 };
 ```
 
-**Inner Text**
+## Inner Text
 
 ```jsx
 import React from 'react';
@@ -60,7 +66,7 @@ export default () => {
 };
 ```
 
-**Orientation**
+## Orientation
 
 ```jsx
 import React from 'react';

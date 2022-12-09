@@ -1,4 +1,11 @@
-**Basic Usage**
+---
+category: Components
+type: 数据展示
+title: Input
+toc: content
+---
+
+## Basic Usage
 
 ```jsx
 import React from 'react';
@@ -18,7 +25,7 @@ export default () => {
 };
 ```
 
-**Size**
+## Size
 
 ```jsx
 import React from 'react';

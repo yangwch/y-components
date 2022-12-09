@@ -1,4 +1,11 @@
-**Usage**
+---
+category: Components
+type: 数据展示
+title: Checkbox
+toc: content
+---
+
+## Basic
 
 ```jsx
 import React from 'react';
@@ -15,7 +22,7 @@ export default () => {
 };
 ```
 
-**Radio**
+## Radio
 ```jsx
 import React from 'react';
 import { Checkbox, Divider } from '@yangwch/y-components';
@@ -41,7 +48,7 @@ export default () => {
 };
 ```
 
-**Group**
+## Group
 ```jsx
 import React from 'react';
 import { Checkbox, Divider } from '@yangwch/y-components';

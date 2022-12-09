@@ -1,4 +1,10 @@
-**Usage**
+---
+category: Components
+type: 数据展示
+title: Tag
+toc: content
+---
+## Usage
 
 ```jsx
 import React from 'react';
@@ -19,7 +25,7 @@ export default () => {
 };
 ```
 
-**Customize**
+## Customize
 
 ```jsx
 import React from 'react';
@@ -38,7 +44,7 @@ export default () => {
 };
 ```
 
-**Tag List**
+## Tag List
 
 ```jsx
 import React from 'react';

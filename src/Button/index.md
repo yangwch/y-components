@@ -1,4 +1,11 @@
-代码演示
+---
+category: Components
+type: 数据展示
+title: Button
+toc: content
+---
+
+## Demo
 
 ```jsx
 import React from 'react';
@@ -34,7 +41,7 @@ export default () => {
 };
 ```
 
-Button size
+## Button Sizes
 
 ```jsx
 import React from 'react';
@@ -90,7 +97,7 @@ export default () => {
 };
 ```
 
-**ButtonGroup**
+## ButtonGroup
 
 ```jsx
 import React from 'react';

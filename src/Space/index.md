@@ -1,4 +1,10 @@
-**Usage**
+---
+category: Components
+type: 数据展示
+title: Space
+toc: content
+---
+## Demo
 
 ```jsx
 import React from 'react';
@@ -51,7 +57,7 @@ export default () => {
 };
 ```
 
-**Wrap**
+## Wrap
 
 ```jsx
 import React from 'react';
@@ -79,7 +85,7 @@ export default () => {
 };
 ```
 
-**Direction**
+## Direction
 
 ```jsx
 import React from 'react';

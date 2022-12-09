@@ -1,4 +1,10 @@
-**Basic Grid**
+---
+category: Components
+type: 数据展示
+title: Grid
+toc: content
+---
+## Basic Grid
 
 ```jsx
 import React from 'react';
@@ -38,7 +44,7 @@ export default () => {
 };
 ```
 
-**Responsive**
+## Responsive
 
 ```jsx
 import React from 'react';
@@ -67,7 +73,7 @@ export default () => {
 };
 ```
 
-**Alignment**
+## Alignment
 
 ```jsx
 import React from 'react';
@@ -128,7 +134,8 @@ export default () => {
   );
 };
 ```
-**Gutter**
+
+## Gutter
 
 ```jsx
 import React from 'react';

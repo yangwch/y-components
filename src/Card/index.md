@@ -1,4 +1,11 @@
-**Card**
+---
+category: Components
+type: 数据展示
+title: Card
+toc: content
+---
+
+## Basic
 
 ```jsx
 import React from 'react';
@@ -20,7 +27,7 @@ export default () => {
 };
 ```
 
-**Card Size**
+## Card Size
 
 ```jsx
 import React from 'react';
@@ -55,7 +62,7 @@ export default () => {
 };
 ```
 
-**Without Title**
+## Customize
 
 ```jsx
 import React from 'react';

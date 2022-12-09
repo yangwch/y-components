@@ -12,7 +12,7 @@ export default defineConfig({
   },
   themeConfig: {
     nav: [
-      { title: '组件', link: '/components/button'}
+      { title: 'Components', link: '/components/button'}
     ]
   }
   // more config: https://d.umijs.org/config

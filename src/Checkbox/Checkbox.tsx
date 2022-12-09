@@ -29,6 +29,7 @@ interface CheckBoxProps {
   onKeyUp?: (e: KeyboardEvent<HTMLInputElement>) => void;
   onKeyDown?: (e: KeyboardEvent<HTMLInputElement>) => void;
   onKeyPress?: (e: KeyboardEvent<HTMLInputElement>) => void;
+  indeterminate?: boolean;
 }
 
 const InternalCheckbox: React.FC = React.forwardRef<HTMLSpanElement, CheckBoxProps>(
@@ -54,6 +55,7 @@ const InternalCheckbox: React.FC = React.forwardRef<HTMLSpanElement, CheckBoxPro
       onKeyPress,
       autoFocus,
       checked: customChecked,
+      indeterminate,
     } = props;
     const [checked, setChecked] = useState<boolean>(
       !!('checked' in props ? props.checked : props.defaultChecked),
@@ -64,9 +66,10 @@ const InternalCheckbox: React.FC = React.forwardRef<HTMLSpanElement, CheckBoxPro
     }, [customChecked, setChecked]);
 
     const classes = classNames(className, prefixCls, {
-      [`${prefixCls}-checked`]: checked,
+      [`${prefixCls}-checked`]: !indeterminate && checked,
       [`${prefixCls}-radio`]: type === 'radio',
       [`${prefixCls}-disabled`]: disabled,
+      [`${prefixCls}-indeterminate`]: indeterminate,
     });
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
