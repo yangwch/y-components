@@ -1,6 +1,6 @@
 {
   "name": "@yangwch/y-components",
-  "version": "0.1.2",
+  "version": "0.1.5",
   "author": {
     "email": "fire_snow@163.com",
     "name": "yangwch",
@@ -15,14 +15,15 @@
     "start": "dumi dev",
     "docs:build": "dumi build",
     "docs:deploy": "gh-pages -d docs-dist",
-    "build": "father build",
+    "build": "father build & npm run build:css",
     "deploy": "npm run docs:build && npm run docs:deploy",
     "prettier": "prettier --write \"**/*.{js,jsx,tsx,ts,less,md,json}\"",
     "test": "umi-test",
     "test:watch": "umi-test --watch",
     "test:coverage": "umi-test --coverage",
     "prepublishOnly": "npm run build",
-    "prepare": "dumi setup"
+    "prepare": "dumi setup",
+    "build:css": "webpack --config config/webpack.config.prod.js"
   },
   "files": [
     "dist"
@@ -54,11 +55,17 @@
     "@types/jest": "^27.0.3",
     "@umijs/fabric": "^2.8.1",
     "@umijs/test": "^3.0.5",
+    "css-loader": "^6.7.3",
     "dumi": "^2.0.13",
-    "father": "^4.0.0-rc.2",
+    "father": "^4.1.2",
     "gh-pages": "^3.0.0",
+    "less-loader": "^11.1.0",
     "lint-staged": "^10.0.7",
+    "mini-css-extract-plugin": "^2.7.2",
     "prettier": "^2.2.1",
+    "ts-loader": "^9.4.2",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1",
     "yorkie": "^2.0.0"
   }
 }
