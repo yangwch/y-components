@@ -42,6 +42,7 @@
 
 .input() {
   .reset-component();
+  display: inline-flex;
   padding: @input-padding-vertical-base @input-padding-horizontal-base;
   color: @input-color;
   font-size: @font-size-base;
@@ -52,11 +53,10 @@
   border-radius: @control-border-radius;
   transition: all 0.3s;
   outline: none;
-
+  
   &:hover {
     .hover();
   }
-
   &:focus,
   &-focused {
     .active();
@@ -65,6 +65,12 @@
   &-disabled {
     .disable();
   }
+  input {
+    border: 0;
+    outline: none;
+    width: 100%;
+  }
+
 }
 
 // size mixins for input

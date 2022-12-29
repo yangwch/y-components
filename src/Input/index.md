@@ -15,7 +15,7 @@ export default () => {
   return (
     <div>
       <p>
-        <Input placeholder="请输入文字" />
+        <Input placeholder="请输入文字" size="large" style={{ width: '100%' }} prefix={'🚫'} />
       </p>
       <p>
         <Input placeholder="disabled" disabled />
