@@ -16,12 +16,13 @@ export interface CardProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'>
   bodyStyle?: CSSProperties;
   hoverable?: boolean;
   size?: CardSize;
+  className?: string;
 }
 
 function Card(props: CardProps) {
-  const { children, title, extra, style, headStyle, bodyStyle, hoverable, size } = props;
+  const { children, title, extra, style, headStyle, bodyStyle, hoverable, size, className } = props;
 
-  const clsNames = classNames(`${cardPrefix}`, {
+  const clsNames = classNames(`${cardPrefix}`, className, {
     [`${cardPrefix}-hoverable`]: hoverable,
     [`${cardPrefix}-${size}`]: !!size,
   });

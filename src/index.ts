@@ -15,3 +15,5 @@ export { default as Space } from './Space';
 export { default as Tag } from './Tag';
 
 export { default as Checkbox } from './Checkbox';
+
+export { default as Dialog } from './Dialog';

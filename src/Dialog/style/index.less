@@ -1,0 +1,37 @@
+@import '../../style/themes/index.less';
+
+@dialog-cls: ~'@{prefix}-dialog';
+@dialog-mask-cls: ~'@{dialog-cls}-mask';
+@dialog-root-cls: ~'@{dialog-cls}-root';
+@dialog-content-cls: ~'@{dialog-cls}-content';
+
+.@{dialog-root-cls} {
+  display: none;
+  animation: all .3s;
+  &.visible {
+    display: block;
+  }
+  .@{dialog-mask-cls} {
+    position: fixed;
+    top: 0;
+    inset-inline-end: 0;
+    bottom: 0;
+    inset-inline-start: 0;
+    z-index: 1000;
+    height: 100%;
+    background-color: @dialog-mask-background-color;
+  }
+
+  .@{dialog-content-cls} {
+    position: fixed;
+    inset-inline-end: 0;
+    z-index: 1001;
+    inset-inline-start: 0;
+    overflow: auto;
+    outline: 0;
+    -webkit-overflow-scrolling: touch;
+    width: 520px;
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+}
