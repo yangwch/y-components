@@ -6,6 +6,7 @@ interface ContentProps {
   children?: React.ReactNode;
   style?: CSSProperties;
   className?: string;
+  nodeRef?: React.LegacyRef<HTMLDivElement>;
 }
 function Content(props: ContentProps) {
   const { prefixCls, children, style, className } = props;

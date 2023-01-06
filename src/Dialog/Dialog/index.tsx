@@ -7,6 +7,7 @@ import Mask from './Mask';
 import Wrap from './Wrap';
 import '../style/index.less';
 import Content from './Content';
+import Motion from '../../utils/Motion';
 
 const dialogPrefix = `${settings.prefix}-dialog`;
 
@@ -30,7 +31,7 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
     width,
   } = props;
   const controllered = 'visible' in props;
-  const [visible, setVisible] = useState<Boolean>(controllered ? !!customVisible : false);
+  const [visible, setVisible] = useState<boolean>(controllered ? !!customVisible : false);
 
   useEffect(() => {
     setVisible(!!customVisible);
@@ -70,21 +71,19 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
           style={maskStyle}
           onClick={maskClickHandler}
         />
-        <Wrap
-          prefixCls={dialogPrefix}
-          className={className}
-          style={{ width, ...contentStyle }}
-          title={title}
-          onClose={onCloseHandler}
-        >
-          <Content
+        <Motion visible={visible}>
+          <Wrap
             prefixCls={dialogPrefix}
-            style={bodyStyle}
-            className={bodyClassName}
+            className={className}
+            style={{ width, ...contentStyle }}
+            title={title}
+            onClose={onCloseHandler}
           >
-            {children}
-          </Content>
-        </Wrap>
+            <Content prefixCls={dialogPrefix} style={bodyStyle} className={bodyClassName}>
+              {children}
+            </Content>
+          </Wrap>
+        </Motion>
       </div>
     </Portal>
   );
