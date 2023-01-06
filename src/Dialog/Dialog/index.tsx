@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { DialogProps } from '../interface';
 import Portal from '../Portal';
 import { settings } from '../../utils/global';
@@ -6,6 +6,7 @@ import classNames from 'classnames';
 import Mask from './Mask';
 import Wrap from './Wrap';
 import '../style/index.less';
+import Content from './Content';
 
 const dialogPrefix = `${settings.prefix}-dialog`;
 
@@ -22,15 +23,42 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
     maskStyle,
     contentStyle = {},
     title,
+    bodyStyle,
+    bodyClassName,
+    maskClosable = true,
+    onClose,
   } = props;
-  const [visible, setVisible] = useState<Boolean>('visible' in props ? !!customVisible : false);
+  const controllered = 'visible' in props
+  const [visible, setVisible] = useState<Boolean>(controllered ? !!customVisible : false);
 
-  if (!visible && destroyOnClose) {
-    return null;
-  }
+  useEffect(() => {
+    setVisible(!!customVisible);
+  }, [customVisible]);
   const rootCls = classNames(`${dialogPrefix}-root`, rootClassName, {
     [`visible`]: visible,
   });
+  const onCloseHandler = useCallback(
+    (e: React.SyntheticEvent) => {
+      if (!controllered) {
+        setVisible(false);
+      }
+      if (onClose) {
+        onClose(e);
+      }
+    },
+    [visible, controllered],
+  );
+  const maskClickHandler = useCallback(
+    (e: React.SyntheticEvent) => {
+      if (maskClosable) {
+        onCloseHandler(e);
+      }
+    },
+    [maskClosable],
+  );
+  if (!visible && destroyOnClose) {
+    return null;
+  }
   return (
     <Portal getContainer={getContainer}>
       <div className={rootCls}>
@@ -39,9 +67,18 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
           prefixCls={dialogPrefix}
           className={maskClassName}
           style={maskStyle}
+          onClick={maskClickHandler}
         />
-        <Wrap prefixCls={dialogPrefix} className={className} style={contentStyle} title={title}>
-          {children}
+        <Wrap
+          prefixCls={dialogPrefix}
+          className={className}
+          style={contentStyle}
+          title={title}
+          onClose={onCloseHandler}
+        >
+          <Content prefixCls={dialogPrefix} style={bodyStyle} className={bodyClassName}>
+            {children}
+          </Content>
         </Wrap>
       </div>
     </Portal>

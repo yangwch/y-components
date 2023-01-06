@@ -16,9 +16,11 @@ export default () => {
   const [visible, setVisible] = React.useState(false);
   return (
     <div ref={ref}>
-      <Button onClick={() => setVisible(!visible)}>Toggle: {visible.toString()}</Button>
-      <Dialog visible={visible} getContainer={() => ref.current}>
-        Dialog!!!
+      <Button onClick={() => setVisible(!visible)}>Open Dialog</Button>
+      <Dialog visible={visible} title="Basic Dialog" getContainer={() => ref.current} onClose={() => setVisible(false)}>
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+        <p>Some contents...</p>
       </Dialog>
     </div>
   );

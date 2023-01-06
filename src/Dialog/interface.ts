@@ -21,6 +21,8 @@ export interface DialogProps {
   maskClassName?: string;
   maskStyle?: CSSProperties;
   contentStyle?: CSSProperties;
+  bodyStyle?: CSSProperties;
+  bodyClassName?: string;
 }
 
 export interface PortalProps {

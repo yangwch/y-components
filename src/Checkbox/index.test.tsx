@@ -4,14 +4,15 @@ import { mountTest } from '../../test/shared/mountTest';
 
 import Checkbox from './index';
 
-describe('Card', () => {
+describe('Checkbox', () => {
   mountTest(() => <Checkbox />);
   mountTest(() => <Checkbox></Checkbox>);
   mountTest(() => <Checkbox type="radio" />);
+  
+  it('render correctly', () => {
+    const testFn = () => render(<Checkbox></Checkbox>);
+    expect(testFn).not.toThrowError();
+  
+  });
 });
 
-it('render correctly', () => {
-  const testFn = () => render(<Checkbox></Checkbox>);
-  expect(testFn).not.toThrowError();
-
-});

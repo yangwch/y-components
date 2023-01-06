@@ -34,4 +34,32 @@
     left: 50%;
     transform: translate(-50%, 0);
   }
+  .@{dialog-cls} {
+    &-close {
+      position: absolute;
+      top: 17px;
+      inset-inline-end: 17px;
+      z-index: 1010;
+      padding: 0;
+      color: rgba(0,0,0,.45);
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 1;
+      text-decoration: none;
+      background: 0 0;
+      border-radius: 4px;
+      border: 0;
+      outline: 0;
+      cursor: pointer;
+      transition: color .2s,background-color .2s;
+    }
+    &-title {
+      margin: 0;
+      color: @dialog-title-color;
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 1.5;
+      word-wrap: break-word;
+    }
+  }
 }
