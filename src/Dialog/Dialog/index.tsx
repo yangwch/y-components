@@ -27,8 +27,9 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
     bodyClassName,
     maskClosable = true,
     onClose,
+    width,
   } = props;
-  const controllered = 'visible' in props
+  const controllered = 'visible' in props;
   const [visible, setVisible] = useState<Boolean>(controllered ? !!customVisible : false);
 
   useEffect(() => {
@@ -72,11 +73,15 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
         <Wrap
           prefixCls={dialogPrefix}
           className={className}
-          style={contentStyle}
+          style={{ width, ...contentStyle }}
           title={title}
           onClose={onCloseHandler}
         >
-          <Content prefixCls={dialogPrefix} style={bodyStyle} className={bodyClassName}>
+          <Content
+            prefixCls={dialogPrefix}
+            style={bodyStyle}
+            className={bodyClassName}
+          >
             {children}
           </Content>
         </Wrap>

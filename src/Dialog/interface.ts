@@ -23,6 +23,7 @@ export interface DialogProps {
   contentStyle?: CSSProperties;
   bodyStyle?: CSSProperties;
   bodyClassName?: string;
+  width?: number;
 }
 
 export interface PortalProps {
