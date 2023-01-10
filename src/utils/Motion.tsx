@@ -15,6 +15,7 @@ interface MotionProps {
   timeout?: number;
   children?: React.ReactNode;
   transitionStyles?: typeof transitionStyles;
+  style?: CSSProperties;
 }
 
 function Motion(props: MotionProps) {
@@ -23,14 +24,14 @@ function Motion(props: MotionProps) {
     timeout = 150,
     children,
     transitionStyles: customTransitionStyles = transitionStyles,
-    delay = 0
+    delay = 0,
+    style,
   } = props;
   const nodeRef = useRef<HTMLDivElement | null>(null);
   const defaultStyle: CSSProperties = {
     transition: `transform ${timeout}ms ease-in-out`,
     transform: 'scale(0, 0)',
     position: 'relative',
-    zIndex: 1001,
   };
   const [enter, setEnter] = useState<boolean>(false);
   useEffect(() => {
@@ -41,7 +42,10 @@ function Motion(props: MotionProps) {
   return (
     <Transition nodeRef={nodeRef} in={enter} timeout={timeout}>
       {(state) => (
-        <div ref={nodeRef} style={{ ...defaultStyle, ...(customTransitionStyles[state] || {}) }}>
+        <div
+          ref={nodeRef}
+          style={{ ...defaultStyle, ...(customTransitionStyles[state] || {}), ...style }}
+        >
           {children}
         </div>
       )}

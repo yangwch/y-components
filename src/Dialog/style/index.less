@@ -6,7 +6,7 @@
 @dialog-content-cls: ~'@{dialog-cls}-content';
 
 .@{dialog-root-cls} {
-  display: none;
+  // display: none;
   animation: all .3s;
   &.visible {
     display: block;
@@ -25,14 +25,15 @@
   .@{dialog-content-cls} {
     position: fixed;
     inset-inline-end: 0;
-    z-index: 1001;
+    z-index: 1000;
     inset-inline-start: 0;
     overflow: auto;
     outline: 0;
     -webkit-overflow-scrolling: touch;
     width: 520px;
     left: 50%;
-    transform: translate(-50%, 0);
+    top: 50%;
+    transform: translate(-50%, -50%);
   }
   .@{dialog-cls} {
     &-close {

@@ -23,6 +23,7 @@ export default () => {
         getContainer={() => ref.current}
         onClose={() => setVisible(false)}
         width={300}
+        zIndex={10}
       >
         <p>Some contents...</p>
         <p>Some contents...</p>

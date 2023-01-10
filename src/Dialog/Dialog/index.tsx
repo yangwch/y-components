@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { CSSProperties, useCallback, useEffect, useMemo, useState } from 'react';
 import { DialogProps } from '../interface';
 import Portal from '../Portal';
 import { settings } from '../../utils/global';
@@ -29,6 +29,7 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
     maskClosable = true,
     onClose,
     width,
+    zIndex,
   } = props;
   const controllered = 'visible' in props;
   const [visible, setVisible] = useState<boolean>(controllered ? !!customVisible : false);
@@ -58,6 +59,26 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
     },
     [maskClosable],
   );
+  const zIndexValue = 'zIndex' in props ? zIndex : 1000;
+  const maskStyleValue: CSSProperties = useMemo(
+    () => ({
+      ...maskStyle,
+      zIndex: zIndexValue,
+    }),
+    [maskStyle, zIndexValue],
+  );
+  const motionStyle: CSSProperties = useMemo(
+    () => ({
+      position: 'fixed',
+      zIndex: zIndexValue,
+      left: 0,
+      top: 0,
+      width: '100%',
+      height: '100%',
+    }),
+    [zIndexValue],
+  );
+
   if (!visible && destroyOnClose) {
     return null;
   }
@@ -68,14 +89,14 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
           visible={visible && mask}
           prefixCls={dialogPrefix}
           className={maskClassName}
-          style={maskStyle}
+          style={maskStyleValue}
           onClick={maskClickHandler}
         />
-        <Motion visible={visible}>
+        <Motion visible={visible} style={motionStyle}>
           <Wrap
             prefixCls={dialogPrefix}
             className={className}
-            style={{ width, ...contentStyle }}
+            style={{ width, zIndex: zIndexValue, ...contentStyle }}
             title={title}
             onClose={onCloseHandler}
           >
