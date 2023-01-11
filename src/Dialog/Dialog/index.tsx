@@ -27,9 +27,12 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
     bodyStyle,
     bodyClassName,
     maskClosable = true,
+    closeIcon,
     onClose,
+    afterClose,
     width,
     zIndex,
+    motionStyles,
   } = props;
   const controllered = 'visible' in props;
   const [visible, setVisible] = useState<boolean>(controllered ? !!customVisible : false);
@@ -51,6 +54,11 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
     },
     [visible, controllered],
   );
+  useEffect(() => {
+    if (!visible && afterClose) {
+      afterClose();
+    }
+  }, [visible]);
   const maskClickHandler = useCallback(
     (e: React.SyntheticEvent) => {
       if (maskClosable) {
@@ -92,10 +100,11 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
           style={maskStyleValue}
           onClick={maskClickHandler}
         />
-        <Motion visible={visible} style={motionStyle}>
+        <Motion visible={visible} style={motionStyle} motionStyles={motionStyles}>
           <Wrap
             prefixCls={dialogPrefix}
             className={className}
+            closeIcon={closeIcon}
             style={{ width, zIndex: zIndexValue, ...contentStyle }}
             title={title}
             onClose={onCloseHandler}

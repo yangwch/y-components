@@ -1,4 +1,5 @@
 import { CSSProperties, ReactNode, SyntheticEvent } from "react";
+import { MotionStyles } from "../utils/Motion";
 
 export type GetContainer = string | HTMLElement | (() => HTMLElement);
 
@@ -8,6 +9,7 @@ export interface DialogProps {
   style?: CSSProperties;
   mask?: boolean;
   children?: any;
+  closeIcon?: ReactNode;
   afterClose?: () => any;
   onClose?: (e: SyntheticEvent) => any;
   closable?: boolean;
@@ -25,6 +27,7 @@ export interface DialogProps {
   bodyClassName?: string;
   width?: number;
   zIndex?: number;
+  motionStyles?: MotionStyles;
 }
 
 export interface PortalProps {

@@ -1,20 +1,28 @@
 import React, { CSSProperties, useEffect, useRef, useState } from 'react';
 import { Transition } from 'react-transition-group';
+export interface MotionStyles {
+  entering?: CSSProperties;
+  entered?: CSSProperties;
+  exiting?: CSSProperties;
+  exited?: CSSProperties;
+  unmounted?: CSSProperties;
+}
 
-const transitionStyles: { [key: string]: CSSProperties } = {
-  entering: { transform: 'scale(1, 1)' },
+const transitionStyles: MotionStyles = {
+  entering: { transform: 'scale(1.2, 1.2)' },
   entered: { transform: 'scale(1, 1)' },
   exiting: { transform: 'scale(0, 0)' },
   exited: { transform: 'scale(0, 0)' },
   unmounted: { transform: 'scale(0, 0)' },
 };
 
+
 interface MotionProps {
   visible: boolean;
   delay?: number;
   timeout?: number;
   children?: React.ReactNode;
-  transitionStyles?: typeof transitionStyles;
+  motionStyles?: MotionStyles;
   style?: CSSProperties;
 }
 
@@ -23,7 +31,7 @@ function Motion(props: MotionProps) {
     visible,
     timeout = 150,
     children,
-    transitionStyles: customTransitionStyles = transitionStyles,
+    motionStyles: customTransitionStyles = transitionStyles,
     delay = 0,
     style,
   } = props;
