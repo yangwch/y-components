@@ -4,10 +4,12 @@
 @dialog-mask-cls: ~'@{dialog-cls}-mask';
 @dialog-root-cls: ~'@{dialog-cls}-root';
 @dialog-content-cls: ~'@{dialog-cls}-content';
+@motion-cls: ~'@{prefix}-motion';
 
 .@{dialog-root-cls} {
   // display: none;
   animation: all .3s;
+  overflow: auto;
   &.visible {
     display: block;
   }
@@ -31,9 +33,9 @@
     outline: 0;
     -webkit-overflow-scrolling: touch;
     width: 520px;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    margin: 0 auto;
+    top: @dialog-content-top;
+    border-radius: @dialog-content-border-radius;
   }
   .@{dialog-cls} {
     &-close {
@@ -62,5 +64,8 @@
       line-height: 1.5;
       word-wrap: break-word;
     }
+  }
+  .@{motion-cls} {
+    overflow: auto;
   }
 }

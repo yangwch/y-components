@@ -27,12 +27,14 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
     bodyStyle,
     bodyClassName,
     maskClosable = true,
+    closable = true,
     closeIcon,
     onClose,
     afterClose,
     width,
     zIndex,
-    motionStyles,
+    disableTransition = false,
+    transitionStyles,
   } = props;
   const controllered = 'visible' in props;
   const [visible, setVisible] = useState<boolean>(controllered ? !!customVisible : false);
@@ -100,7 +102,13 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
           style={maskStyleValue}
           onClick={maskClickHandler}
         />
-        <Motion visible={visible} style={motionStyle} motionStyles={motionStyles}>
+        <Motion
+          visible={visible}
+          style={motionStyle}
+          motionStyles={transitionStyles}
+          disableTransition={disableTransition}
+          onClick={maskClickHandler}
+        >
           <Wrap
             prefixCls={dialogPrefix}
             className={className}
@@ -108,6 +116,7 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
             style={{ width, zIndex: zIndexValue, ...contentStyle }}
             title={title}
             onClose={onCloseHandler}
+            closable={closable}
           >
             <Content prefixCls={dialogPrefix} style={bodyStyle} className={bodyClassName}>
               {children}

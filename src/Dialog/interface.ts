@@ -27,7 +27,8 @@ export interface DialogProps {
   bodyClassName?: string;
   width?: number;
   zIndex?: number;
-  motionStyles?: MotionStyles;
+  disableTransition?: boolean;
+  transitionStyles?: MotionStyles;
 }
 
 export interface PortalProps {

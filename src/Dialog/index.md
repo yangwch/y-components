@@ -49,17 +49,22 @@ export default () => {
         visible={visible}
         onClose={() => setVisible(false)}
         title="Basic Dialog"
-        motionStyles={{
-          entering: { transform: 'scale(2, 2)' },
+        transitionStyles={{
+          entering: { transform: 'scale(2, 2) translate(0, -200px)' },
           entered: { transform: 'scale(1, 1)' },
           exiting: { transform: 'translate(0, 500px)' },
           exited: { transform: 'scale(0, 0)' },
           unmounted: { transform: 'scale(0, 0)' },
         }}
       >
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
+        <p>SOME CONTENTS...</p>
+        <p>SOME CONTENTS...</p>
+        <p>SOME CONTENTS...</p>
+        <p>SOME CONTENTS...</p>
+        <p>SOME CONTENTS...</p>
+        <p>SOME CONTENTS...</p>
+        <p>SOME CONTENTS...</p>
+        <p>SOME CONTENTS...</p>
       </Dialog>
     </div>
   );
