@@ -17,3 +17,5 @@ export { default as Tag } from './Tag';
 export { default as Checkbox } from './Checkbox';
 
 export { default as Dialog } from './Dialog';
+
+export { default as Switch } from './Switch';

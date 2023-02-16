@@ -1,0 +1,114 @@
+@switch-width: 40px;
+@switch-height: 24px;
+@switch-bg: rgba(46, 50, 56, 0.09);
+@switch-hover-bg: rgba(46, 50, 56, 0.09);
+@switch-active-bg: rgba(37, 119, 47, 1);
+@switch-border: 1px solid rgba(46, 50, 56, 0.13);
+@switch-focus-outline: 2px solid rgba(152, 205, 253, 1);
+@switch-know-box-shadow: 0 4px 6px rgba(0, 0, 0, .1), 0 0 1px rgba(0, 0, 0, .3);
+@switch-know-bg: #fff;
+@switch-know-size: 18px;
+
+@switch-checked-bg: rgba(59, 179, 70, 1);
+@switch-text-color: #fff;
+@switch-unchecked-text-color: rgba(28, 31, 35, 0.62);
+
+.switch() {
+  box-sizing: border-box;
+  display: inline-block;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  position: relative;
+  cursor: pointer;
+  background-color: @switch-bg;
+  transition: background-color .2s ease-in 0;
+  width: @switch-width;
+  height: @switch-height;
+
+  &:hover {
+    background-color: @switch-hover-bg;
+  }
+
+  &:active {
+    border: @switch-border;
+  }
+
+  &-focus {
+    outline: @switch-focus-outline;
+  }
+
+  &-active {
+    background-color: @switch-active-bg;
+  }
+
+  // checked
+  &-checked {
+    background-color: @switch-checked-bg;
+  }
+
+  &-checked &-knob {
+    transform: translateX(18px);
+  }
+
+  // knob
+  & &-knob {
+    box-shadow: @switch-know-box-shadow;
+    cursor: pointer;
+    border-radius: 9px;
+    background-color: @switch-know-bg;
+    box-sizing: border-box;
+    position: absolute;
+    left: 0;
+    right: auto;
+    transition: width .2s ease-in-out, -webkit-transform .2s ease-in-out;
+    transition: transform .2s ease-in-out, width .2s ease-in-out;
+    transition: transform .2s ease-in-out, width .2s ease-in-out, -webkit-transform .2s ease-in-out;
+    width: @switch-know-size;
+    height: @switch-know-size;
+    top: 2px;
+    transform: translateX(2px);
+  }
+
+  &:active &-knob {
+    transform: translateX(12px)
+  }
+
+  &-native-control {
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: inherit;
+    pointer-events: auto;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    &[type=checkbox] {
+      width: inherit;
+      height: inherit
+    }
+  }
+
+
+  &-checked-text,
+  &-unchecked-text {
+    position: absolute;
+    font-size: 12px;
+    height: 100%;
+    width: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center
+  }
+
+  .semi-switch-checked-text {
+    color: @switch-text-color;
+  }
+
+  .semi-switch-unchecked-text {
+    color: @switch-unchecked-text-color;
+    right: 0
+  }
+
+}
