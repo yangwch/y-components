@@ -18,15 +18,17 @@ interface WrapProps {
 function Wrap(props: WrapProps) {
   const { prefixCls, children, style, className, title, onClose, closeIcon, closable } = props;
   return (
-    <Card tabIndex={-1} className={classNames(`${prefixCls}-content`, className)} style={style}>
-      {closable ? (
-        <CloseButton prefixCls={prefixCls} onClick={onClose}>
-          {closeIcon}
-        </CloseButton>
-      ) : null}
-      <Header prefixCls={prefixCls}>{title}</Header>
-      {children}
-    </Card>
+    <div className={classNames(`${prefixCls}-content`, className)} style={style}>
+      <Card tabIndex={-1}>
+        {closable ? (
+          <CloseButton prefixCls={prefixCls} onClick={onClose}>
+            {closeIcon}
+          </CloseButton>
+        ) : null}
+        <Header prefixCls={prefixCls}>{title}</Header>
+        {children}
+      </Card>
+    </div>
   );
 }
 
