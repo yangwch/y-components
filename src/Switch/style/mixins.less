@@ -1,32 +1,14 @@
-@switch-width: 40px;
-@switch-height: 24px;
-@switch-bg: rgba(46, 50, 56, 0.09);
-@switch-hover-bg: rgba(46, 50, 56, 0.09);
-@switch-active-bg: rgba(37, 119, 47, 1);
-@switch-border-size: 1px;
-@switch-border: @switch-border-size solid rgba(46, 50, 56, 0.13);
-@switch-focus-outline: 2px solid rgba(152, 205, 253, 1);
-
-@switch-knob-box-shadow: 0 4px 6px rgba(0, 0, 0, .1), 0 0 1px rgba(0, 0, 0, .3);
-@switch-knob-bg: #fff;
-@switch-knob-size: 18px;
-@spacing-switch_knob-padding: 2px;
-@switch-knob-expand-size: 5px;
-
-@switch-checked-bg: rgba(59, 179, 70, 1);
-@switch-checked-hover-bg: rgb(46, 177, 59);
-@switch-text-color: #fff;
-@switch-unchecked-text-color: rgba(28, 31, 35, 0.62);
+@import '../../style/mixins/index.less';
 
 .switch() {
   box-sizing: border-box;
   display: inline-block;
-  border-radius: 12px;
-  border: 1px solid transparent;
+  border-radius: @switch-boarder-radius;
+  border: @switch-border;
   position: relative;
   cursor: pointer;
   background-color: @switch-bg;
-  transition: background-color .2s ease-in 0;
+  transition: @switch-transition;
   width: @switch-width;
   height: @switch-height;
 
@@ -59,7 +41,7 @@
   & &-knob {
     box-shadow: @switch-knob-box-shadow;
     cursor: pointer;
-    border-radius: 9px;
+    border-radius: @switch-knob-border-radius;
     background-color: @switch-knob-bg;
     box-sizing: border-box;
     position: absolute;
@@ -71,7 +53,7 @@
     width: @switch-knob-size;
     height: @switch-knob-size;
     top: 2px;
-    transform: translateX(2px);
+    transform: translateX(@spacing-switch_knob-padding);
   }
 
   &:active &-knob {
