@@ -8,6 +8,9 @@ import Wrap from './Wrap';
 import '../style/index.less';
 import Content from './Content';
 import Motion from '../../utils/Motion';
+import Space from '../../Space';
+import Button from '../../Button';
+import Footer from './Footer';
 
 const dialogPrefix = `${settings.prefix}-dialog`;
 
@@ -35,6 +38,14 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
     zIndex,
     disableTransition = false,
     transitionStyles,
+    footer,
+    footerStyle,
+    okText,
+    okButtonProps,
+    cancelText,
+    cancelButtonProps,
+    onOk,
+    onCancel,
   } = props;
   const controllered = 'visible' in props;
   const [visible, setVisible] = useState<boolean>(controllered ? !!customVisible : false);
@@ -88,10 +99,36 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
     }),
     [zIndexValue],
   );
+  const okClickHandle = (e: React.SyntheticEvent) => {
+    if (onOk) {
+      onOk(e);
+    }
+    onCloseHandler(e);
+  };
+
+  const cancelClickHandle = (e: React.SyntheticEvent) => {
+    if (onCancel) {
+      onCancel(e);
+    }
+    onCloseHandler(e);
+  };
 
   if (!visible && destroyOnClose) {
     return null;
   }
+  const footerProps = {
+    className: `${dialogPrefix}-footer`,
+    style: footerStyle,
+    okText,
+    okButtonProps,
+    cancelText,
+    cancelButtonProps,
+    onOk: okClickHandle,
+    onCancel: cancelClickHandle,
+  };
+  const renderFooter = () => {
+    return <Footer {...footerProps} content={footer} />;
+  };
   return (
     <Portal getContainer={getContainer}>
       <div className={rootCls}>
@@ -120,6 +157,7 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
           >
             <Content prefixCls={dialogPrefix} style={bodyStyle} className={bodyClassName}>
               {children}
+              {renderFooter()}
             </Content>
           </Wrap>
         </Motion>

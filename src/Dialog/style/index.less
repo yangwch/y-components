@@ -10,9 +10,11 @@
   // display: none;
   animation: all .3s;
   overflow: auto;
+
   &.visible {
     display: block;
   }
+
   .@{dialog-mask-cls} {
     position: fixed;
     top: 0;
@@ -38,6 +40,7 @@
     padding-bottom: @dialog-content-top;
     border-radius: @dialog-content-border-radius;
   }
+
   .@{dialog-cls} {
     &-close {
       position: absolute;
@@ -45,7 +48,7 @@
       inset-inline-end: 17px;
       z-index: 1010;
       padding: 0;
-      color: rgba(0,0,0,.45);
+      color: rgba(0, 0, 0, .45);
       font-weight: 600;
       font-size: 20px;
       line-height: 1;
@@ -55,8 +58,9 @@
       border: 0;
       outline: 0;
       cursor: pointer;
-      transition: color .2s,background-color .2s;
+      transition: color .2s, background-color .2s;
     }
+
     &-title {
       margin: 0;
       color: @dialog-title-color;
@@ -65,7 +69,12 @@
       line-height: 1.5;
       word-wrap: break-word;
     }
+
+    &-footer {
+      text-align: right;
+    }
   }
+
   .@{motion-cls} {
     overflow: auto;
   }

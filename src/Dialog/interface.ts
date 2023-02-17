@@ -1,5 +1,6 @@
-import { CSSProperties, ReactNode, SyntheticEvent } from "react";
-import { MotionStyles } from "../utils/Motion";
+import { CSSProperties, ReactNode, SyntheticEvent } from 'react';
+import { ButtonProps } from '../Button';
+import { MotionStyles } from '../utils/Motion';
 
 export type GetContainer = string | HTMLElement | (() => HTMLElement);
 
@@ -16,8 +17,18 @@ export interface DialogProps {
   maskClosable?: boolean;
   visible?: boolean;
   destroyOnClose?: boolean;
+
   title?: ReactNode;
-  footer?: ReactNode;
+  footer?: ReactNode | (() => ReactNode);
+  footerStyle?: CSSProperties;
+
+  okText?: ReactNode;
+  okButtonProps?: ButtonProps;
+  onOk?: (e: React.SyntheticEvent) => void;
+  cancelText?: ReactNode;
+  cancelButtonProps?: ButtonProps;
+  onCancel?: (e: React.SyntheticEvent) => void;
+
   getContainer?: GetContainer;
   rootClassName?: string;
   maskClassName?: string;

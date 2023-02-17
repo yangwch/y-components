@@ -12,19 +12,11 @@ import React from 'react';
 import { Dialog, Button } from '@yangwch/y-components';
 
 export default () => {
-  const ref = React.useRef();
   const [visible, setVisible] = React.useState(false);
   return (
-    <div ref={ref}>
+    <div>
       <Button onClick={() => setVisible(!visible)}>Open Dialog</Button>
-      <Dialog
-        visible={visible}
-        title="Basic Dialog"
-        getContainer={() => ref.current}
-        onClose={() => setVisible(false)}
-        // width={300}
-        zIndex={10}
-      >
+      <Dialog visible={visible} title="Basic Dialog" onClose={() => setVisible(false)}>
         <p>Some contents...</p>
         <p>Some contents...</p>
         <p>Some contents...</p>
@@ -34,7 +26,63 @@ export default () => {
 };
 ```
 
+## Customize Button Texts
+
+```jsx
+import React from 'react';
+import { Dialog, Button } from '@yangwch/y-components';
+
+export default () => {
+  const [visible, setVisible] = React.useState(false);
+  return (
+    <div>
+      <Button onClick={() => setVisible(!visible)}>Open Dialog</Button>
+      <Dialog
+        visible={visible}
+        title="Basic Dialog"
+        onClose={() => setVisible(false)}
+        okText={'Sounds great!'}
+        cancelText={'No, thanks.'}
+      >
+        <p>This is a dialog with customized button texts.</p>
+        <p>More content...</p>
+      </Dialog>
+    </div>
+  );
+};
+```
+
+## Customize Footer
+
+```jsx
+import React from 'react';
+import { Dialog, Button } from '@yangwch/y-components';
+
+export default () => {
+  const [visible, setVisible] = React.useState(false);
+  return (
+    <div>
+      <Button onClick={() => setVisible(!visible)}>Open Dialog</Button>
+      <Dialog
+        visible={visible}
+        title="Basic Dialog"
+        onClose={() => setVisible(false)}
+        footer={() => (
+          <div>
+            <Button>~Amazing</Button>
+          </div>
+        )}
+      >
+        <p>This is a dialog with customized button texts.</p>
+        <p>More content...</p>
+      </Dialog>
+    </div>
+  );
+};
+```
+
 ## Customize Transition
+
 ```jsx
 import React from 'react';
 import { Dialog, Button, Space } from '@yangwch/y-components';
@@ -90,8 +138,8 @@ export default () => {
 };
 ```
 
-
 ## Scroll Content
+
 ```jsx
 import React from 'react';
 import { Dialog, Button } from '@yangwch/y-components';
