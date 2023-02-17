@@ -12,9 +12,10 @@ import React from 'react';
 import { Space, Switch } from '@yangwch/y-components';
 export default () => {
   return (
-    <div>
+    <Space>
+      <Switch />
       <Switch checked />
-    </div>
+    </Space>
   )
 }
 ```
