@@ -12,6 +12,19 @@
   width: @switch-width;
   height: @switch-height;
 
+  &&-disabled {
+    background-color: @switch-disabled-bg;
+    &:hover {
+      background-color: @switch-disabled-bg;
+    }
+  }
+  &-checked&-disabled {
+    background-color: @switch-checked-disabled-bg;
+    &:hover {
+      background-color: @switch-checked-disabled-bg;
+    }
+  }
+
   &:hover {
     background-color: @switch-hover-bg;
   }

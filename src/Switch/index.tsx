@@ -1,10 +1,10 @@
 import classNames from 'classnames';
-import React, { ChangeEvent, createRef, ReactNode, useState } from 'react';
+import React, { ChangeEvent, createRef, HTMLAttributes, ReactNode, useState } from 'react';
 import { settings } from '../utils/global';
 import { SizeType } from '../_utils/size';
 import './style/index.less';
 
-export interface SwitchProps {
+export interface SwitchProps extends Omit<HTMLAttributes<HTMLInputElement>, 'onChange'> {
   checked?: boolean;
   defaultChecked?: boolean;
   checkedText?: ReactNode;
@@ -30,6 +30,7 @@ function InternalSwitch(props: SwitchProps, ref: React.ForwardedRef<HTMLInputEle
     disabled,
     onChange,
     id,
+    ...switchProps
   } = props;
   const switchRef = ref || createRef<HTMLInputElement>();
   const isControlled = 'checked' in props;
@@ -44,6 +45,7 @@ function InternalSwitch(props: SwitchProps, ref: React.ForwardedRef<HTMLInputEle
     {
       [`${switchCls}-checked`]: checked,
       [`${switchCls}-${size}`]: !!size,
+      [`${switchCls}-disabled`]: !!disabled
     },
     className,
   );
@@ -67,15 +69,17 @@ function InternalSwitch(props: SwitchProps, ref: React.ForwardedRef<HTMLInputEle
   return (
     <div className={clsNames}>
       <div className={knobClsNames} aria-hidden="true"></div>
-      {(checked && showText) ? <div className={checkedTextClsNames}>{checkedText}</div> : null}
-      {(!checked && showText) ? <div className={uncheckedTextClsNames}>{uncheckedText}</div> : null}
+      {checked && showText ? <div className={checkedTextClsNames}>{checkedText}</div> : null}
+      {!checked && showText ? <div className={uncheckedTextClsNames}>{uncheckedText}</div> : null}
       <input
+        {...switchProps}
         ref={switchRef}
         id={id}
         type="checkbox"
         checked={checked}
         className={nativeControlClsNames}
         role="switch"
+        disabled={disabled}
         aria-checked={checked}
         aria-disabled={disabled}
         onChange={onChangeHandle}
