@@ -13,8 +13,8 @@ import { Space, Switch } from '@yangwch/y-components';
 export default () => {
   return (
     <Space>
-      <Switch />
-      <Switch checked />
+      <Switch uncheckedText="关" />
+      <Switch checked checkedText="开" />
     </Space>
   )
 }
