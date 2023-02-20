@@ -66,7 +66,7 @@
     width: @switch-knob-size;
     height: @switch-knob-size;
     top: 2px;
-    transform: translateX(@spacing-switch_knob-padding);
+    transform: translateX(@spacing-switch-knob-padding);
   }
 
   &:active &-knob {
@@ -74,10 +74,10 @@
   }
   // checked knob
   &&-checked &-knob {
-    transform: translateX(@switch-width - @switch-knob-size - @switch-border-size - @spacing-switch_knob-padding); // 18px = 40
+    transform: translateX(@switch-width - @switch-knob-size - @switch-border-size - @spacing-switch-knob-padding); // 18px = 40
   }
   &&-checked:active &-knob {
-    transform: translateX(@switch-width - @switch-knob-expand-size - @switch-knob-size - @switch-border-size - @spacing-switch_knob-padding);
+    transform: translateX(@switch-width - @switch-knob-expand-size - @switch-knob-size - @switch-border-size - @spacing-switch-knob-padding);
   }
 
   &-native-control {
@@ -117,5 +117,29 @@
     color: @switch-unchecked-text-color;
     right: 0
   }
+}
 
+.switchSize(@prefix-cls, @width, @height, @knob-size) {
+  width: @width;
+  height: @height;
+  border-radius: @height / 2;
+
+  @knob-cls: ~'@{prefix-cls}-knob';
+  @knob-expand-size: @knob-size / 3;
+  
+  & .@{knob-cls} {
+    width: @knob-size;
+    height: @knob-size;
+    border-radius: @knob-size / 2;
+  }
+  &:active .@{knob-cls} {
+    width: @knob-size + @knob-expand-size;
+  }
+  // checked knob
+  &.@{prefix-cls}-checked .@{knob-cls} {
+    transform: translateX(@width - @knob-size - @switch-border-size - @spacing-switch-knob-padding); // 18px = 40
+  }
+  &.@{prefix-cls}-checked:active .@{knob-cls} {
+    transform: translateX(@width - @knob-expand-size - @knob-size - @switch-border-size - @spacing-switch-knob-padding);
+  }
 }

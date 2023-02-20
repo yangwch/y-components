@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React, { ChangeEvent, createRef, HTMLAttributes, ReactNode, useState } from 'react';
 import { settings } from '../utils/global';
-import { SizeType } from '../_utils/size';
+import { sizeClassNameMap, SizeType } from '../_utils/size';
 import './style/index.less';
 
 export interface SwitchProps extends Omit<HTMLAttributes<HTMLInputElement>, 'onChange'> {
@@ -40,11 +40,13 @@ function InternalSwitch(props: SwitchProps, ref: React.ForwardedRef<HTMLInputEle
     return false;
   });
 
+  const sizeTypeStr = sizeClassNameMap[size || 'middle']
+
   const clsNames = classNames(
     switchCls,
     {
       [`${switchCls}-checked`]: checked,
-      [`${switchCls}-${size}`]: !!size,
+      [`${switchCls}-${sizeTypeStr}`]: !!sizeTypeStr,
       [`${switchCls}-disabled`]: !!disabled
     },
     className,

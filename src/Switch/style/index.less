@@ -7,4 +7,10 @@
 
 .@{switch-prefix-cls} {
   .switch();
+  &-sm {
+    .switchSize(@switch-prefix-cls, 26px, 16px, 10px);
+  }
+  &-lg {
+    .switchSize(@switch-prefix-cls, 54px, 32px, 26px);
+  }
 }
