@@ -16,5 +16,9 @@ export default defineConfig({
       { title: 'Docs', link: '/api'}
     ]
   },
+  apiParser: {},
+  resolve: {
+    entryFile: './src/index.ts'
+  }
   // more config: https://d.umijs.org/config
 });

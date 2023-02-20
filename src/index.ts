@@ -1,4 +1,4 @@
-export { default as Button } from './Button';
+export { Button, ButtonGroup } from './Button';
 
 export { Row, Col } from './Grid';
 
@@ -18,4 +18,4 @@ export { default as Checkbox } from './Checkbox';
 
 export { default as Dialog } from './Dialog';
 
-export { default as Switch } from './Switch';
+export { Switch } from './Switch';

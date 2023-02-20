@@ -5,9 +5,19 @@ import { sizeClassNameMap, SizeType } from '../_utils/size';
 import SizeContext from './SizeContext';
 
 interface ButtonGroupProps {
+  /**
+   * @description 按钮尺寸："small" | "middle" | "large"
+   */
   size?: SizeType;
   children?: React.ReactNode;
+  /**
+   * @description 样式
+   * @type React.CSSProperties
+   */
   style?: CSSProperties;
+  /**
+   * @description 类名
+   */
   className?: string
 }
 const groupCls = `${settings.prefix}-btn-group`

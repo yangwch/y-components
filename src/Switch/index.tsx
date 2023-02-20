@@ -5,14 +5,46 @@ import { sizeClassNameMap, SizeType } from '../_utils/size';
 import './style/index.less';
 
 export interface SwitchProps extends Omit<HTMLAttributes<HTMLInputElement>, 'onChange'> {
+  /**
+   * @description 是否选中
+   * @default 'false'
+   */
   checked?: boolean;
+  /**
+   * @description 初始是否选中
+   * @default 'false'
+   */
   defaultChecked?: boolean;
+  /**
+   * @description 打开时展示的内容, size 为 small 时无效
+   */
   checkedText?: ReactNode;
+  /**
+   * @description 关闭时展示的内容, size 为 small 时无效
+   */
   uncheckedText?: ReactNode;
+  /**
+   * @description 尺寸,可选值large,middle,small
+   */
   size?: SizeType;
+  /**
+   * @description 类名
+   */
   className?: string;
+
+  /**
+   * @description 是否禁用
+   * @default false
+   */
   disabled?: boolean;
+
+  /**
+   * @description 变化时回调函数
+   */
   onChange?: (checked: boolean) => void;
+  /**
+   * @description dom中input[type=checkbox]的id
+   */
   id?: string;
 }
 
@@ -90,6 +122,5 @@ function InternalSwitch(props: SwitchProps, ref: React.ForwardedRef<HTMLInputEle
   );
 }
 
-const Switch = React.forwardRef(InternalSwitch);
+export const Switch = React.forwardRef(InternalSwitch);
 
-export default Switch;

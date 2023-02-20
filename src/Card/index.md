@@ -92,3 +92,6 @@ export default () => {
   );
 };
 ```
+
+## API
+<API id="Card"></API>

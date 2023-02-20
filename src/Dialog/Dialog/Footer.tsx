@@ -1,5 +1,5 @@
 import React, { CSSProperties, ReactNode } from 'react';
-import Button, { ButtonProps } from '../../Button';
+import { Button, ButtonProps } from '../../Button';
 import { cancelText, okText } from '../../constant/dialog';
 import Space from '../../Space';
 
@@ -27,7 +27,7 @@ function Footer(props: FooterProps) {
     onCancel,
   } = props;
   const renderContent = () => {
-    if ('footer' in props) {
+    if ('footer') {
       return typeof content === 'function' ? content() : null;
     }
     return (

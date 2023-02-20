@@ -13,11 +13,28 @@ const ButtonTypes = tuple('default', 'primary', 'ghost', 'dashed', 'link', 'text
 export type ButtonType = typeof ButtonTypes[number];
 
 interface BaseButtonProps {
+  /**
+   * @description 按钮类型："default" | "primary" | "ghost" | "dashed" | "link" | "text"
+   */
   type?: ButtonType;
   children?: React.ReactNode;
+  /**
+   * @description 设置危险按钮
+   */
   danger?: Boolean;
+  /**
+   * @description 是否禁用
+   * @default 'false'
+   */
   disabled?: Boolean;
+  /**
+   * @description 尺寸："small" | "middle" | "large"
+   * @default 'middle'
+   */
   size?: SizeType;
+  /**
+   * @description 类名
+   */
   className?: string;
 }
 const ButtonHTMLTypes = tuple('submit', 'button', 'reset');
@@ -25,6 +42,9 @@ export type ButtonHTMLType = typeof ButtonHTMLTypes[number];
 
 export type NativeButtonProps = {
   htmlType?: ButtonHTMLType;
+  /**
+   * @description 点击事件
+   */
   onClick?: React.MouseEventHandler<HTMLElement>;
 } & BaseButtonProps &
   Omit<React.ButtonHTMLAttributes<any>, 'type' | 'onClick'>;
@@ -62,4 +82,4 @@ const Button = React.forwardRef(function Button(
 
 Button.Group = ButtonGroup;
 
-export default Button;
+export { Button, ButtonGroup };

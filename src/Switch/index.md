@@ -78,3 +78,7 @@ export default () => {
   );
 };
 ```
+
+## API
+
+<API id="Switch"></API>

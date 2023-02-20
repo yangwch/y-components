@@ -68,8 +68,8 @@ export default () => {
         title="Basic Dialog"
         onClose={() => setVisible(false)}
         footer={() => (
-          <div>
-            <Button>~Amazing</Button>
+          <div style={{ width: '100%', textAlign: 'center'}}>
+            <Button style={{ width: '100%'}} onClick={() => setVisible(false)}>~Amazing</Button>
           </div>
         )}
       >

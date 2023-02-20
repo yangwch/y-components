@@ -115,3 +115,9 @@ export default () => {
   )
 }
 ```
+
+## Button API
+<API id="Button"></API>
+
+## Button.Group API
+<API id="ButtonGroup"></API>

@@ -8,8 +8,6 @@ import Wrap from './Wrap';
 import '../style/index.less';
 import Content from './Content';
 import Motion from '../../utils/Motion';
-import Space from '../../Space';
-import Button from '../../Button';
 import Footer from './Footer';
 
 const dialogPrefix = `${settings.prefix}-dialog`;
