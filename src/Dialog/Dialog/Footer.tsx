@@ -1,5 +1,5 @@
 import React, { CSSProperties, ReactNode } from 'react';
-import { Button, ButtonProps } from '../../Button';
+import { Button, ButtonProps } from '../../index';
 import { cancelText, okText } from '../../constant/dialog';
 import Space from '../../Space';
 

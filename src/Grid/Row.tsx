@@ -9,12 +9,32 @@ const cls_prefix = settings.prefix;
 type Alignment = 'top' | 'middle' | 'bottom';
 export type Justify = 'start' | 'end' | 'center' | 'space-around' | 'space-between' | 'space-evenly';
 
-interface RowProps extends HTMLAttributes<HTMLDivElement> {
+export interface RowProps extends HTMLAttributes<HTMLDivElement> {
+  /**
+   * @description 类名
+   */
   className?: string;
+  /**
+   * @description 行内样式
+   * @type React.CSSProperties
+   */
   style?: CSSProperties;
+  /**
+   * @description 是否自动换行
+   * @default 'true'
+   */
   wrap?: boolean;
+  /**
+   * @description flex 布局下的垂直对齐方式： "top" | "middle" | "bottom"
+   */
   align?: Alignment;
+  /**
+   * @description flex 布局下的水平排列方式："start" | "end" | "center" | "space-around" | "space-between" | "space-evenly"
+   */
   justify?: Justify;
+  /**
+   * @description 栅格间隔: [水平间距, 垂直间距]
+   */
   gutter?: [number, number];
 }
 

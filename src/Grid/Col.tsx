@@ -7,15 +7,47 @@ import useRowState from './hooks/useRowState';
 const cls_prefix = settings.prefix;
 
 export interface ColProps extends HTMLAttributes<HTMLDivElement> {
+  /**
+   * @description 类名
+   */
   className?: string;
+  /**
+   * @description 行内样式
+   * @type React.CSSProperties
+   */
   style?: CSSProperties;
+  /**
+   * @description 栅格占位格数，为 0 时相当于 display: none
+   * @default 0
+   */
   span?: number;
+  /**
+   * @description 栅格左侧的间隔格数，间隔内不可以有栅格
+   */
   offset?: number;
+  /**
+   * @description 屏幕 < 576px 响应式栅格，为栅格数
+   */
   xs?: number;
+  /**
+   * @description 屏幕 ≥ 576px 响应式栅格，为栅格数
+   */
   sm?: number;
+  /**
+   * @description 屏幕 ≥ 768px 响应式栅格，为栅格数
+   */
   md?: number;
+  /**
+   * @description 屏幕 ≥ 992px 响应式栅格，为栅格数
+   */
   lg?: number;
+  /**
+   * @description 屏幕 ≥ 1200px 响应式栅格，为栅格数
+   */
   xl?: number;
+  /**
+   * @description 屏幕 ≥ 1600px 响应式栅格，为栅格数
+   */
   xxl?: number;
 }
 
