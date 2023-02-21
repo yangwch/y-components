@@ -19,6 +19,7 @@ export default defineConfig({
   apiParser: {},
   resolve: {
     entryFile: './src/index.ts'
-  }
+  },
+  base: './'
   // more config: https://d.umijs.org/config
 });
