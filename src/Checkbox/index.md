@@ -56,6 +56,7 @@ import React from 'react';
 import { Checkbox, Divider } from '@yangwch/y-components';
 
 export default () => {
+  const [controlledValue, setControlledValue] = React.useState(['1', '2']);
   return (
     <div>
       <h3>UnControlled</h3>
@@ -72,7 +73,7 @@ export default () => {
       </Checkbox.Group>
       <Divider />
       <h3>Controlled</h3>
-      <Checkbox.Group value={['1', '2']}>
+      <Checkbox.Group value={controlledValue} onChange={(values) => setControlledValue(values)}>
         <label>
           <Checkbox value="1" /> 1
         </label>

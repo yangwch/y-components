@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import GroupContext from './GroupContext';
 
 interface CheckboxGroupProps {
@@ -36,17 +36,23 @@ interface CheckboxGroupProps {
 const CheckboxGroup: React.FC<CheckboxGroupProps> = (props: CheckboxGroupProps) => {
   const { disabled, name, defaultValue, value, onChange, children, type } = props;
   const isControlled = 'value' in props;
-  const [checked, setChecked] = useState<string[]>(() => {
+  const getDefValue = () => {
     const values = (isControlled ? value : defaultValue) || [];
     return values instanceof Array ? values : (values && [values]) || [];
-  });
+  };
+  const [checked, setChecked] = useState<string[]>(getDefValue);
+
+  useEffect(() => {
+    setChecked(getDefValue());
+  }, [defaultValue, value]);
 
   const checkHandler = useCallback(
     (values: string[]) => {
-      if (isControlled) {
-        return;
+      console.log('group values', values);
+
+      if (!isControlled) {
+        setChecked(values);
       }
-      setChecked(values);
       if (onChange) {
         onChange(type === 'radio' ? values[0] : values);
       }
