@@ -23,6 +23,7 @@ export default () => {
 ```
 
 ## Radio
+
 ```jsx
 import React from 'react';
 import { Checkbox, Divider } from '@yangwch/y-components';
@@ -49,6 +50,7 @@ export default () => {
 ```
 
 ## Group
+
 ```jsx
 import React from 'react';
 import { Checkbox, Divider } from '@yangwch/y-components';
@@ -58,38 +60,78 @@ export default () => {
     <div>
       <h3>UnControlled</h3>
       <Checkbox.Group defaultValue={['1']}>
-        <label><Checkbox value="1"/> 1</label>
-        <label><Checkbox value="2"/> 2</label>
-        <label><Checkbox value="3"/> 3</label>
+        <label>
+          <Checkbox value="1" /> 1
+        </label>
+        <label>
+          <Checkbox value="2" /> 2
+        </label>
+        <label>
+          <Checkbox value="3" /> 3
+        </label>
       </Checkbox.Group>
-      <Divider/>
+      <Divider />
       <h3>Controlled</h3>
       <Checkbox.Group value={['1', '2']}>
-        <label><Checkbox value="1"/> 1</label>
-        <label><Checkbox value="2"/> 2</label>
-        <label><Checkbox value="3"/> 3</label>
+        <label>
+          <Checkbox value="1" /> 1
+        </label>
+        <label>
+          <Checkbox value="2" /> 2
+        </label>
+        <label>
+          <Checkbox value="3" /> 3
+        </label>
       </Checkbox.Group>
 
       <h3>Radio</h3>
       <Checkbox.Group defaultValue={'1'} type="radio">
-        <label><Checkbox value="1"/> 1</label>
-        <label><Checkbox value="2"/> 2</label>
-        <label><Checkbox value="3"/> 3</label>
+        <label>
+          <Checkbox value="1" /> 1
+        </label>
+        <label>
+          <Checkbox value="2" /> 2
+        </label>
+        <label>
+          <Checkbox value="3" /> 3
+        </label>
       </Checkbox.Group>
       <Divider />
       <h3>Disabled</h3>
       <Checkbox.Group defaultValue={'2'} disabled>
-        <label><Checkbox value="1"/> 1</label>
-        <label><Checkbox value="2"/> 2</label>
-        <label><Checkbox value="3"/> 3</label>
+        <label>
+          <Checkbox value="1" /> 1
+        </label>
+        <label>
+          <Checkbox value="2" /> 2
+        </label>
+        <label>
+          <Checkbox value="3" /> 3
+        </label>
       </Checkbox.Group>
-      <br/>
+      <br />
       <Checkbox.Group defaultValue={'2'} type="radio" disabled>
-        <label><Checkbox value="1"/> 1</label>
-        <label><Checkbox value="2"/> 2</label>
-        <label><Checkbox value="3"/> 3</label>
+        <label>
+          <Checkbox value="1" /> 1
+        </label>
+        <label>
+          <Checkbox value="2" /> 2
+        </label>
+        <label>
+          <Checkbox value="3" /> 3
+        </label>
       </Checkbox.Group>
     </div>
-  )
-}
+  );
+};
 ```
+
+## API
+
+### Checkbox
+
+<API id="Checkbox"></API>
+
+### Checkbox.Group
+
+<API id="CheckboxGroup"></API>

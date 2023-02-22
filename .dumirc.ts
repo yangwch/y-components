@@ -14,15 +14,15 @@ export default defineConfig({
     logo: false,
     name: 'y-components',
     nav: [
-      { title: 'Components', link: '/components/button' },
-      { title: 'Docs', link: '/api' },
+      { title: '组件', link: '/components/button' },
+      { title: '文档', link: '/api' },
     ],
   },
   apiParser: {},
   resolve: {
     entryFile: './src/index.ts',
     docDirs: ['docs'],
-    codeBlockMode: 'passive',
+    // codeBlockMode: 'passive',
   },
   // more config: https://d.umijs.org/config
 });

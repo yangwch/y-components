@@ -2,13 +2,35 @@ import React, { useCallback, useState } from 'react';
 import GroupContext from './GroupContext';
 
 interface CheckboxGroupProps {
+  /**
+   * @description 是否禁用
+   * @default false
+   */
   disabled?: boolean;
+  /**
+   * @description 所有Checkbox的name属性
+   */
   name?: string;
+  /**
+   * @description 默认选中项
+   * @type string[] | string
+   */
   defaultValue?: string[] | string;
+  /**
+   * @description 受控模式选中项
+   * @type string[] | string
+   */
   value?: string[] | string;
-  children: React.ReactNode;
+  /**
+   * @description 选中项变化回调
+   * @type function(checkedValue: string[] | string)
+   */
   onChange?: (checkedValue: string[] | string) => void;
+  /**
+   * @description Checkbox类型 'checkbox' | 'radio'
+   */
   type?: 'checkbox' | 'radio';
+  children: React.ReactNode;
 }
 
 const CheckboxGroup: React.FC<CheckboxGroupProps> = (props: CheckboxGroupProps) => {
