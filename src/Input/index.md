@@ -9,18 +9,14 @@ toc: content
 
 ```jsx
 import React from 'react';
-import { Input } from '@yangwch/y-components';
+import { Input, Space } from '@yangwch/y-components';
 
 export default () => {
   return (
-    <div>
-      <p>
-        <Input placeholder="请输入文字" size="large" style={{ width: '100%' }} prefix={'🚫'} />
-      </p>
-      <p>
-        <Input placeholder="disabled" disabled />
-      </p>
-    </div>
+    <Space direction="vertical" align="start">
+      <Input placeholder="请输入文字" size="large" style={{ width: '100%' }} prefix={'🚫'} />
+      <Input placeholder="disabled" disabled />
+    </Space>
   );
 };
 ```
@@ -51,3 +47,7 @@ export default () => {
   );
 };
 ```
+
+## API
+
+<API id="Input"></API>

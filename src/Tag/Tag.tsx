@@ -4,11 +4,31 @@ import { settings } from '../utils/global';
 import './style/index.less';
 
 interface TagProps extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   * 文字颜色
+   */
   color?: string;
+  /**
+   * 是否可见
+   */
   visible?: boolean;
+  /**
+   * 行内样式
+   * @type CSSProperties
+   */
   style?: CSSProperties;
+  /**
+   * 是否可关闭
+   */
   closable?: boolean;
+  /**
+   * 自定义关闭按钮
+   */
   closeIcon?: React.ReactNode;
+  /**
+   * 关闭时回调函数
+   * @type function(e)
+   */
   onClose?: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
 const tagCls = `${settings.prefix}-tag`;

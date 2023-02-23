@@ -53,7 +53,7 @@ export default () => {
 };
 ```
 
-## Size
+## 尺寸
 
 ```jsx
 import React from 'react';

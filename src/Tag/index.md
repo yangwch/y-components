@@ -4,6 +4,7 @@ type: 数据展示
 title: Tag
 toc: content
 ---
+
 ## Usage
 
 ```jsx
@@ -89,3 +90,7 @@ export default () => {
   );
 };
 ```
+
+## API
+
+<API id="Tag"></API>
