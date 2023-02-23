@@ -1,13 +1,13 @@
-import React, { CSSProperties, Fragment, useCallback, useMemo } from 'react';
 import { Rule, ValidateError } from 'async-validator';
 import classNames from 'classnames';
 import { isEqual } from 'lodash-es';
+import React, { CSSProperties, useCallback, useMemo } from 'react';
+import { Col, Row } from '../Grid';
+import { settings } from '../utils/global';
+import useMountCall from '../_utils/useMountCall';
 import { FormContextProps, useFormState } from './FormContext';
 import { FieldValue, FormInstance } from './interface';
-import useMountCall from '../_utils/useMountCall';
 import { execIsRequired, getFieldName, getFieldRule } from './utils/form';
-import { settings } from '../utils/global';
-import { Col, Row } from '../Grid';
 
 interface WithContextProps {
   name?: string;
@@ -58,16 +58,45 @@ type RenderChildren<Values = any> = (form: FormInstance<Values>) => React.ReactN
 
 type ChildrenType<Values = any> = RenderChildren<Values> | React.ReactNode;
 export interface FormItemProps {
+  /**
+   * 表单项标签
+   */
   label?: React.ReactNode;
+  /**
+   * 是否必填
+   * @default false
+   */
   required?: boolean;
+  /**
+   * 表单项 name 属性
+   */
   name: string;
+  /**
+   * 校验规则，参考{@link https://github.com/yiminghe/async-validator#rules}
+   * @type RuleItem | RuleItem[]
+   *
+   */
   rule?: Rule;
-  children?: ChildrenType;
+  /**
+   * 表单项的值
+   */
   value?: FieldValue;
+  /**
+   * 类名
+   */
   className?: string;
+  /**
+   * 行内样式
+   * @type CSSProperties
+   */
   style?: CSSProperties;
-  formContext: FormContextProps;
+  /**
+   * 错误提示
+   * @type ValidateError[]
+   */
   errors: ValidateError[];
+  formContext: FormContextProps;
+  children?: ChildrenType;
 }
 
 const formItemPrefix = `${settings.prefix}-form-item`;

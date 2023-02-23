@@ -9,8 +9,20 @@ import './style/index.less';
 type BaseFormProps = Omit<React.FormHTMLAttributes<HTMLFormElement>, 'children' | 'onSubmit'>;
 
 export interface FormProps<Values = any> extends BaseFormProps {
+  /**
+   * 是否纵向排列
+   * @default false
+   */
   vertical?: boolean;
+  /**
+   * 标签布局
+   * @type "left" | "right" | "center"
+   */
   labelAlign?: FormLabelAlign;
+  /**
+   * 标签栅格布局
+   * @type ColProps
+   */
   labelCol?: ColProps;
   wrapperCol?: ColProps;
   name?: string;

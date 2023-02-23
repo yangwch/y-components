@@ -4,6 +4,7 @@ type: 数据展示
 title: Form
 toc: content
 ---
+
 ## Basic Usage
 
 ```jsx
@@ -114,7 +115,7 @@ export default () => {
     e.preventDefault();
     form.validateFields().then(() => {
       setValues(values);
-    })
+    });
   };
   return (
     <div>
@@ -162,3 +163,15 @@ export default () => {
   );
 };
 ```
+
+## API
+
+### Form
+
+<API id="Form"></API>
+
+### Form.Item
+
+<API id="FormItem"></API>
+
+表单校验使用[async-validator](https://github.com/yiminghe/async-validator#rules)
