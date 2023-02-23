@@ -7,27 +7,45 @@ const prefix = settings.prefix;
 
 export type DividerType = 'horizontal' | 'vertical';
 
-export type Alignment = 'left' | 'center' | 'right'
+export type Alignment = 'left' | 'center' | 'right';
 
 interface DividerProps extends HTMLAttributes<HTMLDivElement> {
+  /**
+   * 分隔线类型
+   * @type "horizontal" | "vertical"
+   * @default horizontal
+   */
   type?: DividerType;
+  /**
+   * 文字横向定位方式
+   * @type "center" | "left" | "right"
+   */
+  align?: Alignment;
+  /**
+   * 类名
+   */
+  className?: string;
+  /**
+   * 自定义行内样式
+   * @type CSSProperties
+   */
+  style?: CSSProperties;
   children?: React.ReactNode;
-  align?: Alignment
 }
 function Divider(props: DividerProps) {
-  const { type, children, align, ...rest } = props;
+  const { type, children, align, className, style, ...rest } = props;
 
-  const direction: string = type || 'horizontal'
+  const direction: string = type || 'horizontal';
   const cls = classNames(
     `${prefix}-divider`,
     `${prefix}-divider-${direction}`,
     {
-      [`${prefix}-divider-${align}`]: !!align
-
-    }
+      [`${prefix}-divider-${align}`]: !!align,
+    },
+    className,
   );
   return (
-    <div className={cls} {...rest}>
+    <div className={cls} style={style} {...rest}>
       <span className="text">{children}</span>
     </div>
   );

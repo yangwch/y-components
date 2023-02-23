@@ -4,6 +4,7 @@ type: 数据展示
 title: Divider
 toc: content
 ---
+
 ## Divider
 
 ```jsx
@@ -88,3 +89,7 @@ export default () => {
   );
 };
 ```
+
+## API
+
+<API id="Divider"></API>
