@@ -7,9 +7,9 @@
 @motion-cls: ~'@{prefix}-motion';
 
 .@{dialog-root-cls} {
-  // display: none;
-  animation: all .3s;
   overflow: auto;
+  // display: none;
+  animation: all 0.3s;
 
   &.visible {
     display: block;
@@ -18,47 +18,47 @@
   .@{dialog-mask-cls} {
     position: fixed;
     top: 0;
-    inset-inline-end: 0;
     bottom: 0;
-    inset-inline-start: 0;
     z-index: 1000;
     height: 100%;
     background-color: @dialog-mask-background-color;
+    inset-inline-end: 0;
+    inset-inline-start: 0;
   }
 
   .@{dialog-content-cls} {
-    position: fixed;
-    inset-inline-end: 0;
+    position: absolute;
+    top: @dialog-content-top;
     z-index: 1000;
-    inset-inline-start: 0;
-    overflow: auto;
-    outline: 0;
-    -webkit-overflow-scrolling: touch;
     width: 520px;
     margin: 0 auto;
-    top: @dialog-content-top;
     padding-bottom: @dialog-content-top;
+    overflow: auto;
     border-radius: @dialog-content-border-radius;
+    outline: 0;
+    inset-inline-end: 0;
+    inset-inline-start: 0;
+    -webkit-overflow-scrolling: touch;
   }
 
   .@{dialog-cls} {
     &-close {
       position: absolute;
       top: 17px;
-      inset-inline-end: 17px;
       z-index: 1010;
       padding: 0;
-      color: rgba(0, 0, 0, .45);
+      color: rgba(0, 0, 0, 0.45);
       font-weight: 600;
       font-size: 20px;
       line-height: 1;
       text-decoration: none;
       background: 0 0;
-      border-radius: 4px;
       border: 0;
+      border-radius: 4px;
       outline: 0;
       cursor: pointer;
-      transition: color .2s, background-color .2s;
+      transition: color 0.2s, background-color 0.2s;
+      inset-inline-end: 17px;
     }
 
     &-title {
