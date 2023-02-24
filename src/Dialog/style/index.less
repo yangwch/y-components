@@ -4,6 +4,7 @@
 @dialog-mask-cls: ~'@{dialog-cls}-mask';
 @dialog-root-cls: ~'@{dialog-cls}-root';
 @dialog-content-cls: ~'@{dialog-cls}-content';
+@card-cls: ~'@{prefix}-card';
 @motion-cls: ~'@{prefix}-motion';
 
 .@{dialog-root-cls} {
@@ -34,11 +35,13 @@
     margin: 0 auto;
     padding-bottom: @dialog-content-top;
     overflow: auto;
-    border-radius: @dialog-content-border-radius;
     outline: 0;
     inset-inline-end: 0;
     inset-inline-start: 0;
     -webkit-overflow-scrolling: touch;
+    .@{card-cls} {
+      border-radius: @dialog-content-border-radius;
+    }
   }
 
   .@{dialog-cls} {

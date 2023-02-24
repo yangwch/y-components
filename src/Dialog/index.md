@@ -16,7 +16,12 @@ export default () => {
   return (
     <div>
       <Button onClick={() => setVisible(!visible)}>Open Dialog</Button>
-      <Dialog visible={visible} title="Basic Dialog" onClose={() => setVisible(false)}>
+      <Dialog
+        visible={visible}
+        title="Basic Dialog"
+        footer={null}
+        onClose={() => setVisible(false)}
+      >
         <p>Some contents...</p>
         <p>Some contents...</p>
         <p>Some contents...</p>
@@ -68,8 +73,10 @@ export default () => {
         title="Basic Dialog"
         onClose={() => setVisible(false)}
         footer={() => (
-          <div style={{ width: '100%', textAlign: 'center'}}>
-            <Button style={{ width: '100%'}} onClick={() => setVisible(false)}>~Amazing</Button>
+          <div style={{ width: '100%', textAlign: 'center' }}>
+            <Button style={{ width: '100%' }} onClick={() => setVisible(false)}>
+              ~Amazing
+            </Button>
           </div>
         )}
       >
