@@ -1,0 +1,11 @@
+@import '../../style/themes/index.less';
+
+@popup-prefix-cls: ~'@{prefix}-popup';
+
+.@{popup-prefix-cls} {
+  position: fixed;
+  display: none;
+  &-visible {
+    display: block;
+  }
+}
