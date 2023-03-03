@@ -1,4 +1,5 @@
-import React, { CSSProperties, ReactNode } from 'react';
+import React, { CSSProperties, ReactNode, useEffect } from 'react';
+import { CSSTransition } from 'react-transition-group';
 import { GetContainer } from './interface';
 import Portal from './Portal';
 
@@ -9,15 +10,52 @@ interface Props {
   open?: boolean;
   autoDestroy?: boolean;
   getPopupContainer?: GetContainer;
+  transitionName?: string;
+  transitionTimeout?: number;
 }
 
+interface MotionProps {
+  children?: ReactNode;
+  open: boolean;
+  transitionName?: string;
+  transitionTimeout?: number;
+}
+const CSSMotion = React.forwardRef<HTMLElement, MotionProps>(function (props, ref) {
+  const { children, open: customOpen, transitionName, transitionTimeout = 200 } = props;
+  const [open, setOpen] = React.useState(false);
+  useEffect(() => {
+    setOpen(customOpen);
+  }, [customOpen]);
+  return (
+    <CSSTransition nodeRef={ref} in={open} timeout={transitionTimeout} classNames={transitionName}>
+      {children}
+    </CSSTransition>
+  );
+});
+
 const Overlay = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
-  const { open, children, style, className, autoDestroy, getPopupContainer } = props;
+  const {
+    open,
+    children,
+    style,
+    className,
+    autoDestroy,
+    getPopupContainer,
+    transitionName = 'fade',
+    transitionTimeout,
+  } = props;
   return (
     <Portal open={open} autoDestroy={autoDestroy} getContainer={getPopupContainer}>
-      <div style={style} ref={ref} className={className}>
-        {children}
-      </div>
+      <CSSMotion
+        open={!!open}
+        ref={ref}
+        transitionName={transitionName}
+        transitionTimeout={transitionName ? transitionTimeout : 0}
+      >
+        <div style={style} ref={ref} className={className}>
+          {children}
+        </div>
+      </CSSMotion>
     </Portal>
   );
 });

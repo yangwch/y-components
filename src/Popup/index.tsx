@@ -1,7 +1,14 @@
 import classNames from 'classnames';
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement, useEffect, useRef, useState } from 'react';
 import { settings } from '../utils/global';
-import { OFFSETX, OFFSETY } from './constant';
+import useForceUpdate from '../_utils/useForceUpate';
+import {
+  OFFSETX,
+  OFFSETY,
+  TRANSITION_DEFAULT_NAME,
+  TRANSITION_DEFAULT_TIMEOUT,
+  TRIGGER_DEFAULT_VALUE,
+} from './constant';
 import usePosition from './hooks/usePosition';
 import useTriggerRef from './hooks/useTriggerRef';
 import { PopupProps } from './interface';
@@ -24,7 +31,9 @@ const Popup = React.forwardRef<HTMLElement, PopupProps>((props: PopupProps, ref)
     className: overlayClassName,
     offsetX = OFFSETX,
     offsetY = OFFSETY,
-    trigger = ['hover'],
+    trigger = TRIGGER_DEFAULT_VALUE,
+    transitionName = TRANSITION_DEFAULT_NAME,
+    transitionTimeout = TRANSITION_DEFAULT_TIMEOUT,
   } = props;
 
   const [open, setOpen] = useState<boolean>(() => {
@@ -34,11 +43,19 @@ const Popup = React.forwardRef<HTMLElement, PopupProps>((props: PopupProps, ref)
   });
 
   const { setRef, ref: triggerRef } = useTriggerRef(ref);
-  const [overlayDom, setOverlayDom] = useState<HTMLDivElement | null>(null);
+  const overlayRef = useRef<HTMLDivElement | null>(null);
+  const forceUpdate = useForceUpdate();
+
+  // 不强制渲染时，打开后，强制重新render一次，计算位置
+  useEffect(() => {
+    if (open && overlay && !forceRender) {
+      forceUpdate();
+    }
+  }, [open, overlay, forceRender]);
 
   const { overlayStyle } = usePosition({
     trigger: triggerRef.current,
-    overlay: overlayDom,
+    overlay: overlayRef.current,
     open,
     placement,
     getPopupContainer,
@@ -80,11 +97,13 @@ const Popup = React.forwardRef<HTMLElement, PopupProps>((props: PopupProps, ref)
     <>
       <Overlay
         open={open}
-        ref={(el: HTMLDivElement) => setOverlayDom(el)}
+        ref={overlayRef}
         className={overlayCls}
         autoDestroy={!forceRender}
         getPopupContainer={getPopupContainer}
         style={{ ...overlayStyle, ...customOverlayStyle }}
+        transitionName={transitionName}
+        transitionTimeout={transitionTimeout}
       >
         {overlay}
       </Overlay>
