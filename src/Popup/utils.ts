@@ -51,22 +51,39 @@ export const calcPopupPosition = (
   switch (placement) {
     case 'top':
       left = triggerBox.x + triggerBox.width / 2 - overlayBox.width / 2;
-      top = triggerBox.y - overlayBox.height - offsetY;
+      top = triggerBox.y - overlayBox.height;
       break;
     default:
     case 'bottom':
       left = triggerBox.x + triggerBox.width / 2 - overlayBox.width / 2;
-      top = triggerBox.y + triggerBox.height + offsetY;
+      top = triggerBox.y + triggerBox.height;
       break;
     case 'left':
-      left = triggerBox.x - overlayBox.width - offsetX;
+      left = triggerBox.x - overlayBox.width;
       top = triggerBox.y + triggerBox.height / 2 - overlayBox.height / 2;
       break;
     case 'right':
-      left = triggerBox.x + triggerBox.width + offsetX;
+      left = triggerBox.x + triggerBox.width;
       top = triggerBox.y + triggerBox.height / 2 - overlayBox.height / 2;
+      break;
+    case 'topLeft':
+      left = triggerBox.x;
+      top = triggerBox.y - overlayBox.height;
+      break;
+    case 'topRight':
+      left = triggerBox.x + triggerBox.width - overlayBox.width;
+      top = triggerBox.y - overlayBox.height;
+      break;
+    case 'bottomLeft':
+      left = triggerBox.x;
+      top = triggerBox.y + triggerBox.height;
+      break;
+    case 'bottomRight':
+      left = triggerBox.x + triggerBox.width - overlayBox.width;
+      top = triggerBox.y + triggerBox.height;
+      break;
   }
-  return { left, top };
+  return { left: left + offsetX, top: top + offsetY };
 };
 
 export const getWrappedChildProps = (

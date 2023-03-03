@@ -1,7 +1,7 @@
 import { TriggerEvent } from './interface';
 
-export const OFFSETX = 2;
-export const OFFSETY = 2;
+export const OFFSETX = 0;
+export const OFFSETY = 0;
 
 export const TRIGGER_DEFAULT_VALUE: TriggerEvent[] = ['hover'];
 
