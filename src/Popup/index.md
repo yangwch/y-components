@@ -61,6 +61,40 @@ export default () => {
 };
 ```
 
+## 自动调整
+
+```jsx
+import React from 'react';
+import { Popup, Space, Button } from '@yangwch/y-components';
+
+export default () => {
+  return (
+    <div>
+      <Popup
+        placement="top"
+        trigger={['click']}
+        style={{ border: '1px solid', backgroundColor: 'lightgreen', padding: '0 10px' }}
+        overlay={
+          <div>
+            <p> this is the content</p>
+            <p> this is the content</p>
+            <p> this is the content</p>
+            <p> this is the content</p>
+          </div>
+        }
+        autoAdjustPlacements={[
+          {
+            placement: 'bottom',
+          },
+        ]}
+      >
+        <Button>Scroll To The Top</Button>
+      </Popup>
+    </div>
+  );
+};
+```
+
 ## API
 
 <API id="Popup"></API>

@@ -1,5 +1,6 @@
 import React, { CSSProperties } from 'react';
-import { GetContainer, Placement, TriggerEvent } from './interface';
+import { GetContainer } from '../_utils/Portal';
+import { AdjustConfig, Placement, TriggerEvent } from './interface';
 
 export const getContainerElement = (containerGetter?: GetContainer): HTMLElement | null => {
   if (containerGetter) {
@@ -35,6 +36,23 @@ export const getElementRect = (el: HTMLElement, container: HTMLElement): RectBox
   };
 };
 
+function calcOverlayIsOverflow(
+  position: { left: number; top: number },
+  overlayBox: RectBox,
+): boolean {
+  if (position.left < 0 || position.top < 0) {
+    return true;
+  }
+  const { clientWidth, clientHeight } = document.body;
+  if (position.left + overlayBox.width > clientWidth) {
+    return true;
+  }
+  if (position.top + overlayBox.height > clientHeight) {
+    return true;
+  }
+  return false;
+}
+
 export const calcPopupPosition = (
   placement: Placement,
   container: HTMLElement,
@@ -42,6 +60,7 @@ export const calcPopupPosition = (
   overlay: HTMLElement,
   offsetX: number,
   offsetY: number,
+  autoAjustPlacements?: AdjustConfig[],
 ): CSSProperties => {
   if (!trigger || !container || !overlay) return {};
   const triggerBox = getElementRect(trigger, container);
@@ -83,7 +102,22 @@ export const calcPopupPosition = (
       top = triggerBox.y + triggerBox.height;
       break;
   }
-  return { left: left + offsetX, top: top + offsetY };
+  left += offsetX;
+  top += offsetY;
+  if (autoAjustPlacements && calcOverlayIsOverflow({ left, top }, overlayBox)) {
+    for (let i = 0; i < autoAjustPlacements.length; i++) {
+      const config = autoAjustPlacements[i];
+      const { placement: p, offsetX: ox = 0, offsetY: oy = 0 } = config;
+      const pos = calcPopupPosition(p, container, trigger, overlay, ox, oy);
+      if (pos && typeof pos.left === 'number' && typeof pos.top === 'number') {
+        const isOverflow = calcOverlayIsOverflow({ left: pos.left, top: pos.top }, overlayBox);
+        if (!isOverflow) {
+          return pos;
+        }
+      }
+    }
+  }
+  return { left, top };
 };
 
 export const getWrappedChildProps = (

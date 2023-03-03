@@ -34,7 +34,7 @@ const Popup = React.forwardRef<HTMLElement, PopupProps>((props: PopupProps, ref)
     trigger = TRIGGER_DEFAULT_VALUE,
     transitionName = TRANSITION_DEFAULT_NAME,
     transitionTimeout = TRANSITION_DEFAULT_TIMEOUT,
-    autoAjustPlacements,
+    autoAdjustPlacements,
   } = props;
 
   const [open, setOpen] = useState<boolean>(() => {
@@ -49,10 +49,10 @@ const Popup = React.forwardRef<HTMLElement, PopupProps>((props: PopupProps, ref)
 
   // 不强制渲染时，打开后，强制重新render一次，计算位置
   useEffect(() => {
-    if (open && overlay && !forceRender) {
+    if (open && forceRender === false) {
       forceUpdate();
     }
-  }, [open, overlay, forceRender]);
+  }, [open, forceRender]);
 
   const { overlayStyle } = usePosition({
     trigger: triggerRef.current,
@@ -62,6 +62,7 @@ const Popup = React.forwardRef<HTMLElement, PopupProps>((props: PopupProps, ref)
     getPopupContainer,
     offsetX,
     offsetY,
+    autoAdjustPlacements,
   });
 
   if (!children) return null;

@@ -77,7 +77,7 @@ export interface PopupProps {
    * 示例：[{ placement: 'bottom', offsetX: 0, offsetY: 10 }]
    * @type AdjustConfig[]
    */
-  autoAjustPlacements?: AdjustConfig[];
+  autoAdjustPlacements?: AdjustConfig[];
   /**
    * 触发方式，可选"click" | "hover" | "focus"
    * @type Array
