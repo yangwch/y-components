@@ -4,6 +4,7 @@ type: 数据展示
 title: Grid
 toc: content
 ---
+
 ## Basic Grid
 
 ```jsx
@@ -12,9 +13,10 @@ import React from 'react';
 import { Row, Col } from '@yangwch/y-components';
 
 const colStyle = {
-  border: '1px solid blue',
+  // border: '1px solid blue',
   padding: '5px 0',
-  background: 'rgb(119 145 240)'
+  background: 'rgb(119 145 240)',
+  marginTop: 10,
 };
 export default () => {
   return (
@@ -54,7 +56,7 @@ import { Row, Col } from '@yangwch/y-components';
 const colStyle = {
   border: '1px solid blue',
   padding: '5px 0',
-  background: 'rgb(119 145 240)'
+  background: 'rgb(119 145 240)',
 };
 export default () => {
   return (
@@ -78,17 +80,17 @@ export default () => {
 ```jsx
 import React from 'react';
 
-import { Row, Col } from '@yangwch/y-components';
+import { Row, Col, Divider } from '@yangwch/y-components';
 
 const colStyle = {
   border: '1px solid blue',
   padding: '5px 0',
-  background: 'rgb(119 145 240)'
+  background: 'rgb(119 145 240)',
 };
 export default () => {
   return (
     <div>
-      -- Align Top -- Justify Center --
+      <Divider> Align Top & Justify Center</Divider>
       <Row align="top" justify="center">
         <Col span={4}>
           <div style={{ ...colStyle, height: 50 }}></div>
@@ -102,7 +104,7 @@ export default () => {
           <div style={{ ...colStyle, height: 50 }}></div>
         </Col>
       </Row>
-      -- Align Middle -- Justify space-around --
+      <Divider> Align Middle & Justify space-around </Divider>
       <Row align="middle" justify="space-around">
         <Col span={4}>
           <div style={{ ...colStyle, height: 50 }}></div>
@@ -116,7 +118,7 @@ export default () => {
           <div style={{ ...colStyle, height: 50 }}></div>
         </Col>
       </Row>
-      -- Align Bottom -- Justify space-between --
+      <Divider> Align Bottom & Justify space-between </Divider>
       <Row align="bottom" justify="space-between">
         <Col span={4}>
           <div style={{ ...colStyle, height: 50 }}></div>
@@ -140,7 +142,7 @@ export default () => {
 ```jsx
 import React from 'react';
 
-import { Row, Col } from '@yangwch/y-components';
+import { Row, Col, Divider } from '@yangwch/y-components';
 
 const colStyle = {
   background: 'rgb(119 145 240)',
@@ -148,46 +150,81 @@ const colStyle = {
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  color: '#fff'
+  color: '#fff',
 };
 
-const ColumnContent = () => (<div style={colStyle}>Column</div>)
+const ColumnContent = () => <div style={colStyle}>Column</div>;
 
 export default () => {
   return (
     <div>
-      Gutter
+      <Divider>Gutter</Divider>
       <Row gutter={[16, 24]}>
-        <Col span={6}><ColumnContent /></Col>
-        <Col span={6}><ColumnContent /></Col>
-        <Col span={6}><ColumnContent /></Col>
-        <Col span={6}><ColumnContent /></Col>
+        <Col span={6}>
+          <ColumnContent />
+        </Col>
+        <Col span={6}>
+          <ColumnContent />
+        </Col>
+        <Col span={6}>
+          <ColumnContent />
+        </Col>
+        <Col span={6}>
+          <ColumnContent />
+        </Col>
 
-        <Col span={6}><ColumnContent /></Col>
-        <Col span={6}><ColumnContent /></Col>
-        <Col span={6}><ColumnContent /></Col>
-        <Col span={6}><ColumnContent /></Col>
+        <Col span={6}>
+          <ColumnContent />
+        </Col>
+        <Col span={6}>
+          <ColumnContent />
+        </Col>
+        <Col span={6}>
+          <ColumnContent />
+        </Col>
+        <Col span={6}>
+          <ColumnContent />
+        </Col>
 
-        <Col span={6}><ColumnContent /></Col>
-        <Col span={6}><ColumnContent /></Col>
-        <Col span={6}><ColumnContent /></Col>
-        <Col span={6}><ColumnContent /></Col>
+        <Col span={6}>
+          <ColumnContent />
+        </Col>
+        <Col span={6}>
+          <ColumnContent />
+        </Col>
+        <Col span={6}>
+          <ColumnContent />
+        </Col>
+        <Col span={6}>
+          <ColumnContent />
+        </Col>
       </Row>
-      Another Row
+      <Divider>Another Row</Divider>
       <Row gutter={[16, 24]}>
-        <Col span={6}><ColumnContent /></Col>
-        <Col span={6}><ColumnContent /></Col>
-        <Col span={6}><ColumnContent /></Col>
-        <Col span={6}><ColumnContent /></Col>
+        <Col span={6}>
+          <ColumnContent />
+        </Col>
+        <Col span={6}>
+          <ColumnContent />
+        </Col>
+        <Col span={6}>
+          <ColumnContent />
+        </Col>
+        <Col span={6}>
+          <ColumnContent />
+        </Col>
       </Row>
     </div>
-  )
-}
+  );
+};
 ```
 
 ## API
+
 ### Row
+
 <API id="Row"></API>
 
 ### Col
+
 <API id="Col"></API>

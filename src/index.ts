@@ -4,7 +4,7 @@ export { Checkbox, CheckboxGroup } from './Checkbox';
 export { default as Dialog } from './Dialog';
 export { default as Divider } from './Divider';
 export * from './Form';
-export * from './Grid';
+export { Col, Row } from './Grid';
 export { default as Input } from './Input';
 export * from './Popup';
 export { default as Popup } from './Popup';
