@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import { settings } from '../utils/global';
+import { settings } from '../_utils/global';
 import { sizeClassNameMap, SizeType } from '../_utils/size';
 
 export const inputPrefix = `${settings.prefix}-input`;

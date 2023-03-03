@@ -1,16 +1,16 @@
-import React, { RefObject } from 'react';
 import classNames from 'classnames';
-import { settings } from '../utils/global';
-import { tuple } from '../_utils/type';
-import './style/index.less';
+import React from 'react';
+import { settings } from '../_utils/global';
 import { sizeClassNameMap, SizeType } from '../_utils/size';
+import { tuple } from '../_utils/type';
 import ButtonGroup from './ButtonGroup';
+import './style/index.less';
 
 const cls_prefix = settings.prefix;
 
 const ButtonTypes = tuple('default', 'primary', 'ghost', 'dashed', 'link', 'text');
 
-export type ButtonType = typeof ButtonTypes[number];
+export type ButtonType = (typeof ButtonTypes)[number];
 
 interface BaseButtonProps {
   /**
@@ -38,7 +38,7 @@ interface BaseButtonProps {
   className?: string;
 }
 const ButtonHTMLTypes = tuple('submit', 'button', 'reset');
-export type ButtonHTMLType = typeof ButtonHTMLTypes[number];
+export type ButtonHTMLType = (typeof ButtonHTMLTypes)[number];
 
 export type NativeButtonProps = {
   htmlType?: ButtonHTMLType;

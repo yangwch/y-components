@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import React, { CSSProperties, HTMLAttributes } from 'react';
-import { settings } from '../utils/global';
+import { settings } from '../_utils/global';
 import CardHeader from './CardHeader';
 import './style/index.less';
 

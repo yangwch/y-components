@@ -1,6 +1,6 @@
 import { CSSProperties, ReactNode, SyntheticEvent } from 'react';
 import { ButtonProps } from '../Button';
-import { MotionStyles } from '../utils/Motion';
+import { MotionStyles } from '../_utils/Motion';
 
 export type GetContainer = string | HTMLElement | (() => HTMLElement);
 

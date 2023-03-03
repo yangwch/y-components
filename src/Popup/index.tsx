@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import React, { ReactElement, useEffect, useRef, useState } from 'react';
-import { settings } from '../utils/global';
+import { settings } from '../_utils/global';
 import useForceUpdate from '../_utils/useForceUpate';
 import {
   OFFSETX,
@@ -34,6 +34,7 @@ const Popup = React.forwardRef<HTMLElement, PopupProps>((props: PopupProps, ref)
     trigger = TRIGGER_DEFAULT_VALUE,
     transitionName = TRANSITION_DEFAULT_NAME,
     transitionTimeout = TRANSITION_DEFAULT_TIMEOUT,
+    autoAjustPlacements,
   } = props;
 
   const [open, setOpen] = useState<boolean>(() => {

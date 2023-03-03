@@ -1,13 +1,19 @@
 import classNames from 'classnames';
 import React, { CSSProperties, HTMLAttributes } from 'react';
-import { settings } from '../utils/global';
+import { settings } from '../_utils/global';
 import { RowContext } from './RowContext';
 import './style/index.less';
 
 const cls_prefix = settings.prefix;
 
 type Alignment = 'top' | 'middle' | 'bottom';
-export type Justify = 'start' | 'end' | 'center' | 'space-around' | 'space-between' | 'space-evenly';
+export type Justify =
+  | 'start'
+  | 'end'
+  | 'center'
+  | 'space-around'
+  | 'space-between'
+  | 'space-evenly';
 
 export interface RowProps extends HTMLAttributes<HTMLDivElement> {
   /**

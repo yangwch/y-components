@@ -1,8 +1,8 @@
 import classNames from 'classnames';
 import React, { CSSProperties, useCallback, useEffect, useMemo, useState } from 'react';
-import { settings } from '../../utils/global';
-import Motion from '../../utils/Motion';
-import Portal from '../../utils/Portal';
+import { settings } from '../../_utils/global';
+import Motion from '../../_utils/Motion';
+import Portal from '../../_utils/Portal';
 import { DialogProps } from '../interface';
 import '../style/index.less';
 import Content from './Content';

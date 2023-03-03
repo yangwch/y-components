@@ -60,3 +60,7 @@ export default () => {
   );
 };
 ```
+
+## API
+
+<API id="Popup"></API>

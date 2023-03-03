@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import React, { CSSProperties, useState } from 'react';
-import { settings } from '../utils/global';
+import { settings } from '../_utils/global';
 import './style/index.less';
 
 interface TagProps extends React.HTMLAttributes<HTMLDivElement> {

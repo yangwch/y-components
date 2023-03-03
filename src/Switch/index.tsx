@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import React, { ChangeEvent, createRef, HTMLAttributes, ReactNode, useState } from 'react';
-import { settings } from '../utils/global';
+import { settings } from '../_utils/global';
 import { sizeClassNameMap, SizeType } from '../_utils/size';
 import './style/index.less';
 
@@ -72,14 +72,14 @@ function InternalSwitch(props: SwitchProps, ref: React.ForwardedRef<HTMLInputEle
     return false;
   });
 
-  const sizeTypeStr = sizeClassNameMap[size || 'middle']
+  const sizeTypeStr = sizeClassNameMap[size || 'middle'];
 
   const clsNames = classNames(
     switchCls,
     {
       [`${switchCls}-checked`]: checked,
       [`${switchCls}-${sizeTypeStr}`]: !!sizeTypeStr,
-      [`${switchCls}-disabled`]: !!disabled
+      [`${switchCls}-disabled`]: !!disabled,
     },
     className,
   );
@@ -123,4 +123,3 @@ function InternalSwitch(props: SwitchProps, ref: React.ForwardedRef<HTMLInputEle
 }
 
 export const Switch = React.forwardRef(InternalSwitch);
-

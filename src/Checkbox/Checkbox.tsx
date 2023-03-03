@@ -8,7 +8,7 @@ import React, {
   useEffect,
   useState,
 } from 'react';
-import { settings } from '../utils/global';
+import { settings } from '../_utils/global';
 import CheckboxGroup from './Group';
 import GroupContext from './GroupContext';
 import './style/index.less';

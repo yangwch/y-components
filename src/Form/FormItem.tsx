@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { isEqual } from 'lodash-es';
 import React, { CSSProperties, useCallback, useMemo } from 'react';
 import { Col, Row } from '../Grid';
-import { settings } from '../utils/global';
+import { settings } from '../_utils/global';
 import useMountCall from '../_utils/useMountCall';
 import { FormContextProps, useFormState } from './FormContext';
 import { FieldValue, FormInstance } from './interface';

@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import React, { CSSProperties } from 'react';
-import { settings } from '../utils/global';
+import { settings } from '../_utils/global';
 import { sizeClassNameMap, SizeType } from '../_utils/size';
 import SizeContext from './SizeContext';
 
@@ -18,19 +18,20 @@ interface ButtonGroupProps {
   /**
    * @description 类名
    */
-  className?: string
+  className?: string;
 }
-const groupCls = `${settings.prefix}-btn-group`
-
+const groupCls = `${settings.prefix}-btn-group`;
 
 function ButtonGroup(props: ButtonGroupProps) {
   const { size: customizeSize, children, className, style } = props;
   const classes = classNames(groupCls, className, {
-    [`${groupCls}-${customizeSize}`]: `${customizeSize}` in sizeClassNameMap
-  })
+    [`${groupCls}-${customizeSize}`]: `${customizeSize}` in sizeClassNameMap,
+  });
   return (
     <SizeContext.Provider value={customizeSize}>
-      <div className={classes} style={style}>{children}</div>
+      <div className={classes} style={style}>
+        {children}
+      </div>
     </SizeContext.Provider>
   );
 }
