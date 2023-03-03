@@ -1,7 +1,7 @@
 import React, { CSSProperties, ReactNode, useEffect } from 'react';
 import { CSSTransition } from 'react-transition-group';
+import Portal from '../utils/Portal';
 import { GetContainer } from './interface';
-import Portal from './Portal';
 
 interface Props {
   children?: ReactNode;

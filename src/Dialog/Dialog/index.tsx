@@ -1,14 +1,14 @@
-import React, { CSSProperties, useCallback, useEffect, useMemo, useState } from 'react';
-import { DialogProps } from '../interface';
-import Portal from '../Portal';
-import { settings } from '../../utils/global';
 import classNames from 'classnames';
-import Mask from './Mask';
-import Wrap from './Wrap';
+import React, { CSSProperties, useCallback, useEffect, useMemo, useState } from 'react';
+import { settings } from '../../utils/global';
+import Motion from '../../utils/Motion';
+import Portal from '../../utils/Portal';
+import { DialogProps } from '../interface';
 import '../style/index.less';
 import Content from './Content';
-import Motion from '../../utils/Motion';
 import Footer from './Footer';
+import Mask from './Mask';
+import Wrap from './Wrap';
 
 const dialogPrefix = `${settings.prefix}-dialog`;
 

@@ -1,13 +1,5 @@
 import { CSSProperties, ReactElement, ReactNode } from 'react';
-
-export type GetContainer = string | HTMLElement | (() => HTMLElement);
-
-export interface PortalProps {
-  children?: any;
-  getContainer?: GetContainer;
-  open?: boolean;
-  autoDestroy?: boolean;
-}
+import { GetContainer } from '../utils/Portal';
 
 export type Placement =
   | 'left'
