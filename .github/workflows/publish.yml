@@ -1,4 +1,4 @@
-name: Deploy static content to Pages
+name: Build and Publish to NPM
 
 on:
   # Runs on pushes tags
