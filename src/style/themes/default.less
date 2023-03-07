@@ -17,7 +17,6 @@
 @font-size-lg: @font-size-base + 2px;
 @font-size-sm: 12px;
 
-
 // vertical paddings
 @padding-lg: 24px; // containers
 @padding-md: 16px; // small containers and buttons
@@ -32,13 +31,11 @@
 
 @line-height-base: 1.5715;
 
-
 // Outline
 @outline-blur-size: 0;
 @outline-width: 2px;
 @outline-color: @primary-color; // No use anymore
 @outline-fade: 20%;
-
 
 // Animation
 @ease-base-out: cubic-bezier(0.7, 0.3, 0.1, 1);
@@ -60,14 +57,13 @@
 @background-color-base: hsv(0, 0, 96%); // Default grey background color
 
 // >>> Error
-@error-color: color("@{red-5}");
+@error-color: color('@{red-5}');
 
 @error-color-hover: colorPalette('@{error-color}', 5);
 @error-color-active: colorPalette('@{error-color}', 7);
 @error-color-outline: fade(@error-color, 20%);
 @error-color-deprecated-bg: colorPalette('@{error-color}', 1);
 @error-color-deprecated-border: colorPalette('@{error-color}', 3);
-
 
 // Disabled states
 @disabled-color: fade(#000, 25%);
@@ -235,9 +231,9 @@
 @switch-boarder-radius: 12px;
 @switch-border: @switch-border-size solid rgba(46, 50, 56, 0.13);
 @switch-focus-outline: 2px solid rgba(152, 205, 253, 1);
-@switch-transition: background-color .2s @ease-base-in 0;
+@switch-transition: background-color 0.2s @ease-base-in 0;
 
-@switch-knob-box-shadow: 0 4px 6px rgba(0, 0, 0, .1), 0 0 1px rgba(0, 0, 0, .3);
+@switch-knob-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 0 1px rgba(0, 0, 0, 0.3);
 @switch-knob-bg: @white;
 @switch-knob-size: 18px;
 @switch-knob-border-radius: 9px;
@@ -248,3 +244,12 @@
 @switch-checked-hover-bg: @primary-color-hover;
 @switch-text-color: @white;
 @switch-unchecked-text-color: @text-color;
+
+// tooltip
+@tooltip-background: fade(@black, 85%);
+@tooltip-color: @white;
+@tooltip-font-size: @font-size-base;
+@tooltip-border-radius: @border-radius-base * 2;
+@tooltip-padding: 6px 8px;
+@tooltip-offset: 2px;
+@tooltip-arrow-width: 6px;
