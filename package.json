@@ -23,7 +23,8 @@
     "test:coverage": "umi-test --coverage",
     "prepublishOnly": "npm run build",
     "prepare": "dumi setup",
-    "build:css": "webpack --config config/webpack.config.prod.js"
+    "build:css": "webpack --config config/webpack.config.prod.js",
+    "version": "node version --VERSION patch"
   },
   "files": [
     "dist"
