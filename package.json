@@ -1,6 +1,6 @@
 {
   "name": "@yangwch/y-components",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "author": {
     "email": "fire_snow@163.com",
     "name": "yangwch",
@@ -23,8 +23,7 @@
     "test:coverage": "umi-test --coverage",
     "prepublishOnly": "npm run build",
     "prepare": "dumi setup",
-    "build:css": "webpack --config config/webpack.config.prod.js",
-    "version": "node version --VERSION patch"
+    "build:css": "webpack --config config/webpack.config.prod.js"
   },
   "files": [
     "dist"
