@@ -1,8 +1,8 @@
-import React from 'react';
 import { render } from '@testing-library/react';
+import React from 'react';
 import { mountTest } from '../../test/shared/mountTest';
 
-import Button from './index';
+import { Button } from './index';
 
 describe('Button', () => {
   mountTest(() => <Button />);

@@ -2,7 +2,7 @@ import { render } from '@testing-library/react';
 import React from 'react';
 import { mountTest } from '../../test/shared/mountTest';
 
-import Switch from './index';
+import { Switch } from './index';
 
 describe('Switch', () => {
   mountTest(() => <Switch />);
