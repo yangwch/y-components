@@ -11,6 +11,7 @@ toc: content
 import React from 'react';
 import { Tooltip, Space, Button, Switch, Divider } from '@yangwch/y-components';
 
+const placeList = ['topLeft', 'topRight', 'bottom', 'bottomLeft', 'bottomRight', 'left', 'right'];
 export default () => {
   const [arrow, setArrow] = React.useState(true);
   const content = (
@@ -26,35 +27,11 @@ export default () => {
       </Space>
       <Divider />
       <Space size={50} wrap>
-        <Tooltip trigger={['click']} content={content} arrow={arrow}>
-          <Button>Top</Button>
-        </Tooltip>
-        <Tooltip placement="topLeft" content={content} arrow={arrow}>
-          <Button>TopLeft</Button>
-        </Tooltip>
-        <Tooltip placement="topRight" content={content} arrow={arrow}>
-          <Button>TopRight</Button>
-        </Tooltip>
-
-        <Tooltip placement="bottom" content={content} arrow={arrow}>
-          <Button>Bottom</Button>
-        </Tooltip>
-
-        <Tooltip placement="bottomLeft" content={content} arrow={arrow}>
-          <Button>BottomLeft</Button>
-        </Tooltip>
-
-        <Tooltip placement="bottomRight" content={content} arrow={arrow}>
-          <Button>BottomRight</Button>
-        </Tooltip>
-
-        <Tooltip placement="left" trigger={['click']} content={content} arrow={arrow}>
-          <Button>Left</Button>
-        </Tooltip>
-
-        <Tooltip placement="right" trigger={['click']} content={content} arrow={arrow}>
-          <Button>Right</Button>
-        </Tooltip>
+        {placeList.map((placement) => (
+          <Tooltip content={content} placement={placement} arrow={arrow}>
+            <Button>{placement}</Button>
+          </Tooltip>
+        ))}
       </Space>
     </div>
   );

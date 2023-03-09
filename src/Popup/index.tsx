@@ -35,6 +35,7 @@ const Popup = React.forwardRef<HTMLElement, PopupProps>((props: PopupProps, ref)
     transitionName = TRANSITION_DEFAULT_NAME,
     transitionTimeout = TRANSITION_DEFAULT_TIMEOUT,
     autoAdjustPlacements,
+    onPlacementChanged,
   } = props;
 
   const [open, setOpen] = useState<boolean>(() => {
@@ -63,6 +64,7 @@ const Popup = React.forwardRef<HTMLElement, PopupProps>((props: PopupProps, ref)
     offsetX,
     offsetY,
     autoAdjustPlacements,
+    onPlacementChanged,
   });
 
   if (!children) return null;

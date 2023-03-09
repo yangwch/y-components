@@ -93,4 +93,9 @@ export interface PopupProps {
    * @default 200
    */
   transitionTimeout?: number;
+  /**
+   * 重新定位后回调
+   * @param placement
+   */
+  onPlacementChanged?: (placement: Placement) => void;
 }

@@ -12,6 +12,7 @@ interface Props {
   offsetX?: number;
   offsetY?: number;
   autoAdjustPlacements?: AdjustConfig[];
+  onPlacementChanged?: (placement: Placement) => void;
 }
 function usePosition(props: Props) {
   const {
@@ -23,14 +24,20 @@ function usePosition(props: Props) {
     offsetX = 0,
     offsetY = 0,
     autoAdjustPlacements,
+    onPlacementChanged,
   } = props;
   const [overlayStyle, setOverlayStyle] = useState<CSSProperties>({});
   // dom
   const container = getContainerElement(getPopupContainer);
+  const placementRef = useRef<Placement>(placement);
 
   useLayoutEffect(() => {
     if (!open || !trigger || !overlay || !container) return;
-    const { left, top } = calcPopupPosition(
+    const {
+      left,
+      top,
+      placement: nplacement,
+    } = calcPopupPosition(
       placement,
       container,
       trigger,
@@ -39,6 +46,11 @@ function usePosition(props: Props) {
       offsetY,
       autoAdjustPlacements,
     );
+
+    if (nplacement !== placementRef.current && onPlacementChanged) {
+      onPlacementChanged(nplacement);
+    }
+    placementRef.current = nplacement;
 
     if (overlayStyle.left !== left || overlayStyle.top !== top) {
       setOverlayStyle({ left, top });
@@ -53,6 +65,7 @@ function usePosition(props: Props) {
     offsetX,
     offsetY,
     autoAdjustPlacements,
+    onPlacementChanged,
   ]);
   const propsRef = useRef(props);
   if (propsRef.current !== props) {
@@ -79,7 +92,11 @@ function usePosition(props: Props) {
         const container = getContainerElement(getPopupContainer);
         if (!open) return;
         if (!container || !trigger || !overlay) return;
-        const { left, top } = calcPopupPosition(
+        const {
+          left,
+          top,
+          placement: nplacement,
+        } = calcPopupPosition(
           placement,
           container,
           trigger,
@@ -89,6 +106,10 @@ function usePosition(props: Props) {
           autoAdjustPlacements,
         );
 
+        if (nplacement !== placementRef.current && onPlacementChanged) {
+          onPlacementChanged(nplacement);
+        }
+        placementRef.current = nplacement;
         setOverlayStyle({ left, top });
       }, 10);
     }

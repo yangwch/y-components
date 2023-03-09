@@ -1,4 +1,4 @@
-import React, { CSSProperties } from 'react';
+import React from 'react';
 import { GetContainer } from '../_utils/Portal';
 import { AdjustConfig, Placement, TriggerEvent } from './interface';
 
@@ -61,12 +61,13 @@ export const calcPopupPosition = (
   offsetX: number,
   offsetY: number,
   autoAjustPlacements?: AdjustConfig[],
-): CSSProperties => {
-  if (!trigger || !container || !overlay) return {};
+): { left?: number; top?: number; placement: Placement } => {
+  if (!trigger || !container || !overlay) return { placement };
   const triggerBox = getElementRect(trigger, container);
   const overlayBox = getElementRect(overlay, container);
   let left;
   let top;
+  let nplacement = placement;
   switch (placement) {
     case 'top':
       left = triggerBox.x + triggerBox.width / 2 - overlayBox.width / 2;
@@ -112,12 +113,13 @@ export const calcPopupPosition = (
       if (pos && typeof pos.left === 'number' && typeof pos.top === 'number') {
         const isOverflow = calcOverlayIsOverflow({ left: pos.left, top: pos.top }, overlayBox);
         if (!isOverflow) {
+          nplacement = p;
           return pos;
         }
       }
     }
   }
-  return { left, top };
+  return { left, top, placement: nplacement };
 };
 
 export const getWrappedChildProps = (
