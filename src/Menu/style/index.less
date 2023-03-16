@@ -1,0 +1,51 @@
+@import '../../style/themes/index.less';
+
+@menuPrefix: ~'@{prefix}-menu';
+
+.@{menuPrefix} {
+  padding: 0.5em 0.5em;
+  padding: @menu-root-padding;
+  border: @menu-border;
+  border-radius: @menu-border-radius;
+
+  &,
+  &-submenu-list {
+    list-style-type: none;
+    padding-inline-start: 0;
+  }
+
+  &-item,
+  &-submenu &-submenu-title {
+    position: relative;
+    display: block;
+    margin: 0;
+    padding: @menu-item-padding;
+    white-space: nowrap;
+
+    &:hover,
+    &-focus,
+    &-active {
+      background-color: #eaf8fe;
+    }
+  }
+
+  &-expand-icon-container {
+    float: right;
+  }
+
+  // icon
+  &-icon-arrow::before {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border: @menu-icon-width solid @menu-icon-color;
+    border-color: @menu-icon-color transparent transparent transparent;
+    transform: translate(0, 20%);
+    transition: transform 0.2s;
+    content: '';
+  }
+
+  &-submenu-open > &-submenu-title &-icon-arrow::before {
+    transform: rotate(180deg) translate(0, 20%);
+  }
+}

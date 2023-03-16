@@ -1,5 +1,5 @@
-import React, { CSSProperties, ReactNode, useEffect } from 'react';
-import { CSSTransition } from 'react-transition-group';
+import React, { CSSProperties, ReactNode } from 'react';
+import CSSMotion from '../_utils/CSSMotion';
 import Portal, { GetContainer } from '../_utils/Portal';
 
 interface Props {
@@ -12,25 +12,6 @@ interface Props {
   transitionName?: string;
   transitionTimeout?: number;
 }
-
-interface MotionProps {
-  children?: ReactNode;
-  open: boolean;
-  transitionName?: string;
-  transitionTimeout?: number;
-}
-const CSSMotion = React.forwardRef<HTMLElement, MotionProps>(function (props, ref) {
-  const { children, open: customOpen, transitionName, transitionTimeout = 200 } = props;
-  const [open, setOpen] = React.useState(false);
-  useEffect(() => {
-    setOpen(customOpen);
-  }, [customOpen]);
-  return (
-    <CSSTransition nodeRef={ref} in={open} timeout={transitionTimeout} classNames={transitionName}>
-      {children}
-    </CSSTransition>
-  );
-});
 
 const Overlay = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
   const {

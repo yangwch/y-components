@@ -6,6 +6,7 @@ export { default as Divider } from './Divider';
 export * from './Form';
 export { Col, Row } from './Grid';
 export { default as Input } from './Input';
+export * from './Menu';
 export * from './Popup';
 export { default as Popup } from './Popup';
 export { default as Space } from './Space';
