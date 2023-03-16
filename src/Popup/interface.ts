@@ -98,4 +98,15 @@ export interface PopupProps {
    * @param placement
    */
   onPlacementChanged?: (placement: Placement) => void;
+  /**
+   * 显示改变回调
+   * @type function(visible)
+   */
+  onVisibleChange?: (visible: boolean) => void;
+  /**
+   * 切换显示状态延迟时间
+   * @type 毫秒
+   * @default 200毫秒
+   */
+  visibleChangeDelay?: number;
 }

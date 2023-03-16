@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { ReactElement, useEffect, useRef, useState } from 'react';
+import React, { PointerEvent, ReactElement, useCallback, useEffect, useRef, useState } from 'react';
 import { settings } from '../_utils/global';
 import useForceUpdate from '../_utils/useForceUpate';
 import {
@@ -36,6 +36,8 @@ const Popup = React.forwardRef<HTMLElement, PopupProps>((props: PopupProps, ref)
     transitionTimeout = TRANSITION_DEFAULT_TIMEOUT,
     autoAdjustPlacements,
     onPlacementChanged,
+    onVisibleChange,
+    visibleChangeDelay = 200,
   } = props;
 
   const [open, setOpen] = useState<boolean>(() => {
@@ -47,6 +49,8 @@ const Popup = React.forwardRef<HTMLElement, PopupProps>((props: PopupProps, ref)
   const { setRef, ref: triggerRef } = useTriggerRef(ref);
   const overlayRef = useRef<HTMLDivElement | null>(null);
   const forceUpdate = useForceUpdate();
+
+  const timerRef = useRef<number>();
 
   // 不强制渲染时，打开后，强制重新render一次，计算位置
   useEffect(() => {
@@ -67,6 +71,40 @@ const Popup = React.forwardRef<HTMLElement, PopupProps>((props: PopupProps, ref)
     onPlacementChanged,
   });
 
+  const setOpenHandler = useCallback(
+    (v?: boolean) => {
+      clearTimeout(timerRef.current);
+      timerRef.current = setTimeout(() => {
+        if (typeof v === 'boolean') {
+          setOpen((pv) => {
+            if (!!v !== pv) {
+              onVisibleChange && onVisibleChange(v);
+            }
+            return !!v;
+          });
+          return;
+        }
+        setOpen((p) => {
+          onVisibleChange && onVisibleChange(!p);
+          return !p;
+        });
+      }, visibleChangeDelay);
+    },
+    [onVisibleChange],
+  );
+
+  const onOverlayPointerEnter = useCallback((e: PointerEvent) => {
+    clearTimeout(timerRef.current);
+  }, []);
+  const onOverlayPointerOut = useCallback(
+    (e: PointerEvent) => {
+      if (trigger && trigger.includes('hover')) {
+        setOpenHandler(false);
+      }
+    },
+    [setOpenHandler, trigger],
+  );
+
   if (!children) return null;
   const child = React.Children.only(children) as ReactElement;
   const originChildProps = child?.props || {};
@@ -79,13 +117,7 @@ const Popup = React.forwardRef<HTMLElement, PopupProps>((props: PopupProps, ref)
         ref: setRef,
       },
       trigger,
-      (v?: boolean) => {
-        if (typeof v === 'boolean') {
-          setOpen(v);
-          return;
-        }
-        setOpen((p) => !p);
-      },
+      (v?: boolean) => setOpenHandler(v),
     ),
   );
 
@@ -108,6 +140,8 @@ const Popup = React.forwardRef<HTMLElement, PopupProps>((props: PopupProps, ref)
         style={{ ...overlayStyle, ...customOverlayStyle }}
         transitionName={transitionName}
         transitionTimeout={transitionTimeout}
+        onPointerEnter={onOverlayPointerEnter}
+        onPointerOut={onOverlayPointerOut}
       >
         {overlay}
       </Overlay>

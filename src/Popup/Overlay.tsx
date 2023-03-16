@@ -1,4 +1,4 @@
-import React, { CSSProperties, ReactNode } from 'react';
+import React, { CSSProperties, PointerEvent, ReactNode } from 'react';
 import CSSMotion from '../_utils/CSSMotion';
 import Portal, { GetContainer } from '../_utils/Portal';
 
@@ -11,6 +11,8 @@ interface Props {
   getPopupContainer?: GetContainer;
   transitionName?: string;
   transitionTimeout?: number;
+  onPointerEnter?: (e: PointerEvent) => void;
+  onPointerOut?: (e: PointerEvent) => void;
 }
 
 const Overlay = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
@@ -23,6 +25,8 @@ const Overlay = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
     getPopupContainer,
     transitionName = 'fade',
     transitionTimeout,
+    onPointerEnter,
+    onPointerOut,
   } = props;
   return (
     <Portal open={open} autoDestroy={autoDestroy} getContainer={getPopupContainer}>
@@ -32,7 +36,13 @@ const Overlay = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
         transitionName={transitionName}
         transitionTimeout={transitionName ? transitionTimeout : 0}
       >
-        <div style={style} ref={ref} className={className}>
+        <div
+          style={style}
+          ref={ref}
+          className={className}
+          onPointerEnter={onPointerEnter}
+          onPointerLeave={onPointerOut}
+        >
           {children}
         </div>
       </CSSMotion>
@@ -40,4 +50,4 @@ const Overlay = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
   );
 });
 
-export default Overlay;
+export default React.memo(Overlay);

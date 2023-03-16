@@ -1,6 +1,8 @@
 import classNames from 'classnames';
 import React, { CSSProperties, ReactNode, useMemo, useRef } from 'react';
 import { MENU_ITEM_PADDING } from '../constant/menu';
+import { Placement } from '../Popup';
+import { Tooltip } from '../Tooltip';
 import CSSMotion from '../_utils/CSSMotion';
 import identity from '../_utils/identity';
 import { SubMenuContext } from './context/SubMenuContext';
@@ -32,6 +34,7 @@ function SubMenu(props: SubMenuProps) {
     transitionName,
     transitionTimeout,
     forceSubMenuRender,
+    mode,
   } = useMenuState(key);
 
   const cls = classNames(
@@ -53,8 +56,8 @@ function SubMenu(props: SubMenuProps) {
   };
 
   const listRef = useRef<HTMLUListElement | null>(null);
-  return (
-    <li role="presentation" onClick={(e) => e.stopPropagation()} className={cls}>
+  const renderTitle = () => {
+    return (
       <div
         role="presentation"
         className={`${subMenuCls}-title`}
@@ -65,6 +68,37 @@ function SubMenu(props: SubMenuProps) {
         {title}
         {renderExpandIcon()}
       </div>
+    );
+  };
+  const renderSubMenu = () => {
+    return (
+      <ul role="group" ref={listRef} className={`${subMenuCls}-list`}>
+        {children}
+      </ul>
+    );
+  };
+  if (mode === 'horizontal' || mode === 'vertical') {
+    const placement: Placement = mode === 'horizontal' ? 'bottomLeft' : 'right';
+    return (
+      <li role="presentation" onClick={(e) => e.stopPropagation()} className={cls}>
+        <Tooltip
+          content={renderSubMenu()}
+          placement={placement}
+          arrow={false}
+          onVisibleChange={(visible) => {
+            onToggle(key);
+          }}
+          color="#fff"
+          style={{ color: '#000' }}
+        >
+          {renderTitle()}
+        </Tooltip>
+      </li>
+    );
+  }
+  return (
+    <li role="presentation" onClick={(e) => e.stopPropagation()} className={cls}>
+      {renderTitle()}
       <SubMenuContext.Provider value={{ depth: depth + 1 }}>
         <CSSMotion
           unmountOnExit={!forceSubMenuRender}
@@ -73,9 +107,7 @@ function SubMenu(props: SubMenuProps) {
           transitionName={transitionName}
           transitionTimeout={transitionTimeout}
         >
-          <ul role="group" ref={listRef} className={`${subMenuCls}-list`}>
-            {children}
-          </ul>
+          {renderSubMenu()}
         </CSSMotion>
       </SubMenuContext.Provider>
     </li>

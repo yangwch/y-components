@@ -1,7 +1,9 @@
 import React, { ReactNode } from 'react';
+import { MenuMode } from '../Menu';
 import { SubMenuProps } from '../SubMenu';
 
 export interface MenuContextValue {
+  mode: MenuMode;
   selectedKeys: string[];
   multiple?: boolean;
   activeKey?: string;

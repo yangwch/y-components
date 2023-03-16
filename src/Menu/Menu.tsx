@@ -89,6 +89,7 @@ function InternalMenu(props: MenuProps, ref?: React.LegacyRef<HTMLUListElement>)
   return (
     <MenuContext.Provider
       value={{
+        mode,
         selectedKeys,
         multiple,
         activeKey,

@@ -1,6 +1,7 @@
 @import '../../style/themes/index.less';
 
 @menuPrefix: ~'@{prefix}-menu';
+@popupPrefix: ~'@{prefix}-popup';
 
 .@{menuPrefix} {
   padding: 0.5em 0.5em;
@@ -20,17 +21,19 @@
     display: block;
     margin: 0;
     padding: @menu-item-padding;
+    color: @text-color;
     white-space: nowrap;
 
     &:hover,
     &-focus,
     &-active {
-      background-color: #eaf8fe;
+      background-color: @menu-active-background;
     }
   }
 
   &-expand-icon-container {
     float: right;
+    margin-left: 50px;
   }
 
   // icon
@@ -48,4 +51,9 @@
   &-submenu-open > &-submenu-title &-icon-arrow::before {
     transform: rotate(180deg) translate(0, 20%);
   }
+}
+
+.@{popupPrefix} .@{menuPrefix}-submenu-list {
+  border: @menu-border;
+  border-radius: @menu-border-radius;
 }
