@@ -43,6 +43,7 @@ function SubMenu(props: SubMenuProps) {
       [`${subMenuCls}-open`]: isOpen,
       [`${subMenuCls}-selected`]: isSelected,
       [`${subMenuCls}-active`]: isActive,
+      [`${subMenuCls}-${mode}`]: mode,
     },
     className,
   );
@@ -80,20 +81,21 @@ function SubMenu(props: SubMenuProps) {
   if (mode === 'horizontal' || mode === 'vertical') {
     const placement: Placement = mode === 'horizontal' ? 'bottomLeft' : 'right';
     return (
-      <li role="presentation" onClick={(e) => e.stopPropagation()} className={cls}>
-        <Tooltip
-          content={renderSubMenu()}
-          placement={placement}
-          arrow={false}
-          onVisibleChange={(visible) => {
-            onToggle(key);
-          }}
-          color="#fff"
-          style={{ color: '#000' }}
-        >
+      <Tooltip
+        content={renderSubMenu()}
+        placement={placement}
+        arrow={false}
+        onVisibleChange={(visible) => {
+          onToggle(key);
+        }}
+        color="#fff"
+        style={{ color: '#000' }}
+        contentStyle={{ padding: 0 }}
+      >
+        <li role="presentation" onClick={(e) => e.stopPropagation()} className={cls}>
           {renderTitle()}
-        </Tooltip>
-      </li>
+        </li>
+      </Tooltip>
     );
   }
   return (

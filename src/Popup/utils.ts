@@ -154,8 +154,8 @@ export const getWrappedChildProps = (
       if (e.isDefaultPrevented() || !trigger.includes('hover')) return;
       callback(true);
     },
-    onPointerOut: (e: React.SyntheticEvent) => {
-      callOriginEvent('onPointerOut', e);
+    onPointerLeave: (e: React.SyntheticEvent) => {
+      callOriginEvent('onPointerLeave', e);
       if (e.isDefaultPrevented() || !trigger.includes('hover')) return;
       callback(false);
     },

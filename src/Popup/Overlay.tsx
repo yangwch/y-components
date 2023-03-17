@@ -12,7 +12,7 @@ interface Props {
   transitionName?: string;
   transitionTimeout?: number;
   onPointerEnter?: (e: PointerEvent) => void;
-  onPointerOut?: (e: PointerEvent) => void;
+  onPointerLeave?: (e: PointerEvent) => void;
 }
 
 const Overlay = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
@@ -26,7 +26,7 @@ const Overlay = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
     transitionName = 'fade',
     transitionTimeout,
     onPointerEnter,
-    onPointerOut,
+    onPointerLeave: onPointerOut,
   } = props;
   return (
     <Portal open={open} autoDestroy={autoDestroy} getContainer={getPopupContainer}>

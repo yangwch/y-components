@@ -96,7 +96,7 @@ const Popup = React.forwardRef<HTMLElement, PopupProps>((props: PopupProps, ref)
   const onOverlayPointerEnter = useCallback((e: PointerEvent) => {
     clearTimeout(timerRef.current);
   }, []);
-  const onOverlayPointerOut = useCallback(
+  const onOverlayPointerLeave = useCallback(
     (e: PointerEvent) => {
       if (trigger && trigger.includes('hover')) {
         setOpenHandler(false);
@@ -141,7 +141,7 @@ const Popup = React.forwardRef<HTMLElement, PopupProps>((props: PopupProps, ref)
         transitionName={transitionName}
         transitionTimeout={transitionTimeout}
         onPointerEnter={onOverlayPointerEnter}
-        onPointerOut={onOverlayPointerOut}
+        onPointerLeave={onOverlayPointerLeave}
       >
         {overlay}
       </Overlay>

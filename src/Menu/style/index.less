@@ -15,6 +15,13 @@
     padding-inline-start: 0;
   }
 
+  // vertical icon
+  &-submenu&-submenu-vertical &-icon-arrow::before,
+  &-submenu&-submenu-vertical&-submenu-open &-icon-arrow::before {
+    border-color: transparent transparent transparent @menu-icon-color;
+    transform: none;
+  }
+
   &-item,
   &-submenu &-submenu-title {
     position: relative;
@@ -42,14 +49,14 @@
     width: 0;
     height: 0;
     border: @menu-icon-width solid @menu-icon-color;
-    border-color: @menu-icon-color transparent transparent transparent;
+    border-color: transparent transparent transparent @menu-icon-color;
     transform: translate(0, 20%);
     transition: transform 0.2s;
     content: '';
   }
 
   &-submenu-open > &-submenu-title &-icon-arrow::before {
-    transform: rotate(180deg) translate(0, 20%);
+    transform: rotate(90deg) translate(0, 20%);
   }
 }
 
