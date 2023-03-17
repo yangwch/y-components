@@ -83,19 +83,18 @@ const Popup = React.forwardRef<HTMLElement, PopupProps>((props: PopupProps, ref)
           onVisibleChange && onVisibleChange(!open);
           return;
         }
+        // set to true or false
         if (typeof v === 'boolean') {
-          setOpen((pv) => {
-            if (!!v !== pv) {
-              onVisibleChange && onVisibleChange(v);
-            }
-            return !!v;
-          });
+          if (v !== open) {
+            onVisibleChange && onVisibleChange(v);
+          }
+          setOpen(v);
           return;
+        } else {
+          // toggle
+          onVisibleChange && onVisibleChange(!open);
+          setOpen(!open);
         }
-        setOpen((p) => {
-          onVisibleChange && onVisibleChange(!p);
-          return !p;
-        });
       }, visibleChangeDelay);
     },
     [onVisibleChange, isControlled, open],
