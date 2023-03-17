@@ -6,8 +6,8 @@ import { Tooltip } from '../Tooltip';
 import CSSMotion from '../_utils/CSSMotion';
 import identity from '../_utils/identity';
 import { SubMenuContext } from './context/SubMenuContext';
-import useDepth from './hooks/useDepth';
 import useMenuState from './hooks/useMenuState';
+import useSubMenuState from './hooks/useSubMenuState';
 import { menuCls } from './Menu';
 
 export interface SubMenuProps {
@@ -24,7 +24,7 @@ function SubMenu(props: SubMenuProps) {
   const { style, children, className, title, eventKey: customKey } = props;
 
   const key = useMemo<string>(() => customKey || `yc-key-${identity.create()}`, [customKey]);
-  const depth = useDepth();
+  const { depth } = useSubMenuState();
   const {
     isOpen,
     isSelected,
@@ -49,6 +49,9 @@ function SubMenu(props: SubMenuProps) {
   );
 
   const renderExpandIcon = () => {
+    if (mode === 'horizontal') {
+      return null;
+    }
     let icon: ReactNode = <i className={`${menuCls}-icon-arrow`}></i>;
     if (expandIcon) {
       icon = typeof expandIcon === 'function' ? expandIcon(isOpen, props) : expandIcon;
@@ -58,12 +61,18 @@ function SubMenu(props: SubMenuProps) {
 
   const listRef = useRef<HTMLUListElement | null>(null);
   const renderTitle = () => {
+    const subMenuStyle = {
+      ...style,
+    };
+    if (mode === 'inline' && depth > 1) {
+      subMenuStyle.paddingLeft = MENU_ITEM_PADDING * depth;
+    }
     return (
       <div
         role="presentation"
         className={`${subMenuCls}-title`}
         title={typeof title === 'string' ? title : undefined}
-        style={{ paddingLeft: MENU_ITEM_PADDING * depth, ...style }}
+        style={subMenuStyle}
         onClick={() => onToggle(key)}
       >
         {title}
@@ -73,13 +82,15 @@ function SubMenu(props: SubMenuProps) {
   };
   const renderSubMenu = () => {
     return (
-      <ul role="group" ref={listRef} className={`${subMenuCls}-list`}>
-        {children}
-      </ul>
+      <SubMenuContext.Provider value={{ depth: depth + 1, mode }}>
+        <ul role="group" ref={listRef} className={`${subMenuCls}-list`}>
+          {children}
+        </ul>
+      </SubMenuContext.Provider>
     );
   };
   if (mode === 'horizontal' || mode === 'vertical') {
-    const placement: Placement = mode === 'horizontal' ? 'bottomLeft' : 'right';
+    const placement: Placement = mode === 'horizontal' && depth === 1 ? 'bottomLeft' : 'right';
     return (
       <Tooltip
         content={renderSubMenu()}
@@ -92,26 +103,29 @@ function SubMenu(props: SubMenuProps) {
         style={{ color: '#000' }}
         contentStyle={{ padding: 0 }}
       >
-        <li role="presentation" onClick={(e) => e.stopPropagation()} className={cls}>
+        <li
+          role="presentation"
+          data-depth={depth}
+          onClick={(e) => e.stopPropagation()}
+          className={cls}
+        >
           {renderTitle()}
         </li>
       </Tooltip>
     );
   }
   return (
-    <li role="presentation" onClick={(e) => e.stopPropagation()} className={cls}>
+    <li role="presentation" data-depth={depth} onClick={(e) => e.stopPropagation()} className={cls}>
       {renderTitle()}
-      <SubMenuContext.Provider value={{ depth: depth + 1 }}>
-        <CSSMotion
-          unmountOnExit={!forceSubMenuRender}
-          open={isOpen}
-          ref={listRef}
-          transitionName={transitionName}
-          transitionTimeout={transitionTimeout}
-        >
-          {renderSubMenu()}
-        </CSSMotion>
-      </SubMenuContext.Provider>
+      <CSSMotion
+        unmountOnExit={!forceSubMenuRender}
+        open={isOpen}
+        ref={listRef}
+        transitionName={transitionName}
+        transitionTimeout={transitionTimeout}
+      >
+        {renderSubMenu()}
+      </CSSMotion>
     </li>
   );
 }

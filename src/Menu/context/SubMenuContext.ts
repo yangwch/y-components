@@ -1,9 +1,12 @@
 import React from 'react';
+import { MenuMode } from '../Menu';
 
-interface SubMenuContextValue {
+export interface SubMenuContextValue {
   depth: number;
+  mode: MenuMode;
 }
 
 export const SubMenuContext = React.createContext<SubMenuContextValue>({
   depth: 1,
+  mode: 'vertical',
 });

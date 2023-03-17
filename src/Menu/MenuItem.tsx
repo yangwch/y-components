@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React, { CSSProperties, ReactNode } from 'react';
 import { MENU_ITEM_PADDING } from '../constant/menu';
-import useDepth from './hooks/useDepth';
+import useSubMenuState from './hooks/useSubMenuState';
 import { menuCls } from './Menu';
 
 export interface MenuItemProps {
@@ -17,7 +17,7 @@ export const menuItemCls = `${menuCls}-item`;
 
 function MenuItem(props: MenuItemProps) {
   const { children, className, style, disabled, expandIcon, eventKey } = props;
-  const depth = useDepth();
+  const { depth, mode } = useSubMenuState();
   const menuClassName = classNames(
     menuItemCls,
     {
@@ -36,8 +36,14 @@ function MenuItem(props: MenuItemProps) {
       </i>
     );
   };
+  const listItemStyle = {
+    ...style,
+  };
+  if (mode === 'inline') {
+    listItemStyle.paddingLeft = MENU_ITEM_PADDING * depth;
+  }
   return (
-    <li style={{ paddingLeft: MENU_ITEM_PADDING * depth, ...style }} className={menuClassName}>
+    <li style={listItemStyle} className={menuClassName}>
       {children}
       {renderExpandIcon()}
     </li>

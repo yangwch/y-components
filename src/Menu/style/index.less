@@ -57,6 +57,19 @@
   &-submenu-open > &-submenu-title &-icon-arrow::before {
     transform: rotate(90deg) translate(0, 20%);
   }
+
+  // horizontal alignment
+  &-horizontal {
+    padding: 0;
+    border-top: 0;
+    border-right: 0;
+    border-left: 0;
+  }
+
+  &-horizontal &-item,
+  &-horizontal &-submenu {
+    display: inline-block;
+  }
 }
 
 .@{popupPrefix} .@{menuPrefix}-submenu-list {
