@@ -52,7 +52,7 @@ export default () => {
   };
   return (
     <div>
-      <Menu defaultOpenKeys={['1-3']} mode="vertical" style={{ width: 200 }}>
+      <Menu openKeys={['1-3']} mode="vertical" style={{ width: 200 }}>
         <MenuItem eventKey="1-1">Menu 1</MenuItem>
         <MenuItem eventKey="1-2">Menu 2</MenuItem>
         <SubMenu title="Menu 3" eventKey="1-3">

@@ -128,8 +128,9 @@ export const getWrappedChildProps = (
   callback: (visible?: boolean) => void,
 ) => {
   const callOriginEvent = (eventName: string, e: React.SyntheticEvent) => {
-    if (originProps.eventName && typeof originProps[eventName] === 'function') {
-      originProps[eventName](e);
+    const call = originProps[eventName];
+    if (call && typeof call === 'function') {
+      call(e);
     }
   };
   return {

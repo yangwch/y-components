@@ -100,8 +100,9 @@ function SubMenu(props: SubMenuProps) {
           onToggle(key);
         }}
         color="#fff"
-        style={{ color: '#000' }}
+        className={`${subMenuCls}-tooltip`}
         contentStyle={{ padding: 0 }}
+        visible={isOpen}
       >
         <li
           role="presentation"

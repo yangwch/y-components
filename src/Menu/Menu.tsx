@@ -77,6 +77,7 @@ function InternalMenu(props: MenuProps, ref?: React.LegacyRef<HTMLUListElement>)
 
   const toggleHandler = useCallback(
     (key: string) => {
+      if (isControlledOpenKeys) return;
       setOpenKeys((prevKeys) => {
         if (prevKeys.includes(key)) {
           return prevKeys.filter((k) => k !== key);
@@ -84,7 +85,7 @@ function InternalMenu(props: MenuProps, ref?: React.LegacyRef<HTMLUListElement>)
         return prevKeys.concat(key);
       });
     },
-    [setOpenKeys],
+    [setOpenKeys, isControlledOpenKeys],
   );
   return (
     <MenuContext.Provider

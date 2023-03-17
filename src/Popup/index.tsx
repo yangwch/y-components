@@ -39,9 +39,10 @@ const Popup = React.forwardRef<HTMLElement, PopupProps>((props: PopupProps, ref)
     onVisibleChange,
     visibleChangeDelay = 200,
   } = props;
+  const isControlled = 'visible' in props;
 
   const [open, setOpen] = useState<boolean>(() => {
-    if ('visible' in props) return !!visible;
+    if (isControlled) return !!visible;
     if ('defaultVisible' in props) return !!defaultVisible;
     return false;
   });
@@ -57,7 +58,10 @@ const Popup = React.forwardRef<HTMLElement, PopupProps>((props: PopupProps, ref)
     if (open && forceRender === false) {
       forceUpdate();
     }
-  }, [open, forceRender]);
+    if (isControlled && open !== visible) {
+      setOpen(!!visible);
+    }
+  }, [open, forceRender, isControlled, visible]);
 
   const { overlayStyle } = usePosition({
     trigger: triggerRef.current,
@@ -75,6 +79,10 @@ const Popup = React.forwardRef<HTMLElement, PopupProps>((props: PopupProps, ref)
     (v?: boolean) => {
       clearTimeout(timerRef.current);
       timerRef.current = setTimeout(() => {
+        if (isControlled) {
+          onVisibleChange && onVisibleChange(!open);
+          return;
+        }
         if (typeof v === 'boolean') {
           setOpen((pv) => {
             if (!!v !== pv) {
@@ -90,7 +98,7 @@ const Popup = React.forwardRef<HTMLElement, PopupProps>((props: PopupProps, ref)
         });
       }, visibleChangeDelay);
     },
-    [onVisibleChange],
+    [onVisibleChange, isControlled, open],
   );
 
   const onOverlayPointerEnter = useCallback((e: PointerEvent) => {
