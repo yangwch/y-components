@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { CSSProperties, ReactNode, useCallback } from 'react';
+import React, { CSSProperties, ReactNode, startTransition, useCallback } from 'react';
 import { settings } from '../_utils/global';
 import { MenuContext } from './context/MenuContext';
 import useControlState from './hooks/useControlState';
@@ -38,12 +38,14 @@ function InternalMenu(props: MenuProps, ref?: React.LegacyRef<HTMLUListElement>)
     defaultSelectedKeys,
     openKeys: customOpenKeys,
     defaultOpenKeys,
-    activeKey,
+    activeKey: customActiveKey,
     expandIcon,
     transitionName = 'collapse',
     transitionTimeout = 200,
     forceSubMenuRender,
   } = props;
+
+  const [activeKey, setActiveKey] = React.useState<string | undefined>(customActiveKey);
 
   const {
     isControlled: isControlledSelected,
@@ -71,9 +73,21 @@ function InternalMenu(props: MenuProps, ref?: React.LegacyRef<HTMLUListElement>)
     className,
   );
 
-  const onCheckItem = (key: string) => {
-    console.log('check item', key);
-  };
+  const onClickItem = useCallback(
+    (key: string) => {
+      console.log('check item', key);
+      startTransition(() => {
+        setSelectedKeys((prev) => {
+          if (multiple) {
+            return prev.includes(key) ? prev : prev.concat(key);
+          }
+          return [key];
+        });
+        setActiveKey(key);
+      });
+    },
+    [multiple],
+  );
 
   const toggleHandler = useCallback(
     (key: string) => {
@@ -95,7 +109,7 @@ function InternalMenu(props: MenuProps, ref?: React.LegacyRef<HTMLUListElement>)
         multiple,
         activeKey,
         openKeys,
-        onCheckItem,
+        onClickItem,
         onToggle: toggleHandler,
         expandIcon,
         transitionName,

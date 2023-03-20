@@ -1,11 +1,11 @@
 import classNames from 'classnames';
-import React, { CSSProperties, ReactNode, useMemo, useRef } from 'react';
+import React, { CSSProperties, MouseEvent, ReactNode, useRef } from 'react';
 import { MENU_ITEM_PADDING } from '../constant/menu';
 import { Placement } from '../Popup';
 import { Tooltip } from '../Tooltip';
 import CSSMotion from '../_utils/CSSMotion';
-import identity from '../_utils/identity';
 import { SubMenuContext } from './context/SubMenuContext';
+import useKey from './hooks/useKey';
 import useMenuState from './hooks/useMenuState';
 import useSubMenuState from './hooks/useSubMenuState';
 import { menuCls } from './Menu';
@@ -23,7 +23,7 @@ const subMenuCls = `${menuCls}-submenu`;
 function SubMenu(props: SubMenuProps) {
   const { style, children, className, title, eventKey: customKey } = props;
 
-  const key = useMemo<string>(() => customKey || `yc-key-${identity.create()}`, [customKey]);
+  const key = useKey(customKey);
   const { depth } = useSubMenuState();
   const {
     isOpen,
@@ -35,6 +35,7 @@ function SubMenu(props: SubMenuProps) {
     transitionTimeout,
     forceSubMenuRender,
     mode,
+    onClickItem,
   } = useMenuState(key);
 
   const cls = classNames(
@@ -67,13 +68,18 @@ function SubMenu(props: SubMenuProps) {
     if (mode === 'inline' && depth > 1) {
       subMenuStyle.paddingLeft = MENU_ITEM_PADDING * depth;
     }
+    const titleClickHandler = (e: MouseEvent<HTMLDivElement>) => {
+      onToggle(key);
+      onClickItem(key, props);
+    };
     return (
       <div
         role="presentation"
+        tab-index={-1}
         className={`${subMenuCls}-title`}
         title={typeof title === 'string' ? title : undefined}
         style={subMenuStyle}
-        onClick={() => onToggle(key)}
+        onClick={titleClickHandler}
       >
         {title}
         {renderExpandIcon()}

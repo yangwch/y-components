@@ -4,11 +4,7 @@
 @popupPrefix: ~'@{prefix}-popup';
 
 .@{menuPrefix} {
-  padding: 0.5em 0.5em;
-  padding: @menu-root-padding;
-  border: @menu-border;
-  border-radius: @menu-border-radius;
-
+  box-shadow: @menu-boxshadow;
   &,
   &-submenu-list {
     list-style-type: none;
@@ -32,7 +28,9 @@
     padding: @menu-item-padding;
     color: @text-color;
     white-space: nowrap;
-
+  }
+  &-item,
+  &-submenu-title {
     &:hover,
     &-focus,
     &-active {
@@ -75,6 +73,5 @@
 }
 
 .@{popupPrefix} .@{menuPrefix}-submenu-list {
-  border: @menu-border;
-  border-radius: @menu-border-radius;
+  box-shadow: @menu-boxshadow;
 }

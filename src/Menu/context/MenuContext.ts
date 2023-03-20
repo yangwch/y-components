@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react';
 import { MenuMode } from '../Menu';
+import { MenuItemProps } from '../MenuItem';
 import { SubMenuProps } from '../SubMenu';
 
 export interface MenuContextValue {
@@ -8,7 +9,7 @@ export interface MenuContextValue {
   multiple?: boolean;
   activeKey?: string;
   openKeys: string[];
-  onCheckItem: (key: string) => void;
+  onClickItem: (key: string, props?: MenuItemProps | SubMenuProps) => void;
   onToggle: (key: string) => void;
   expandIcon?: ReactNode | ((isOpen: boolean, props: SubMenuProps) => React.ReactNode);
   transitionName?: string;
