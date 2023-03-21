@@ -90,9 +90,18 @@ function InternalMenu(props: MenuProps, ref?: React.LegacyRef<HTMLUListElement>)
   );
 
   const toggleHandler = useCallback(
-    (key: string) => {
+    (key: string, visible?: boolean) => {
       if (isControlledOpenKeys) return;
+
       setOpenKeys((prevKeys) => {
+        // 传了visible
+        if (typeof visible === 'boolean') {
+          if (visible) {
+            return prevKeys.includes(key) ? prevKeys : prevKeys.concat(key);
+          }
+          return prevKeys.filter((k) => k !== key);
+        }
+        // 未传visible toggles visibility
         if (prevKeys.includes(key)) {
           return prevKeys.filter((k) => k !== key);
         }

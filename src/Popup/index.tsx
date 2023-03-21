@@ -80,7 +80,7 @@ const Popup = React.forwardRef<HTMLElement, PopupProps>((props: PopupProps, ref)
       clearTimeout(timerRef.current);
       timerRef.current = setTimeout(() => {
         if (isControlled) {
-          onVisibleChange && onVisibleChange(!open);
+          onVisibleChange && onVisibleChange(typeof v === 'boolean' ? v : !open);
           return;
         }
         // set to true or false
@@ -100,9 +100,13 @@ const Popup = React.forwardRef<HTMLElement, PopupProps>((props: PopupProps, ref)
     [onVisibleChange, isControlled, open],
   );
 
-  const onOverlayPointerEnter = useCallback((e: PointerEvent) => {
-    clearTimeout(timerRef.current);
-  }, []);
+  const onOverlayPointerEnter = useCallback(
+    (e: PointerEvent) => {
+      clearTimeout(timerRef.current);
+      setOpenHandler(true);
+    },
+    [setOpenHandler],
+  );
   const onOverlayPointerLeave = useCallback(
     (e: PointerEvent) => {
       if (trigger && trigger.includes('hover')) {

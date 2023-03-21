@@ -10,7 +10,7 @@ export interface MenuContextValue {
   activeKey?: string;
   openKeys: string[];
   onClickItem: (key: string, props?: MenuItemProps | SubMenuProps) => void;
-  onToggle: (key: string) => void;
+  onToggle: (key: string, visible?: boolean) => void;
   expandIcon?: ReactNode | ((isOpen: boolean, props: SubMenuProps) => React.ReactNode);
   transitionName?: string;
   transitionTimeout?: number;

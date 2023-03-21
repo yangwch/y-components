@@ -103,7 +103,7 @@ function SubMenu(props: SubMenuProps) {
         placement={placement}
         arrow={false}
         onVisibleChange={(visible) => {
-          onToggle(key);
+          onToggle(key, visible);
         }}
         color="#fff"
         className={`${subMenuCls}-tooltip`}
