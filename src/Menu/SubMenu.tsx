@@ -28,7 +28,6 @@ function SubMenu(props: SubMenuProps) {
   const {
     isOpen,
     isSelected,
-    isActive,
     onToggle,
     expandIcon,
     transitionName,
@@ -37,13 +36,11 @@ function SubMenu(props: SubMenuProps) {
     mode,
     onClickItem,
   } = useMenuState(key);
-
   const cls = classNames(
     subMenuCls,
     {
       [`${subMenuCls}-open`]: isOpen,
       [`${subMenuCls}-selected`]: isSelected,
-      [`${subMenuCls}-active`]: isActive,
       [`${subMenuCls}-${mode}`]: mode,
     },
     className,
@@ -70,13 +67,16 @@ function SubMenu(props: SubMenuProps) {
     }
     const titleClickHandler = (e: MouseEvent<HTMLDivElement>) => {
       onToggle(key);
-      onClickItem(key, props);
+      // onClickItem(key, props);
     };
+    const titleCls = classNames(`${subMenuCls}-title`, {
+      [`${subMenuCls}-title-selected`]: isSelected,
+    });
     return (
       <div
         role="presentation"
         tab-index={-1}
-        className={`${subMenuCls}-title`}
+        className={titleCls}
         title={typeof title === 'string' ? title : undefined}
         style={subMenuStyle}
         onClick={titleClickHandler}

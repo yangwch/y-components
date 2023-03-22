@@ -77,16 +77,17 @@ function InternalMenu(props: MenuProps, ref?: React.LegacyRef<HTMLUListElement>)
     (key: string) => {
       console.log('check item', key);
       startTransition(() => {
-        setSelectedKeys((prev) => {
-          if (multiple) {
-            return prev.includes(key) ? prev : prev.concat(key);
-          }
-          return [key];
-        });
-        setActiveKey(key);
+        const isSelected = selectedKeys.includes(key);
+        if (isSelected) {
+          setSelectedKeys(selectedKeys.filter((k) => k !== key));
+          setActiveKey('');
+        } else {
+          setSelectedKeys(selectedKeys.concat(key));
+          setActiveKey(key);
+        }
       });
     },
-    [multiple],
+    [multiple, selectedKeys],
   );
 
   const toggleHandler = useCallback(

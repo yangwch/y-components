@@ -5,12 +5,14 @@
 
 .@{menuPrefix} {
   box-shadow: @menu-boxshadow;
+
   &,
   &-submenu-list {
+    padding: 0;
     list-style-type: none;
     padding-inline-start: 0;
-    margin-block-start: 5px;
-    margin-block-end: 5px;
+    margin-block-start: 0;
+    margin-block-end: 0;
   }
 
   // vertical icon
@@ -29,11 +31,13 @@
     color: @text-color;
     white-space: nowrap;
   }
+
   &-item,
   &-submenu-title {
     &:hover,
     &-focus,
-    &-active {
+    &-active,
+    &-selected {
       background-color: @menu-active-background;
     }
   }

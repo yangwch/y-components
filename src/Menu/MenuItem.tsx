@@ -50,6 +50,7 @@ function MenuItem(props: MenuItemProps) {
   }
   return (
     <li
+      role="menuitem"
       tabIndex={-1}
       style={listItemStyle}
       className={menuClassName}
