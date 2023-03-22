@@ -25,7 +25,7 @@ function MenuItem(props: MenuItemProps) {
   const menuClassName = classNames(
     menuItemCls,
     {
-      [`${menuItemCls}-${disabled}`]: disabled,
+      [`${menuItemCls}-disabled`]: disabled,
       [`${menuItemCls}-selected`]: isSelected,
       [`${menuItemCls}-active`]: isActive,
     },
@@ -48,13 +48,21 @@ function MenuItem(props: MenuItemProps) {
   if (mode === 'inline') {
     listItemStyle.paddingLeft = MENU_ITEM_PADDING * depth;
   }
+
+  const menuItemClickHandler = () => {
+    if (disabled) {
+      return;
+    }
+    onClickItem(key, props);
+  };
   return (
     <li
+      data-key={key}
       role="menuitem"
       tabIndex={-1}
       style={listItemStyle}
       className={menuClassName}
-      onClick={(e) => onClickItem(key, props)}
+      onClick={menuItemClickHandler}
     >
       {children}
       {renderExpandIcon()}
