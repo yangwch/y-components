@@ -54,9 +54,14 @@ function Tooltip(props: TooltipProps) {
   } = props;
   const [renderedPlacement, setRenderedPlacement] = useState<Placement>(customPlacement);
 
-  const popupCls = classNames(tooltipCls, `${tooltipCls}-${renderedPlacement}`, {
-    [`${tooltipCls}-disabled-arrow`]: !arrow,
-  });
+  const popupCls = classNames(
+    tooltipCls,
+    `${tooltipCls}-${renderedPlacement}`,
+    {
+      [`${tooltipCls}-disabled-arrow`]: !arrow,
+    },
+    className,
+  );
   const arrowCls = `${tooltipCls}-arrow`;
 
   const arrowStyle = {
@@ -100,4 +105,4 @@ function Tooltip(props: TooltipProps) {
   );
 }
 
-export default Tooltip;
+export { Tooltip, TooltipProps };

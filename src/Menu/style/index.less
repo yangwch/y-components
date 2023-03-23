@@ -23,13 +23,22 @@
   }
 
   &-item,
-  &-submenu &-submenu-title {
+  &-submenu &-submenu-title,
+  &-group {
     position: relative;
     display: block;
     margin: 0;
     padding: @menu-item-padding;
     color: @text-color;
     white-space: nowrap;
+    cursor: @menu-item-cursor;
+  }
+  // menu group
+  &-group {
+    padding: @menu-group-padding;
+    color: @menu-group-color;
+    font-size: @menu-group-font-size;
+    cursor: @menu-group-cursor;
   }
 
   &-item,
@@ -42,6 +51,7 @@
     }
     &-disabled {
       color: @menu-disabled-color;
+      cursor: not-allowed;
     }
   }
 

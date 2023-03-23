@@ -4,11 +4,11 @@ import { MENU_ITEM_PADDING } from '../constant/menu';
 import { Placement } from '../Popup';
 import { Tooltip } from '../Tooltip';
 import CSSMotion from '../_utils/CSSMotion';
+import { menuCls, subMenuCls } from './constant';
 import { SubMenuContext } from './context/SubMenuContext';
 import useKey from './hooks/useKey';
 import useMenuState from './hooks/useMenuState';
 import useSubMenuState from './hooks/useSubMenuState';
-import { menuCls } from './Menu';
 
 export interface SubMenuProps {
   children: React.ReactNode;
@@ -17,8 +17,6 @@ export interface SubMenuProps {
   title?: string | ReactNode;
   eventKey?: string;
 }
-
-const subMenuCls = `${menuCls}-submenu`;
 
 function SubMenu(props: SubMenuProps) {
   const { style, children, className, title, eventKey: customKey } = props;

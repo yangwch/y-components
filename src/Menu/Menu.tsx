@@ -1,29 +1,77 @@
 import classNames from 'classnames';
 import React, { CSSProperties, ReactNode, startTransition, useCallback } from 'react';
-import { settings } from '../_utils/global';
+import { menuCls } from './constant';
 import { MenuContext } from './context/MenuContext';
 import useControlState from './hooks/useControlState';
+import { MenuGroup } from './MenuGroup';
+import { MenuItem } from './MenuItem';
 import './style/index.less';
-import { SubMenuProps } from './SubMenu';
+import { SubMenu, SubMenuProps } from './SubMenu';
 
-export const menuCls = `${settings.prefix}-menu`;
-export type MenuMode = 'vertical' | 'horizontal' | 'inline';
+type MenuMode = 'vertical' | 'horizontal' | 'inline';
 
-export interface MenuProps {
+interface MenuProps {
   children: React.ReactNode;
+  /**
+   * 展示方式
+   * @type "vertical" | "horizontal" | "inline"
+   * @default vertical
+   */
   mode?: MenuMode;
+  /**
+   * 类名
+   */
   className?: string;
+  /**
+   * 行内样式
+   */
   style?: CSSProperties;
-  disabled?: boolean;
+  // disabled?: boolean;
+  /**
+   * 是否多选
+   * @default false
+   */
   multiple?: boolean;
+  /**
+   * 默认激活项
+   */
   activeKey?: string;
+  /**
+   * 选中项，受控模式
+   * @type string[]
+   */
   selectedKeys: string[];
+  /**
+   * 默认选中项
+   * @type string[]
+   */
   defaultSelectedKeys?: string[];
+  /**
+   * 展开节点，受控模式
+   */
   openKeys?: string[];
+  /**
+   * 默认展开节点
+   */
   defaultOpenKeys?: string[];
+  /**
+   * 自定义收起/展开图标
+   */
   expandIcon?: ReactNode | ((isOpen: boolean, props: SubMenuProps) => React.ReactNode);
+  /**
+   * 动画
+   * @default 'collapse'
+   */
   transitionName?: string;
+  /**
+   * 动画时长
+   * @default 200
+   */
   transitionTimeout?: number;
+  /**
+   * 是否默认渲染未展开的节点
+   * @default false
+   */
   forceSubMenuRender?: boolean;
 }
 
@@ -133,5 +181,15 @@ function InternalMenu(props: MenuProps, ref?: React.LegacyRef<HTMLUListElement>)
     </MenuContext.Provider>
   );
 }
+interface CompoundedComponent extends React.ForwardRefExoticComponent<MenuProps> {
+  Item: typeof MenuItem;
+  SubMenu: typeof SubMenu;
+  Group: typeof MenuGroup;
+}
+const Menu = React.forwardRef(InternalMenu) as CompoundedComponent;
 
-export const Menu = React.forwardRef(InternalMenu);
+Menu.Item = MenuItem;
+Menu.SubMenu = SubMenu;
+Menu.Group = MenuGroup;
+
+export { Menu, MenuProps, MenuMode };

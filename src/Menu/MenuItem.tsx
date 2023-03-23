@@ -1,10 +1,10 @@
 import classNames from 'classnames';
 import React, { CSSProperties, ReactNode } from 'react';
 import { MENU_ITEM_PADDING } from '../constant/menu';
+import { menuItemCls } from './constant';
 import useKey from './hooks/useKey';
 import useMenuState from './hooks/useMenuState';
 import useSubMenuState from './hooks/useSubMenuState';
-import { menuCls } from './Menu';
 
 export interface MenuItemProps {
   children: React.ReactNode;
@@ -14,8 +14,6 @@ export interface MenuItemProps {
   expandIcon?: ReactNode | ((props: MenuItemProps) => React.ReactNode);
   eventKey?: string;
 }
-
-export const menuItemCls = `${menuCls}-item`;
 
 function MenuItem(props: MenuItemProps) {
   const { children, className, style, disabled, expandIcon, eventKey } = props;

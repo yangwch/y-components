@@ -3,6 +3,7 @@ export { default as Card } from './Card';
 export { Checkbox, CheckboxGroup } from './Checkbox';
 export { default as Dialog } from './Dialog';
 export { default as Divider } from './Divider';
+export * from './Dropdown';
 export * from './Form';
 export { Col, Row } from './Grid';
 export { default as Input } from './Input';
