@@ -53,31 +53,12 @@ import React from 'react';
 import { Dropdown, Button } from '@yangwch/y-components';
 
 const menu = [
-  {
-    node: 'item',
-    name: 'Menu Item 1',
-  },
-  {
-    node: 'item',
-    name: 'Menu Item 2：disabled',
-    active: true,
-    disabled: true,
-  },
-  {
-    node: 'divider',
-  },
-  {
-    node: 'group',
-    name: '分组 2',
-  },
-  {
-    node: 'item',
-    name: 'Menu Item 3',
-  },
-  {
-    node: 'item',
-    name: 'Menu Item 4',
-  },
+  { node: 'item', name: 'Menu Item 1' },
+  { node: 'item', name: 'Menu Item 2：disabled', active: true, disabled: true },
+  { node: 'divider' },
+  { node: 'group', name: '分组 2' },
+  { node: 'item', name: 'Menu Item 3' },
+  { node: 'item', name: 'Menu Item 4' },
 ];
 export default () => {
   return (
