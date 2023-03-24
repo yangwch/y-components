@@ -37,14 +37,16 @@ export default () => {
     );
   };
   return (
-    <Space>
-      <Dropdown render={renderMenus()} visible>
-        <Button>始终显示</Button>
-      </Dropdown>
-      <Dropdown render={renderMenus()}>
-        <Button>HOVER ME</Button>
-      </Dropdown>
-    </Space>
+    <div style={{ marginBottom: 200 }}>
+      <Space>
+        <Dropdown render={renderMenus()} visible>
+          <Button>始终显示</Button>
+        </Dropdown>
+        <Dropdown render={renderMenus()}>
+          <Button>HOVER ME</Button>
+        </Dropdown>
+      </Space>
+    </div>
   );
 };
 ```
