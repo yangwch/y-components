@@ -9,8 +9,8 @@ toc: content
 
 ```jsx
 import React from 'react';
-import { Menu, SubMenu, MenuItem, MenuGroup } from '@yangwch/y-components';
-
+import { Menu } from '@yangwch/y-components';
+const { SubMenu, Item: MenuItem, Group: MenuGroup } = Menu;
 export default () => {
   const renderExpandIcon = (isOpen) => {
     return <span style={{ marginLeft: 50 }}>{isOpen ? 'Close' : 'Open'}</span>;
@@ -48,8 +48,8 @@ export default () => {
 
 ```jsx
 import React from 'react';
-import { Menu, SubMenu, MenuItem } from '@yangwch/y-components';
-
+import { Menu } from '@yangwch/y-components';
+const { SubMenu, Item: MenuItem } = Menu;
 export default () => {
   const renderExpandIcon = (isOpen) => {
     return <span style={{ marginLeft: 50 }}>{isOpen ? 'Close' : 'Open'}</span>;
@@ -119,3 +119,15 @@ export default () => {
 ### Menu
 
 <API id="Menu"></API>
+
+### Menu.Item
+
+<API id="MenuItem"></API>
+
+### Menu.SubMenu
+
+<API id="SubMenu"></API>
+
+### Menu.Group
+
+<API id="MenuGroup"></API>

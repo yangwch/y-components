@@ -9,17 +9,8 @@ toc: content
 
 ```jsx
 import React from 'react';
-import {
-  Dropdown,
-  Menu,
-  SubMenu,
-  MenuItem,
-  MenuGroup,
-  Button,
-  Divider,
-  Space,
-} from '@yangwch/y-components';
-
+import { Dropdown, Menu, Button, Divider, Space } from '@yangwch/y-components';
+const { SubMenu, Item: MenuItem, Group: MenuGroup } = Menu;
 export default () => {
   const renderMenus = () => {
     return (
