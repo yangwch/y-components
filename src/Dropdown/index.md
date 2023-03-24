@@ -17,6 +17,7 @@ import {
   MenuGroup,
   Button,
   Divider,
+  Space,
 } from '@yangwch/y-components';
 
 export default () => {
@@ -36,9 +37,14 @@ export default () => {
     );
   };
   return (
-    <Dropdown render={renderMenus()}>
-      <Button>hover me</Button>
-    </Dropdown>
+    <Space>
+      <Dropdown render={renderMenus()} visible>
+        <Button>始终显示</Button>
+      </Dropdown>
+      <Dropdown render={renderMenus()}>
+        <Button>HOVER ME</Button>
+      </Dropdown>
+    </Space>
   );
 };
 ```
