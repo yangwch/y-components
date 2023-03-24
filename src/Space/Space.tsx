@@ -28,6 +28,7 @@ const Space: React.FC<SpaceProps> = (props: SpaceProps) => {
     align,
     wrap = false,
     className,
+    style: customStyle,
     ...rest
   } = props;
   if (!children) return null;
@@ -51,6 +52,7 @@ const Space: React.FC<SpaceProps> = (props: SpaceProps) => {
   const style: React.CSSProperties = {
     ...getSpaceStyle(size, direction),
     flexWrap: wrap ? 'wrap' : 'nowrap',
+    ...customStyle,
   };
 
   return (
