@@ -79,8 +79,9 @@ export interface PopupProps {
    */
   autoAdjustPlacements?: AdjustConfig[];
   /**
-   * 触发方式，可选"click" | "hover" | "focus"
-   * @type Array
+   * 触发方式，可选 "click" | "hover" | "focus"
+   * @default "['hover']"
+   * @type TriggerEvent[]
    */
   trigger?: TriggerEvent[];
   /**

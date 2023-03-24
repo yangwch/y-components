@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import React, { ReactNode } from 'react';
+import { DROPDOWN_COLOR } from '../constant/dropdown';
 import { Placement } from '../Popup';
 import { Tooltip, TooltipProps } from '../Tooltip';
 import { settings } from '../_utils/global';
@@ -23,10 +24,23 @@ interface DropdownProps extends TooltipProps {
    * @default 'false'
    */
   arrow?: boolean;
+  /**
+   * 弹出背景色
+   * @default '#fff'
+   */
+  color?: string;
 }
 
 function Dropdown(props: DropdownProps) {
-  const { render, content, placement = 'bottomLeft', arrow = false, className, ...attrs } = props;
+  const {
+    render,
+    content,
+    placement = 'bottomLeft',
+    arrow = false,
+    color = DROPDOWN_COLOR,
+    className,
+    ...attrs
+  } = props;
   const renderContent = () => {
     if (render) {
       return typeof render === 'function' ? render() : render;
@@ -36,6 +50,7 @@ function Dropdown(props: DropdownProps) {
   const clsNames = classNames(dropdownCls, className);
   return (
     <Tooltip
+      color={color}
       content={renderContent()}
       placement={placement}
       arrow={arrow}

@@ -36,8 +36,15 @@ export default () => {
         <Dropdown render={renderMenus()}>
           <Button>HOVER ME</Button>
         </Dropdown>
+        <Dropdown render={renderMenus()} placement="bottom" arrow>
+          <Button>自定义位置</Button>
+        </Dropdown>
       </Space>
     </div>
   );
 };
 ```
+
+## API
+
+<API id="Dropdown" />

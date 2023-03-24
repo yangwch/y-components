@@ -22,6 +22,7 @@ export interface SubMenuProps {
   style?: CSSProperties;
   /**
    * 子列表标题
+   * @type string | ReactNode
    */
   title?: string | ReactNode;
   /**
