@@ -12,9 +12,21 @@ import useSubMenuState from './hooks/useSubMenuState';
 
 export interface SubMenuProps {
   children: React.ReactNode;
+  /**
+   * 类名
+   */
   className?: string;
+  /**
+   * 行内样式
+   */
   style?: CSSProperties;
+  /**
+   * 子列表标题
+   */
   title?: string | ReactNode;
+  /**
+   * 唯一标识
+   */
   eventKey?: string;
 }
 

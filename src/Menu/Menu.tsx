@@ -40,7 +40,7 @@ interface MenuProps {
    * 选中项，受控模式
    * @type string[]
    */
-  selectedKeys: string[];
+  selectedKeys?: string[];
   /**
    * 默认选中项
    * @type string[]

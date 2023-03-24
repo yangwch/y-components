@@ -6,7 +6,13 @@ import useSubMenuState from './hooks/useSubMenuState';
 
 export interface MenuGroupProps {
   children: ReactNode;
+  /**
+   * 类名
+   */
   className?: string;
+  /**
+   * 行内样式
+   */
   style?: CSSProperties;
 }
 

@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { CSSProperties, ReactNode } from 'react';
+import React, { CSSProperties } from 'react';
 import { MENU_ITEM_PADDING } from '../constant/menu';
 import { menuItemCls } from './constant';
 import useKey from './hooks/useKey';
@@ -8,15 +8,27 @@ import useSubMenuState from './hooks/useSubMenuState';
 
 export interface MenuItemProps {
   children: React.ReactNode;
+  /**
+   * 类名
+   */
   className?: string;
+  /**
+   * 行内样式
+   */
   style?: CSSProperties;
+  /**
+   * 是否禁用
+   */
   disabled?: boolean;
-  expandIcon?: ReactNode | ((props: MenuItemProps) => React.ReactNode);
+  // expandIcon?: ReactNode | ((props: MenuItemProps) => React.ReactNode);
+  /**
+   * 唯一标识
+   */
   eventKey?: string;
 }
 
 function MenuItem(props: MenuItemProps) {
-  const { children, className, style, disabled, expandIcon, eventKey } = props;
+  const { children, className, style, disabled, eventKey } = props;
   const { depth, mode } = useSubMenuState();
   const key = useKey(eventKey);
   const { isSelected, isActive, onClickItem } = useMenuState(key);
@@ -29,17 +41,17 @@ function MenuItem(props: MenuItemProps) {
     },
     className,
   );
-  const renderExpandIcon = () => {
-    const expandIconCls = classNames(`${menuItemCls}-icon`, {
-      [`${menuItemCls}-icon-arrow`]: !expandIcon,
-    });
-    if (!expandIcon) return <i className={expandIconCls}></i>;
-    return (
-      <i className={expandIconCls}>
-        {typeof expandIcon === 'function' ? expandIcon(props) : expandIcon}
-      </i>
-    );
-  };
+  // const renderExpandIcon = () => {
+  //   const expandIconCls = classNames(`${menuItemCls}-icon`, {
+  //     [`${menuItemCls}-icon-arrow`]: !expandIcon,
+  //   });
+  //   if (!expandIcon) return <i className={expandIconCls}></i>;
+  //   return (
+  //     <i className={expandIconCls}>
+  //       {typeof expandIcon === 'function' ? expandIcon(props) : expandIcon}
+  //     </i>
+  //   );
+  // };
   const listItemStyle = {
     ...style,
   };
@@ -63,7 +75,7 @@ function MenuItem(props: MenuItemProps) {
       onClick={menuItemClickHandler}
     >
       {children}
-      {renderExpandIcon()}
+      {/* {renderExpandIcon()} */}
     </li>
   );
 }
