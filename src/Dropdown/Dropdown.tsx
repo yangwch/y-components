@@ -1,35 +1,13 @@
 import classNames from 'classnames';
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { DROPDOWN_COLOR } from '../constant/dropdown';
-import { Placement } from '../Popup';
-import { Tooltip, TooltipProps } from '../Tooltip';
+import { Tooltip } from '../Tooltip';
 import { settings } from '../_utils/global';
+import DropdownMenu from './DropdownMenu';
+import { DropdownProps } from './interface';
 import './style/index.less';
 
 const dropdownCls = `${settings.prefix}-dropdown`;
-
-interface DropdownProps extends TooltipProps {
-  /**
-   * 自定义弹出内容
-   * @type () => ReactNode
-   */
-  render?: () => ReactNode | ReactNode;
-  /**
-   * 弹出位置
-   * @default 'bottomLeft'
-   */
-  placement?: Placement;
-  /**
-   * 是否显示箭头
-   * @default 'false'
-   */
-  arrow?: boolean;
-  /**
-   * 弹出背景色
-   * @default '#fff'
-   */
-  color?: string;
-}
 
 function Dropdown(props: DropdownProps) {
   const {
@@ -39,11 +17,15 @@ function Dropdown(props: DropdownProps) {
     arrow = false,
     color = DROPDOWN_COLOR,
     className,
+    menu,
     ...attrs
   } = props;
   const renderContent = () => {
     if (render) {
       return typeof render === 'function' ? render() : render;
+    }
+    if (menu) {
+      return <DropdownMenu menu={menu} />;
     }
     return content;
   };
@@ -60,4 +42,4 @@ function Dropdown(props: DropdownProps) {
   );
 }
 
-export { Dropdown, DropdownProps };
+export { Dropdown };

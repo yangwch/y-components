@@ -111,7 +111,7 @@ function usePosition(props: Props) {
         }
         placementRef.current = nplacement;
         setOverlayStyle({ left, top });
-      }, 10);
+      }, 0);
     }
     document.addEventListener('scroll', onScroll);
     window.addEventListener('resize', onScroll);

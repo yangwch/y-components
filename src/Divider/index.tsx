@@ -9,7 +9,7 @@ export type DividerType = 'horizontal' | 'vertical';
 
 export type Alignment = 'left' | 'center' | 'right';
 
-interface DividerProps extends HTMLAttributes<HTMLDivElement> {
+export interface DividerProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * 分隔线类型
    * @type "horizontal" | "vertical"

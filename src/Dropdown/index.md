@@ -28,19 +28,62 @@ export default () => {
     );
   };
   return (
-    <div style={{ marginBottom: 200 }}>
-      <Space>
-        <Dropdown render={renderMenus()} visible>
-          <Button>始终显示</Button>
-        </Dropdown>
-        <Dropdown render={renderMenus()}>
-          <Button>HOVER ME</Button>
-        </Dropdown>
-        <Dropdown render={renderMenus()} placement="bottom" arrow>
-          <Button>自定义位置</Button>
-        </Dropdown>
-      </Space>
-    </div>
+    <Space style={{ marginBottom: 200 }}>
+      <Dropdown render={renderMenus()} visible>
+        <Button>始终显示</Button>
+      </Dropdown>
+      <Dropdown render={renderMenus()}>
+        <Button>HOVER ME</Button>
+      </Dropdown>
+      <Dropdown render={renderMenus()} placement="bottom" arrow>
+        <Button>自定义位置</Button>
+      </Dropdown>
+      <Dropdown render={renderMenus()} color="#c7cb7e1a">
+        <Button>自定义样式</Button>
+      </Dropdown>
+    </Space>
+  );
+};
+```
+
+## JSON 使用方式
+
+```jsx
+import React from 'react';
+import { Dropdown, Button } from '@yangwch/y-components';
+
+const menu = [
+  {
+    node: 'item',
+    name: 'Menu Item 1',
+  },
+  {
+    node: 'item',
+    name: 'Menu Item 2：disabled',
+    active: true,
+    disabled: true,
+  },
+  {
+    node: 'divider',
+  },
+  {
+    node: 'group',
+    name: '分组 2',
+  },
+  {
+    node: 'item',
+    name: 'Menu Item 3',
+  },
+  {
+    node: 'item',
+    name: 'Menu Item 4',
+  },
+];
+export default () => {
+  return (
+    <Dropdown menu={menu}>
+      <Button>Hover me</Button>
+    </Dropdown>
   );
 };
 ```

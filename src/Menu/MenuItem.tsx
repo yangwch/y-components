@@ -25,10 +25,14 @@ export interface MenuItemProps {
    * 唯一标识
    */
   eventKey?: string;
+  /**
+   * 是否激活
+   */
+  active?: boolean;
 }
 
 function MenuItem(props: MenuItemProps) {
-  const { children, className, style, disabled, eventKey } = props;
+  const { children, className, style, disabled, eventKey, active } = props;
   const { depth, mode } = useSubMenuState();
   const key = useKey(eventKey);
   const { isSelected, isActive, onClickItem } = useMenuState(key);
@@ -37,7 +41,7 @@ function MenuItem(props: MenuItemProps) {
     {
       [`${menuItemCls}-disabled`]: disabled,
       [`${menuItemCls}-selected`]: isSelected,
-      [`${menuItemCls}-active`]: isActive,
+      [`${menuItemCls}-active`]: 'active' in props ? active : isActive,
     },
     className,
   );
