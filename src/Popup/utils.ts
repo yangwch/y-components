@@ -43,11 +43,11 @@ function calcOverlayIsOverflow(
   if (position.left < 0 || position.top < 0) {
     return true;
   }
-  const { clientWidth, clientHeight } = document.body;
-  if (position.left + overlayBox.width > clientWidth) {
+  const { innerWidth, innerHeight } = window;
+  if (position.left + overlayBox.width > innerWidth) {
     return true;
   }
-  if (position.top + overlayBox.height > clientHeight) {
+  if (position.top + overlayBox.height > innerHeight) {
     return true;
   }
   return false;

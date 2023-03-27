@@ -1,6 +1,7 @@
 import React from 'react';
 import Divider from '../Divider';
 import { Menu } from '../Menu';
+import identity from '../_utils/identity';
 import { DropdownMenuItem } from './interface';
 interface DropdownMenuProps {
   menu: DropdownMenuItem[];
@@ -12,13 +13,25 @@ function DropdownMenu(props: DropdownMenuProps) {
       {menu.map((item) => {
         const { node, name, ...attrs } = item;
         if (item.node === 'item') {
-          return <Menu.Item {...attrs}>{item.name}</Menu.Item>;
+          return (
+            <Menu.Item key={item.eventKey || `dropdown-${identity.create()}`} {...attrs}>
+              {item.name}
+            </Menu.Item>
+          );
         }
         if (item.node === 'divider') {
-          return <Divider {...attrs}>{item.name}</Divider>;
+          return (
+            <Divider key={`dropdown-${identity.create()}`} {...attrs}>
+              {item.name}
+            </Divider>
+          );
         }
         if (item.node === 'group') {
-          return <Menu.Group {...attrs}>{item.name}</Menu.Group>;
+          return (
+            <Menu.Group key={`dropdown-${identity.create()}`} {...attrs}>
+              {item.name}
+            </Menu.Group>
+          );
         }
         return null;
       })}
