@@ -18,6 +18,7 @@ function Dropdown(props: DropdownProps) {
     color = DROPDOWN_COLOR,
     className,
     menu,
+    menuProps,
     ...attrs
   } = props;
   const renderContent = () => {
@@ -25,7 +26,7 @@ function Dropdown(props: DropdownProps) {
       return typeof render === 'function' ? render() : render;
     }
     if (menu) {
-      return <DropdownMenu menu={menu} />;
+      return <DropdownMenu menu={menu} menuProps={menuProps} />;
     }
     return content;
   };

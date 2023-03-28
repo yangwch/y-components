@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { DividerProps } from '../Divider';
-import { MenuGroupProps, MenuItemProps } from '../Menu';
+import { MenuGroupProps, MenuItemProps, MenuProps, SubMenuProps } from '../Menu';
 import { Placement } from '../Popup';
 import { TooltipProps } from '../Tooltip';
 
@@ -30,6 +30,11 @@ interface DropdownProps extends TooltipProps {
    * @type DropdownMenuItem[]
    */
   menu?: DropdownMenuItem[];
+  /**
+   * json使用方式给传给Menu的属性
+   * @type MenuProps
+   */
+  menuProps: MenuProps;
 }
 
 interface MenuItem extends Omit<MenuItemProps, 'children'> {
@@ -42,11 +47,17 @@ interface MenuGroup extends Omit<MenuGroupProps, 'children'> {
   name?: string;
 }
 
+interface SubMenu extends Omit<SubMenuProps, 'children' | 'title'> {
+  node: 'submenu';
+  name?: string;
+  children: DropdownMenuItem[];
+}
+
 interface Divider extends Omit<DividerProps, 'children'> {
   node: 'divider';
   name?: string;
 }
 
-type DropdownMenuItem = MenuItem | MenuGroup | Divider;
+type DropdownMenuItem = MenuItem | SubMenu | MenuGroup | Divider;
 
 export { DropdownProps, DropdownMenuItem };

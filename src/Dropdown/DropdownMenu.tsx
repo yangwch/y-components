@@ -1,39 +1,50 @@
 import React from 'react';
 import Divider from '../Divider';
-import { Menu } from '../Menu';
+import { Menu, MenuProps, SubMenu } from '../Menu';
 import identity from '../_utils/identity';
 import { DropdownMenuItem } from './interface';
 interface DropdownMenuProps {
   menu: DropdownMenuItem[];
+  menuProps: MenuProps;
+}
+function MenuItemRenderer(item: DropdownMenuItem) {
+  const { node, name, ...attrs } = item;
+  if (item.node === 'item') {
+    return <Menu.Item {...attrs}>{item.name}</Menu.Item>;
+  }
+  if (item.node === 'divider') {
+    return <Divider {...attrs}>{item.name}</Divider>;
+  }
+  if (item.node === 'group') {
+    return <Menu.Group {...attrs}>{item.name}</Menu.Group>;
+  }
+  if (item.node === 'submenu') {
+    const { children, name, ...attrs } = item;
+    return (
+      <SubMenu title={name} {...attrs}>
+        {children.map((child) => (
+          <MenuItemRenderer
+            key={`dropdown-key-${('eventKey' in child && child.eventKey) || identity.create()}`}
+            {...child}
+          />
+        ))}
+      </SubMenu>
+    );
+  }
+
+  return null;
 }
 function DropdownMenu(props: DropdownMenuProps) {
-  const { menu } = props;
+  const { menu, menuProps } = props;
   return (
-    <Menu>
+    <Menu {...menuProps}>
       {menu.map((item) => {
-        const { node, name, ...attrs } = item;
-        if (item.node === 'item') {
-          return (
-            <Menu.Item key={item.eventKey || `dropdown-${identity.create()}`} {...attrs}>
-              {item.name}
-            </Menu.Item>
-          );
-        }
-        if (item.node === 'divider') {
-          return (
-            <Divider key={`dropdown-${identity.create()}`} {...attrs}>
-              {item.name}
-            </Divider>
-          );
-        }
-        if (item.node === 'group') {
-          return (
-            <Menu.Group key={`dropdown-${identity.create()}`} {...attrs}>
-              {item.name}
-            </Menu.Group>
-          );
-        }
-        return null;
+        return (
+          <MenuItemRenderer
+            key={`dropdown-key-${('eventKey' in item && item.eventKey) || identity.create()}`}
+            {...item}
+          />
+        );
       })}
     </Menu>
   );

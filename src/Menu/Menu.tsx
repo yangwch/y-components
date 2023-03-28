@@ -127,10 +127,10 @@ function InternalMenu(props: MenuProps, ref?: React.LegacyRef<HTMLUListElement>)
       startTransition(() => {
         const isSelected = selectedKeys.includes(key);
         if (isSelected) {
-          setSelectedKeys(selectedKeys.filter((k) => k !== key));
-          setActiveKey('');
+          setSelectedKeys(multiple ? selectedKeys.filter((k) => k !== key) : [key]);
+          setActiveKey(multiple ? '' : key);
         } else {
-          setSelectedKeys(selectedKeys.concat(key));
+          setSelectedKeys(multiple ? selectedKeys.concat(key) : [key]);
           setActiveKey(key);
         }
       });
