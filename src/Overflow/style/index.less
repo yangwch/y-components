@@ -1,0 +1,18 @@
+@import '../../style/themes/index.less';
+
+@overflow-prefix-cls: ~'@{prefix}-overflow';
+
+.@{overflow-prefix-cls} {
+  overflow: hidden;
+  white-space: nowrap;
+
+  &-item,
+  &-rest {
+    display: inline-block;
+    &-hidden {
+      width: 0;
+      height: 0;
+      overflow: hidden;
+    }
+  }
+}

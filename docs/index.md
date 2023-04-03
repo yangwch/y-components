@@ -1,4 +1,3 @@
-
 ## Hello y-components!
 
 ## Install
@@ -6,7 +5,9 @@
 ```bash
 $ npm i @yangwch/y-components
 ```
+
 demo:
+
 ```code
 
 import React from 'react';
@@ -21,18 +22,26 @@ export default () => {
 ```
 
 ## Components List
-* Button
-* Card
-* Checkbox
-* Divider
-* Form
-* Grid
-* Input
-* Space
-* Tag
-* More building...
+
+- Button
+- Card
+- Checkbox
+- Divider
+- Form
+- Grid
+- Input
+- Space
+- Tag
+- Switch
+- Menu
+- Dropdown
+- Popup
+- Tooltip
+- Dialog
+- Overflow
+- More building...
+
 ## 🔗 Links
 
 - [Github](https://github.com/yangwch/y-components)
 - [Issues](https://github.com/yangwch/y-components/issues)
-
