@@ -21,6 +21,8 @@ const getOverflowItemWidth = (el: Element) => {
 export const calcVisibleCount = (
   rootWidth: number,
   restWidth: number,
+  suffixWidth: number,
+  prefixWidth: number,
   itemsLength: number,
   domsData: Record<number, Element>,
 ): number => {
@@ -28,12 +30,15 @@ export const calcVisibleCount = (
     return 0;
   }
   let count = 0;
-  let currentWidth = restWidth;
+  let currentWidth = suffixWidth + prefixWidth;
   for (let i = 0; i < itemsLength; i++) {
     const element = domsData[i];
     if (element) {
       const w = getOverflowItemWidth(element);
       if (w + currentWidth >= rootWidth) {
+        break;
+      }
+      if (i > 0 && i < itemsLength - 1 && currentWidth + w + restWidth >= rootWidth) {
         break;
       }
       count += 1;

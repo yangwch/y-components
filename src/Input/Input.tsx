@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React from 'react';
 import { settings } from '../_utils/global';
 import { sizeClassNameMap, SizeType } from '../_utils/size';
 
@@ -13,11 +13,11 @@ interface InputProps extends Omit<React.HTMLAttributes<HTMLInputElement>, 'prefi
   /**
    * 输入框值
    */
-  value?: string;
+  value?: any;
   /**
    * 输入框默认值
    */
-  defaultValue?: string;
+  defaultValue?: any;
   /**
    * 是否显示边框
    * @default true
@@ -44,13 +44,8 @@ const Input = React.forwardRef(function InternalInput(
   props: InputProps,
   ref: React.ForwardedRef<HTMLInputElement>,
 ) {
-  const { className, value: customValue, bordered, disabled, size, style, prefix, ...rest } = props;
-  const [value, setValue] = useState('value' in props ? customValue : '');
-  useEffect(() => {
-    if ('value' in props) {
-      setValue(customValue);
-    }
-  }, [customValue]);
+  const { className, bordered, disabled, size, style, prefix, ...rest } = props;
+
   const classes = classNames(className, inputPrefix, {
     [`${inputPrefix}-disabled`]: disabled,
     [`${inputPrefix}-${sizeClassNameMap[size || 'middle']}`]: !!sizeClassNameMap[size || 'middle'],
@@ -61,17 +56,10 @@ const Input = React.forwardRef(function InternalInput(
     return <span className={`${inputPrefix}-prefix`}>{prefix}</span>;
   };
 
-  const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setValue(value);
-    if (props.onChange) {
-      props.onChange(e);
-    }
-  };
   return (
     <span className={classes} style={style}>
       {renderPrefix()}
-      <input value={value} onChange={onChangeHandler} ref={ref} disabled={disabled} {...rest} />
+      <input ref={ref} disabled={disabled} {...rest} />
     </span>
   );
 });

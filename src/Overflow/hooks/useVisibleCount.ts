@@ -9,8 +9,10 @@ interface Props<ItemType> {
 const useVisibleCount = <ItemType>(props: Props<ItemType>) => {
   const { maxLength: customMaxLength, items, ref } = props;
   const rootRef = useRef<Element | null>(null);
-  const restRef = useRef<HTMLDivElement | null>(null);
+  const restRef = useRef<Element | null>(null);
   const itemsRef = useRef<Record<number, Element>>({});
+  const suffixRef = useRef<Element | null>(null);
+  const prefixRef = useRef<Element | null>(null);
   const [visibleCount, setVisibleCount] = useState<number>(0);
 
   const rootRefHandler = useCallback(
@@ -50,9 +52,13 @@ const useVisibleCount = <ItemType>(props: Props<ItemType>) => {
       return;
     }
     const restWidth = restRef.current ? getDomWidth(restRef.current) : 0;
+    const suffixWidth = suffixRef.current ? getDomWidth(suffixRef.current) : 0;
+    const prefixWidth = prefixRef.current ? getDomWidth(prefixRef.current) : 0;
     const currentVisibleCount = calcVisibleCount(
       rootWidth,
       restWidth,
+      suffixWidth,
+      prefixWidth,
       items.length,
       itemsRef.current,
     );
@@ -65,6 +71,8 @@ const useVisibleCount = <ItemType>(props: Props<ItemType>) => {
     maxLength,
     setItemRef,
     restRef,
+    suffixRef,
+    prefixRef,
   };
 };
 
