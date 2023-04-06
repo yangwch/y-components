@@ -9,14 +9,10 @@ interface Props<ItemType> {
 const useVisibleCount = <ItemType>(props: Props<ItemType>) => {
   const { maxLength: customMaxLength, items, ref } = props;
   const rootRef = useRef<Element | null>(null);
-  // const restRef = useRef<Element | null>(null);
   const [itemsSize, setItemsSize] = useState<Record<number, number>>({});
   const [suffixWidth, setSuffixWidth] = useState<number>(0);
   const [prefixWidth, setPrefixWidth] = useState<number>(0);
   const [restWidth, setRestWidth] = useState<number>(0);
-  // remove
-  const suffixRef = useRef<Element | null>(null);
-  const prefixRef = useRef<Element | null>(null);
   const [visibleCount, setVisibleCount] = useState<number>(0);
 
   const rootRefHandler = useCallback(
@@ -44,6 +40,9 @@ const useVisibleCount = <ItemType>(props: Props<ItemType>) => {
     (index: number, el: Element) => {
       const width = getOverflowItemWidth(el);
       setItemsSize((origin: Record<number, number>) => {
+        if (origin[index] === width) {
+          return origin;
+        }
         return {
           ...origin,
           [index]: width,
@@ -64,8 +63,6 @@ const useVisibleCount = <ItemType>(props: Props<ItemType>) => {
       }
       return;
     }
-    const suffixWidth = suffixRef.current ? getDomWidth(suffixRef.current) : 0;
-    const prefixWidth = prefixRef.current ? getDomWidth(prefixRef.current) : 0;
     const currentVisibleCount = calcVisibleCount(
       rootWidth,
       restWidth,
@@ -77,7 +74,7 @@ const useVisibleCount = <ItemType>(props: Props<ItemType>) => {
     if (visibleCount !== currentVisibleCount) {
       setVisibleCount(currentVisibleCount);
     }
-  }, [maxLength, visibleCount, itemsSize, suffixWidth, prefixWidth]);
+  }, [maxLength, visibleCount, itemsSize, suffixWidth, prefixWidth, restWidth]);
 
   const setRestWidthHandler = useCallback(
     (el: Element) => {
@@ -88,14 +85,14 @@ const useVisibleCount = <ItemType>(props: Props<ItemType>) => {
 
   const setPrefixWidthHandler = useCallback(
     (el: Element) => {
-      setPrefixWidth(getDomWidth(el));
+      setPrefixWidth(getOverflowItemWidth(el));
     },
     [setPrefixWidth],
   );
 
   const setSuffixWidthHandler = useCallback(
     (el: Element) => {
-      setSuffixWidth(getDomWidth(el));
+      setSuffixWidth(getOverflowItemWidth(el));
     },
     [setSuffixWidth],
   );
@@ -106,8 +103,6 @@ const useVisibleCount = <ItemType>(props: Props<ItemType>) => {
     onRestWidthChange: setRestWidthHandler,
     onPrefixWidthChange: setPrefixWidthHandler,
     onSuffixWidthChange: setSuffixWidthHandler,
-    suffixRef,
-    prefixRef,
   };
 };
 

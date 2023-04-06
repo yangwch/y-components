@@ -75,7 +75,10 @@ function InternalOverflow<ItemType>(
   return (
     <Component ref={composedRef} className={rootCls} style={style}>
       {prefix && (
-        <Item className={`${overflowCls}-prefix`} onSizeChanged={onPrefixWidthChange}>
+        <Item
+          className={`${overflowCls}-item ${overflowCls}-prefix`}
+          onSizeChanged={onPrefixWidthChange}
+        >
           {prefix}
         </Item>
       )}
@@ -84,8 +87,11 @@ function InternalOverflow<ItemType>(
         {renderRest()}
       </Item>
       {suffix && (
-        <Item className={`${overflowCls}-suffix`} onSizeChanged={onSuffixWidthChange}>
-          {renderRest()}
+        <Item
+          className={`${overflowCls}-item ${overflowCls}-suffix`}
+          onSizeChanged={onSuffixWidthChange}
+        >
+          {suffix}
         </Item>
       )}
     </Component>

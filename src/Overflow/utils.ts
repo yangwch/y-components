@@ -41,7 +41,7 @@ export const calcVisibleCount = (
     if (w + currentWidth >= rootWidth) {
       break;
     }
-    if (i > 0 && i < itemsLength - 1 && currentWidth + w + restWidth >= rootWidth) {
+    if (i < itemsLength - 1 && currentWidth + w + restWidth >= rootWidth) {
       break;
     }
     count += 1;

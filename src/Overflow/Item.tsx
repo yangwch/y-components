@@ -6,7 +6,6 @@ interface ItemProps {
   className: string;
   component?: ComponentType;
   children: React.ReactNode;
-  setRef?: (el: Element) => void;
   onSizeChanged?: (el: Element) => void;
 }
 
@@ -18,15 +17,12 @@ const defaultOnSizeChanged = (el: Element) => {
 
 function Item(props: ItemProps) {
   const ref = useRef<Element | null>(null);
-  const { className, component: Component = 'div', setRef, onSizeChanged, children } = props;
+  const { className, component: Component = 'div', onSizeChanged, children } = props;
   useObserve({ el: ref.current, onSizeChanged: onSizeChanged || defaultOnSizeChanged });
   return (
     <Component
       className={className}
       ref={(el: any) => {
-        if (setRef) {
-          setRef(el);
-        }
         ref.current = el;
       }}
     >
