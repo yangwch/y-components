@@ -30,12 +30,18 @@ function InternalOverflow<ItemType>(
   } = props;
   const rootCls = classNames(overflowCls, className);
 
-  const { maxLength, setItemRef, composedRef, restRef, suffixRef, prefixRef } =
-    useVisibleCount<ItemType>({
-      ref,
-      items,
-      maxLength: customMaxLength,
-    });
+  const {
+    maxLength,
+    setItemSize,
+    composedRef,
+    onRestWidthChange,
+    onSuffixWidthChange,
+    onPrefixWidthChange,
+  } = useVisibleCount<ItemType>({
+    ref,
+    items,
+    maxLength: customMaxLength,
+  });
   const renderItems = () => {
     return items.map((item, i) => {
       let node = renderItem ? renderItem(item) : (item as ReactNode);
@@ -47,7 +53,7 @@ function InternalOverflow<ItemType>(
         <Item
           key={key}
           className={itemCls}
-          setRef={(el: Element) => setItemRef(i, el)}
+          onSizeChanged={(el: Element) => setItemSize(i, el)}
           component={itemComponent}
         >
           {node}
@@ -69,16 +75,16 @@ function InternalOverflow<ItemType>(
   return (
     <Component ref={composedRef} className={rootCls} style={style}>
       {prefix && (
-        <Item className={`${overflowCls}-prefix`} setRef={(el) => (prefixRef.current = el)}>
+        <Item className={`${overflowCls}-prefix`} onSizeChanged={onPrefixWidthChange}>
           {prefix}
         </Item>
       )}
       {renderItems()}
-      <Item className={`${overflowCls}-rest`} setRef={(el) => (restRef.current = el)}>
+      <Item className={`${overflowCls}-rest`} onSizeChanged={onRestWidthChange}>
         {renderRest()}
       </Item>
       {suffix && (
-        <Item className={`${overflowCls}-suffix`} setRef={(el) => (suffixRef.current = el)}>
+        <Item className={`${overflowCls}-suffix`} onSizeChanged={onSuffixWidthChange}>
           {renderRest()}
         </Item>
       )}

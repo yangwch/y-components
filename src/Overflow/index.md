@@ -33,7 +33,7 @@ export default () => {
       <div>
         show
         <Input
-          style={{ width: 60 }}
+          style={{ width: 60, margin: '2px 5px' }}
           max={10}
           type="number"
           defaultValue={itemsCount}

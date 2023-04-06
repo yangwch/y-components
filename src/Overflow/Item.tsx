@@ -6,7 +6,7 @@ interface ItemProps {
   className: string;
   component?: ComponentType;
   children: React.ReactNode;
-  setRef: (el: Element) => void;
+  setRef?: (el: Element) => void;
   onSizeChanged?: (el: Element) => void;
 }
 
