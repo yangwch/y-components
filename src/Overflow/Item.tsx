@@ -1,9 +1,11 @@
-import React, { useRef } from 'react';
+import React, { CSSProperties, useRef } from 'react';
 import useObserve from '../_utils/observe/useObserve';
+import useComposedRef from '../_utils/useComposedRef';
 import { ComponentType } from './interface';
 
 interface ItemProps {
   className: string;
+  style?: CSSProperties;
   component?: ComponentType;
   children: React.ReactNode;
   onSizeChanged?: (el: Element) => void;
@@ -15,20 +17,16 @@ const defaultOnSizeChanged = (el: Element) => {
   }
 };
 
-function Item(props: ItemProps) {
-  const ref = useRef<Element | null>(null);
-  const { className, component: Component = 'div', onSizeChanged, children } = props;
-  useObserve({ el: ref.current, onSizeChanged: onSizeChanged || defaultOnSizeChanged });
+function Item(props: ItemProps, ref: React.ForwardedRef<Element>) {
+  const { className, style, component: Component = 'div', onSizeChanged, children } = props;
+  const compRef = useRef<Element | null>(null);
+  const onSetRef = useComposedRef<Element>(compRef, ref);
+  useObserve({ el: compRef.current, onSizeChanged: onSizeChanged || defaultOnSizeChanged });
   return (
-    <Component
-      className={className}
-      ref={(el: any) => {
-        ref.current = el;
-      }}
-    >
+    <Component className={className} style={style} ref={onSetRef}>
       {children}
     </Component>
   );
 }
 
-export default Item;
+export default React.forwardRef(Item);

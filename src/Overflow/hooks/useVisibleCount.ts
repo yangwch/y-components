@@ -1,4 +1,4 @@
-import { useCallback, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useLayoutEffect, useMemo, useState } from 'react';
 import { calcVisibleCount, getDomWidth, getOverflowItemWidth } from '../utils';
 
 interface Props<ItemType> {
@@ -8,26 +8,12 @@ interface Props<ItemType> {
 }
 const useVisibleCount = <ItemType>(props: Props<ItemType>) => {
   const { maxLength: customMaxLength, items, ref } = props;
-  const rootRef = useRef<Element | null>(null);
+  const [rootWidth, setRootWidth] = useState<number>(0);
   const [itemsSize, setItemsSize] = useState<Record<number, number>>({});
   const [suffixWidth, setSuffixWidth] = useState<number>(0);
   const [prefixWidth, setPrefixWidth] = useState<number>(0);
   const [restWidth, setRestWidth] = useState<number>(0);
   const [visibleCount, setVisibleCount] = useState<number>(0);
-
-  const rootRefHandler = useCallback(
-    (el: Element) => {
-      rootRef.current = el;
-      if (ref) {
-        if (typeof ref === 'function') {
-          ref(el);
-        } else {
-          ref.current = el;
-        }
-      }
-    },
-    [ref],
-  );
 
   const maxLength = useMemo(() => {
     if (typeof customMaxLength === 'number') {
@@ -53,10 +39,9 @@ const useVisibleCount = <ItemType>(props: Props<ItemType>) => {
   );
 
   useLayoutEffect(() => {
-    if (!rootRef.current) {
+    if (!rootWidth) {
       return;
     }
-    const rootWidth = getDomWidth(rootRef.current);
     if (!rootWidth) {
       if (visibleCount !== 0) {
         setVisibleCount(0);
@@ -74,7 +59,7 @@ const useVisibleCount = <ItemType>(props: Props<ItemType>) => {
     if (visibleCount !== currentVisibleCount) {
       setVisibleCount(currentVisibleCount);
     }
-  }, [maxLength, visibleCount, itemsSize, suffixWidth, prefixWidth, restWidth]);
+  }, [maxLength, visibleCount, itemsSize, suffixWidth, prefixWidth, restWidth, rootWidth]);
 
   const setRestWidthHandler = useCallback(
     (el: Element) => {
@@ -96,8 +81,14 @@ const useVisibleCount = <ItemType>(props: Props<ItemType>) => {
     },
     [setSuffixWidth],
   );
+  const setRootWidthHandler = useCallback(
+    (el: Element) => {
+      setRootWidth(getOverflowItemWidth(el));
+    },
+    [setRootWidth],
+  );
   return {
-    composedRef: rootRefHandler,
+    onRootWidthChange: setRootWidthHandler,
     maxLength,
     setItemSize,
     onRestWidthChange: setRestWidthHandler,

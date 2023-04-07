@@ -33,10 +33,10 @@ function InternalOverflow<ItemType>(
   const {
     maxLength,
     setItemSize,
-    composedRef,
     onRestWidthChange,
     onSuffixWidthChange,
     onPrefixWidthChange,
+    onRootWidthChange,
   } = useVisibleCount<ItemType>({
     ref,
     items,
@@ -73,7 +73,7 @@ function InternalOverflow<ItemType>(
   };
 
   return (
-    <Component ref={composedRef} className={rootCls} style={style}>
+    <Item ref={ref} className={rootCls} style={style} onSizeChanged={onRootWidthChange}>
       {prefix && (
         <Item
           className={`${overflowCls}-item ${overflowCls}-prefix`}
@@ -94,7 +94,7 @@ function InternalOverflow<ItemType>(
           {suffix}
         </Item>
       )}
-    </Component>
+    </Item>
   );
 }
 

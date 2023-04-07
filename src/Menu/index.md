@@ -108,6 +108,9 @@ export default () => {
             <MenuItem eventKey="5-3-2">Menu 5-3-2</MenuItem>
           </SubMenu>
         </SubMenu>
+        <MenuItem eventKey="1-6">Menu 6</MenuItem>
+        <MenuItem eventKey="1-7">Menu 7</MenuItem>
+        <MenuItem eventKey="1-8">Menu 8</MenuItem>
       </Menu>
     </div>
   );

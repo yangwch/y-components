@@ -1,5 +1,12 @@
 import classNames from 'classnames';
-import React, { ChangeEvent, createRef, HTMLAttributes, ReactNode, useState } from 'react';
+import React, {
+  ChangeEvent,
+  createRef,
+  HTMLAttributes,
+  ReactNode,
+  useEffect,
+  useState,
+} from 'react';
 import { settings } from '../_utils/global';
 import { sizeClassNameMap, SizeType } from '../_utils/size';
 import './style/index.less';
@@ -40,6 +47,7 @@ export interface SwitchProps extends Omit<HTMLAttributes<HTMLInputElement>, 'onC
 
   /**
    * @description 变化时回调函数
+   * @type (checked: boolean) => void
    */
   onChange?: (checked: boolean) => void;
   /**
@@ -72,6 +80,10 @@ function InternalSwitch(props: SwitchProps, ref: React.ForwardedRef<HTMLInputEle
     return false;
   });
 
+  useEffect(() => {
+    setChecked(!!customChecked);
+  }, [customChecked]);
+
   const sizeTypeStr = sizeClassNameMap[size || 'middle'];
 
   const clsNames = classNames(
@@ -90,14 +102,14 @@ function InternalSwitch(props: SwitchProps, ref: React.ForwardedRef<HTMLInputEle
   const nativeControlClsNames = `${switchCls}-native-control`;
   const onChangeHandle = (e: ChangeEvent<HTMLInputElement>) => {
     const nativeChecked = e.target.checked;
+    if (onChange) {
+      onChange(nativeChecked);
+    }
     if (isControlled) {
       e.target.checked = checked;
       return;
     }
     setChecked(nativeChecked);
-    if (onChange) {
-      onChange(nativeChecked);
-    }
   };
   const showText = size !== 'small';
   return (
