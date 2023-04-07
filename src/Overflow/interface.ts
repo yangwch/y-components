@@ -10,12 +10,12 @@ export interface OverflowProps<ItemType> {
   /**
    * 外层组件类型
    * @default div
-   * @type keyof React.ReactHTML | React.FC<any> | React.ComponentType<any> | React.ForwardRefExoticComponent<any>
+   * @type string | React.FC<any> | React.ComponentType<any> | React.ForwardRefExoticComponent<any>
    */
   component?: ComponentType;
   /**
    * 每项的组件类型
-   * @type keyof React.ReactHTML | React.FC<any> | React.ComponentType<any> | React.ForwardRefExoticComponent<any>
+   * @type string | React.FC<any> | React.ComponentType<any> | React.ForwardRefExoticComponent<any>
    */
   itemComponent?: ComponentType;
   /**
@@ -24,6 +24,7 @@ export interface OverflowProps<ItemType> {
   className?: string;
   /**
    * 行内样式
+   * @type CSSProperties
    */
   style?: CSSProperties;
   /**
@@ -32,6 +33,7 @@ export interface OverflowProps<ItemType> {
   items?: ItemType[];
   /**
    * 每项key
+   * @type (item) => string
    * @default index
    */
   itemKey?: (item: ItemType) => string;
