@@ -51,7 +51,7 @@ const Popup = React.forwardRef<HTMLElement, PopupProps>((props: PopupProps, ref)
   const overlayRef = useRef<HTMLDivElement | null>(null);
   const forceUpdate = useForceUpdate();
 
-  const timerRef = useRef<number>();
+  const timerRef = useRef<number | NodeJS.Timer>();
 
   // 不强制渲染时，打开后，强制重新render一次，计算位置
   useEffect(() => {
