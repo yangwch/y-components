@@ -31,7 +31,54 @@ export default () => {
   return (
     <div style={{ width: 300, margin: '50px 0' }}>
       <div>
-        show
+        显示
+        <Input
+          style={{ width: 60, margin: '2px 5px' }}
+          max={10}
+          type="number"
+          defaultValue={itemsCount}
+          onChange={(e) => {
+            console.log('input', e.target.value);
+            setItemsCount(e.target.value);
+          }}
+        />项
+      </div>
+      <div style={{ border: '1px solid #0C0C0C' }}>
+        <Overflow items={items} renderItem={renderItem}></Overflow>
+      </div>
+    </div>
+  );
+};
+```
+
+## 动宽容器
+
+```jsx
+import React from 'react';
+import { Overflow, Tag, Input, Switch, Space } from '@yangwch/y-components';
+
+export default () => {
+  const [itemsCount, setItemsCount] = React.useState(15);
+  const [responsive, setResponsive] = React.useState(false);
+  const renderItem = (item) => {
+    return <div style={{ margin: 2, background: '#ccc' }}>{item.label}</div>;
+  };
+  const renderRest = (ommitedItems = []) => {
+    if (ommitedItems.length === 0) return null;
+    return <span style={{ background: 'lightblue' }}> +{ommitedItems.length}</span>;
+  };
+
+  const items = React.useMemo(() => {
+    const data = [];
+    for (let i = 0; i < itemsCount; i++) {
+      data.push({ label: 'item ' + (i + 1), value: 'item' + (i + 1) });
+    }
+    return data;
+  }, [itemsCount]);
+  return (
+    <>
+      <Space align="middle">
+        显示
         <Input
           style={{ width: 60, margin: '2px 5px' }}
           max={10}
@@ -42,12 +89,14 @@ export default () => {
             setItemsCount(e.target.value);
           }}
         />
-        items
+        项。 动宽容器： <Switch checked={responsive} onChange={setResponsive} />
+      </Space>
+      <div style={{ width: responsive ? '80%' : 300, margin: '0 0 50px 0' }}>
+        <div style={{ border: '1px solid #0C0C0C' }}>
+          <Overflow items={items} renderItem={renderItem}></Overflow>
+        </div>
       </div>
-      <div style={{ border: '1px solid #0C0C0C' }}>
-        <Overflow items={items} renderItem={renderItem}></Overflow>
-      </div>
-    </div>
+    </>
   );
 };
 ```
@@ -87,7 +136,7 @@ export default () => {
     <div style={{ margin: '50px auto' }}>
       <Space direction="vertical" align="start">
         <div>
-          show
+          显示
           <Input
             style={{ width: 60, margin: '2px 5px' }}
             max={10}
@@ -98,7 +147,7 @@ export default () => {
               setItemsCount(e.target.value);
             }}
           />
-          items.
+          项。
         </div>
         <div>
           prefix: <Input value={prefixContent} onInput={(e) => setPrefixContent(e.target.value)} />
@@ -116,56 +165,6 @@ export default () => {
         </div>
       </Space>
     </div>
-  );
-};
-```
-
-## Responsive
-
-```jsx
-import React from 'react';
-import { Overflow, Tag, Input, Switch, Space } from '@yangwch/y-components';
-
-export default () => {
-  const [itemsCount, setItemsCount] = React.useState(15);
-  const [responsive, setResponsive] = React.useState(false);
-  const renderItem = (item) => {
-    return <div style={{ margin: 2, background: '#ccc' }}>{item.label}</div>;
-  };
-  const renderRest = (ommitedItems = []) => {
-    if (ommitedItems.length === 0) return null;
-    return <span style={{ background: 'lightblue' }}> +{ommitedItems.length}</span>;
-  };
-
-  const items = React.useMemo(() => {
-    const data = [];
-    for (let i = 0; i < itemsCount; i++) {
-      data.push({ label: 'item ' + (i + 1), value: 'item' + (i + 1) });
-    }
-    return data;
-  }, [itemsCount]);
-  return (
-    <>
-      <Space align="middle">
-        show
-        <Input
-          style={{ width: 60, margin: '2px 5px' }}
-          max={10}
-          type="number"
-          defaultValue={itemsCount}
-          onChange={(e) => {
-            console.log('input', e.target.value);
-            setItemsCount(e.target.value);
-          }}
-        />
-        items. Responsive: <Switch checked={responsive} onChange={setResponsive} />
-      </Space>
-      <div style={{ width: responsive ? '' : 300, margin: '0 0 50px 0' }}>
-        <div style={{ border: '1px solid #0C0C0C' }}>
-          <Overflow items={items} renderItem={renderItem}></Overflow>
-        </div>
-      </div>
-    </>
   );
 };
 ```
