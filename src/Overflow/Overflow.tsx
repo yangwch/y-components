@@ -98,6 +98,12 @@ function InternalOverflow<ItemType>(
   );
 }
 
-const Overflow = React.forwardRef(InternalOverflow);
+type ForwardOverflowType = <ItemType = any>(
+  props: React.PropsWithChildren<OverflowProps<ItemType>> & {
+    ref?: React.Ref<HTMLDivElement>;
+  },
+) => React.ReactElement;
+
+const Overflow = React.forwardRef(InternalOverflow) as ForwardOverflowType;
 
 export { Overflow };
