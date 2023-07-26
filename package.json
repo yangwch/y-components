@@ -15,7 +15,7 @@
     "start": "dumi dev",
     "docs:build": "dumi build",
     "docs:deploy": "gh-pages -d docs-dist",
-    "build": "father build & npm run build:css",
+    "build": "father build & npm run build:umd",
     "deploy": "npm run docs:build && npm run docs:deploy",
     "prettier": "prettier --write \"**/*.{js,jsx,tsx,ts,less,md,json}\"",
     "test": "umi-test",
@@ -23,7 +23,7 @@
     "test:coverage": "umi-test --coverage",
     "prepublishOnly": "npm run build",
     "prepare": "dumi setup",
-    "build:css": "webpack --config config/webpack.config.prod.js"
+    "build:umd": "webpack --config config/webpack.config.prod.js"
   },
   "files": [
     "dist"
@@ -60,7 +60,7 @@
     "@umijs/fabric": "^2.8.1",
     "@umijs/test": "^3.0.5",
     "css-loader": "^6.7.3",
-    "dumi": "^2.0.13",
+    "dumi": "^2.2.1",
     "father": "^4.1.2",
     "gh-pages": "^3.0.0",
     "less-loader": "^11.1.0",

@@ -39,7 +39,6 @@ export default () => {
 - Tooltip
 - Dialog
 - Overflow
-- More building...
 
 ## 🔗 Links
 
