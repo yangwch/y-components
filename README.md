@@ -2,13 +2,13 @@
 
 ## Getting Started
 
-Install dependencies,
+Install dependencies
 
 ```bash
 $ npm i @yangwch/y-components
 ```
 
-demo
+## Demo
 
 ```jsx
 import React from 'react';
@@ -45,6 +45,3 @@ Written in TypeScript with complete definitions.
 - Dialog
 - Popup
 - Tooltip
-- More building...
-  - Dropdown ...
-  - Select ...

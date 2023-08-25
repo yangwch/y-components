@@ -7,6 +7,7 @@ export * from './Dropdown';
 export * from './Form';
 export { Col, Row } from './Grid';
 export { default as Input } from './Input';
+export { default as Layout } from './Layout';
 export * from './Menu';
 export * from './Overflow';
 export * from './Popup';
