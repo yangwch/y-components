@@ -1,12 +1,12 @@
 import classNames from 'classnames';
-import React from 'react';
+import React, { HTMLInputTypeAttribute } from 'react';
 import { settings } from '../_utils/global';
 import { sizeClassNameMap, SizeType } from '../_utils/size';
 
 export const inputPrefix = `${settings.prefix}-input`;
 
 interface InputProps extends Omit<React.HTMLAttributes<HTMLInputElement>, 'prefix'> {
-  type?: 'string';
+  type?: HTMLInputTypeAttribute;
   /**
    * 类名
    */
