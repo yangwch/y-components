@@ -11,6 +11,12 @@
   overflow: auto;
   // display: none;
   animation: all 0.3s;
+  &.visible {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    z-index: 1000;
+  }
 
   &.visible {
     display: block;
@@ -20,7 +26,6 @@
     position: fixed;
     top: 0;
     bottom: 0;
-    z-index: 1000;
     height: 100%;
     background-color: @dialog-mask-background-color;
     inset-inline-end: 0;
@@ -36,11 +41,19 @@
     padding-bottom: @dialog-content-top;
     overflow: auto;
     outline: 0;
+    pointer-events: none;
     inset-inline-end: 0;
     inset-inline-start: 0;
     -webkit-overflow-scrolling: touch;
+    &.centered {
+      top: 50%;
+      padding-bottom: 0;
+      transform: translate(0, -50%);
+    }
+
     .@{card-cls} {
       border-radius: @dialog-content-border-radius;
+      pointer-events: all;
     }
   }
 

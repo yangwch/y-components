@@ -9,6 +9,9 @@ export interface DialogProps {
   keyboard?: boolean;
   style?: CSSProperties;
   mask?: boolean;
+
+  centered?: boolean;
+
   children?: any;
   closeIcon?: ReactNode;
   afterClose?: () => any;

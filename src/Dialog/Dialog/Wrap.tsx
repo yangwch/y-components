@@ -13,12 +13,23 @@ interface WrapProps {
   onClose?: (event: MouseEvent<HTMLButtonElement>) => void;
   closeIcon?: ReactNode;
   closable?: boolean;
+  centered?: boolean;
 }
 
 function Wrap(props: WrapProps) {
-  const { prefixCls, children, style, className, title, onClose, closeIcon, closable } = props;
+  const { prefixCls, children, style, className, title, onClose, closeIcon, closable, centered } =
+    props;
   return (
-    <div className={classNames(`${prefixCls}-content`, className)} style={style}>
+    <div
+      className={classNames(
+        `${prefixCls}-content`,
+        {
+          centered: centered,
+        },
+        className,
+      )}
+      style={style}
+    >
       <Card tabIndex={-1}>
         {closable ? (
           <CloseButton prefixCls={prefixCls} onClick={onClose}>

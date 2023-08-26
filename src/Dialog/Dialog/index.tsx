@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import React, { CSSProperties, useCallback, useEffect, useMemo, useState } from 'react';
 import { settings } from '../../_utils/global';
+import IdentifyCreator from '../../_utils/identity';
 import Motion from '../../_utils/Motion';
 import Portal from '../../_utils/Portal';
 import { DialogProps } from '../interface';
@@ -21,6 +22,7 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
     destroyOnClose,
     rootClassName,
     mask = true,
+    centered,
     maskClassName,
     maskStyle,
     contentStyle = {},
@@ -78,7 +80,10 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
     },
     [maskClosable],
   );
-  const zIndexValue = 'zIndex' in props ? zIndex : 1000;
+  // z-index
+  const zIndexValue = useMemo(() => {
+    return 'zIndex' in props ? zIndex : 1000 + IdentifyCreator.getInstance().create();
+  }, [props.zIndex]);
   const maskStyleValue: CSSProperties = useMemo(
     () => ({
       ...maskStyle,
@@ -129,7 +134,7 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
   };
   return (
     <Portal getContainer={getContainer}>
-      <div className={rootCls}>
+      <div className={rootCls} style={{ zIndex: zIndexValue }}>
         <Mask
           visible={visible && mask}
           prefixCls={dialogPrefix}
@@ -148,10 +153,11 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
             prefixCls={dialogPrefix}
             className={className}
             closeIcon={closeIcon}
-            style={{ width, zIndex: zIndexValue, ...contentStyle }}
+            style={{ width, ...contentStyle }}
             title={title}
             onClose={onCloseHandler}
             closable={closable}
+            centered={centered}
           >
             <Content prefixCls={dialogPrefix} style={bodyStyle} className={bodyClassName}>
               {children}

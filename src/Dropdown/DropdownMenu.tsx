@@ -24,7 +24,9 @@ function MenuItemRenderer(item: DropdownMenuItem) {
       <SubMenu title={name} {...attrs}>
         {children.map((child) => (
           <MenuItemRenderer
-            key={`dropdown-key-${('eventKey' in child && child.eventKey) || identity.create()}`}
+            key={`dropdown-key-${
+              ('eventKey' in child && child.eventKey) || identity.getInstance().create()
+            }`}
             {...child}
           />
         ))}
@@ -41,7 +43,9 @@ function DropdownMenu(props: DropdownMenuProps) {
       {menu.map((item) => {
         return (
           <MenuItemRenderer
-            key={`dropdown-key-${('eventKey' in item && item.eventKey) || identity.create()}`}
+            key={`dropdown-key-${
+              ('eventKey' in item && item.eventKey) || identity.getInstance().create()
+            }`}
             {...item}
           />
         );
