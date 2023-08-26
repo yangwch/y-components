@@ -60,7 +60,16 @@ const Button = React.forwardRef(function Button(
   props: ButtonProps,
   ref: React.ForwardedRef<HTMLButtonElement>,
 ) {
-  const { type = 'default', children, danger = false, disabled, size, className, ...rest } = props;
+  const {
+    type = 'default',
+    htmlType,
+    children,
+    danger = false,
+    disabled,
+    size,
+    className,
+    ...rest
+  } = props;
 
   const clsNames = classNames(
     {
@@ -74,7 +83,7 @@ const Button = React.forwardRef(function Button(
     className,
   );
   return (
-    <button className={clsNames} disabled={!!disabled} ref={ref} {...rest}>
+    <button type={htmlType} className={clsNames} disabled={!!disabled} ref={ref} {...rest}>
       {children}
     </button>
   );
