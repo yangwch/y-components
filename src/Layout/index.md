@@ -10,15 +10,35 @@ import React from 'react';
 import { Layout } from '@yangwch/y-components';
 
 const { Header, Content, Sider, Footer } = Layout;
+const headerStyle = {
+  textAlign: 'center',
+  paddingInline: 50,
+  lineHeight: '50px',
+  height: 50,
+  backgroundColor: 'rgb(125, 188, 234)',
+};
+const siderStyle = {
+  width: 100,
+};
+
+const contentStyle = {
+  padding: 10,
+};
 
 export default () => {
   return (
-    <div style={{ height: 300 }}>
+    <div style={{ background: 'rgb(125, 188, 234)' }}>
       <Layout>
-        <Header>this is Header</Header>
+        <Header style={headerStyle}>Header</Header>
         <Layout>
-          <Sider>Sider</Sider>
-          <Content>Content</Content>
+          <Sider style={siderStyle}>Sider</Sider>
+          <Content style={contentStyle}>
+            <p>Content</p>
+            <p>Content</p>
+            <p>Content</p>
+            <p>Content</p>
+            <p>Content</p>
+          </Content>
         </Layout>
         <Footer>Footer</Footer>
       </Layout>

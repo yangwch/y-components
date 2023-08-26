@@ -15,7 +15,7 @@
   & &-header {
     flex: 0 0 auto;
     height: @layout-header-height;
-    border-bottom: 1px solid #eee;
+    border-bottom: @layout-border;
   }
 
   & &-content {
@@ -25,6 +25,13 @@
   & &-sider {
     flex: 0 0 auto;
     min-width: 0;
+    border-right: @layout-border;
     transition: all 0.2s;
+  }
+
+  & &-footer {
+    padding: 28px 0;
+    text-align: center;
+    border-top: @layout-border;
   }
 }
