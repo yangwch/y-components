@@ -70,7 +70,7 @@ export interface FormItemProps {
   /**
    * 表单项 name 属性
    */
-  name: string;
+  name?: string;
   /**
    * 校验规则，参考{@link https://github.com/yiminghe/async-validator#rules}
    * @type RuleItem | RuleItem[]
@@ -123,14 +123,22 @@ function InternalFormItem(props: FormItemProps) {
   if (!form) {
     return null;
   }
-  const onFieldValueChange = useCallback(
-    (value: any) => {
-      form.setFieldValue(name, value);
-    },
-    [name, form],
+  const onFieldValueChangeGenerator = useCallback(
+    (props: any) =>
+      (e: any, ...attrs: any[]) => {
+        if (name) {
+          // 兼容原生事件
+          form.setFieldValue(name, e && e.target ? e.target.value : e);
+        }
+        // trigger onchange event
+        if (props.onChange && typeof props.onChange === 'function') {
+          props.onChange(e, ...attrs);
+        }
+      },
+    [form, name],
   );
 
-  const errors = form.getErrors()[name] || [];
+  const errors = name ? form.getErrors()[name] || [] : [];
 
   const classes = classNames(
     formItemPrefix,
@@ -149,7 +157,7 @@ function InternalFormItem(props: FormItemProps) {
       return React.cloneElement(children, {
         ...children.props,
         value: value,
-        onChange: onFieldValueChange,
+        onChange: onFieldValueChangeGenerator(children.props),
       });
     } else {
       console.warn('Form item children is not a valid ReactElement');

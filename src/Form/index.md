@@ -91,6 +91,71 @@ export default () => {
 };
 ```
 
+## Layout
+
+```jsx
+import React from 'react';
+
+import { Form, Input, Button } from '@yangwch/y-components';
+
+const labelCol = { span: 5, style: { padding: 5, fontSize: 14 } };
+
+const wrapperCol = { span: 10, style: { fontSize: 14 } };
+
+export default () => {
+  const form = Form.useForm();
+  const onSubmit = () => {
+    form
+      .validateFields()
+      .then((values) => {
+        console.log(values);
+      })
+      .catch(({ errors }) => {
+        // setValues()
+      });
+  };
+  return (
+    <Form
+      form={form}
+      initialValues={{ username: '', password: '' }}
+      name="login"
+      labelCol={labelCol}
+      wrapperCol={wrapperCol}
+    >
+      <Form.Item
+        name="username"
+        label="用户名"
+        rule={{
+          required: true,
+          type: 'string',
+          message: '姓名是必填项，长度为2-15!',
+          min: 2,
+          max: 15,
+        }}
+      >
+        <Input placeholder="Username" />
+      </Form.Item>
+      <Form.Item
+        name="password"
+        label="密&nbsp;&nbsp;&nbsp;码"
+        rule={{
+          required: true,
+          type: 'string',
+          message: '密码是必填项，长度3-20',
+          min: 3,
+          max: 20,
+        }}
+      >
+        <Input type="password" placeholder="Password" />
+      </Form.Item>
+      <Form.Item>
+        <Button onClick={onSubmit}>提交</Button>
+      </Form.Item>
+    </Form>
+  );
+};
+```
+
 ## Inline
 
 ```jsx
