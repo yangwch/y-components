@@ -16,6 +16,7 @@ export default () => {
     <Space direction="vertical" align="start">
       <Input placeholder="请输入文字" size="large" style={{ width: '100%' }} prefix={'🚫'} />
       <Input placeholder="disabled" disabled />
+      <Input type="password" />
     </Space>
   );
 };

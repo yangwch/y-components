@@ -6,6 +6,7 @@ import { sizeClassNameMap, SizeType } from '../_utils/size';
 export const inputPrefix = `${settings.prefix}-input`;
 
 interface InputProps extends Omit<React.HTMLAttributes<HTMLInputElement>, 'prefix'> {
+  type?: 'string';
   /**
    * 类名
    */
