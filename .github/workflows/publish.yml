@@ -1,14 +1,16 @@
 name: Build and Publish to NPM
 
 on:
-  # Runs on pushes tags
-  push:
-    tags:
-      - v0.*
-      - v1.*
-
+  release:
+    types: [created]
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+
+  # Runs on pushes tags
+  # push:
+  #   tags:
+  #     - v0.*
+  #     - v1.*
 
 jobs:
   build-and-publish:
@@ -16,14 +18,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-
-      - name: Build and Publish
+      - name: Setup Node
         uses: actions/setup-node@v3
-      - run: |
-          node -v
-          npm -v
-          npm install
-          npm run build
-          npm publish
+        with:
+          node-version: '14.x'
+          registry-url: 'https://registry.npmjs.org'
+      - name: Install dependencies and build 🔧
+        run: npm install && npm run build
+      - name: Publish package on NPM 📦
+        run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
