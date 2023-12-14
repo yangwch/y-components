@@ -44,7 +44,7 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = (props: CheckboxGroupProps) 
 
   useEffect(() => {
     setChecked(getDefValue());
-  }, [defaultValue, value]);
+  }, [value]);
 
   const checkHandler = useCallback(
     (values: string[]) => {
