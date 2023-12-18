@@ -1,11 +1,11 @@
-import { CSSProperties, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { CSSProperties, MutableRefObject, useEffect, useRef, useState } from 'react';
 import { GetContainer } from '../../_utils/Portal';
 import { AdjustConfig, Placement } from '../interface';
 import { calcPopupPosition, getContainerElement } from '../utils';
 
 interface Props {
-  trigger: HTMLElement | null;
-  overlay: HTMLDivElement | null;
+  triggerRef: MutableRefObject<HTMLElement | null>;
+  overlayRef: MutableRefObject<HTMLElement | null>;
   open: boolean;
   placement?: Placement;
   getPopupContainer?: GetContainer;
@@ -16,8 +16,8 @@ interface Props {
 }
 function usePosition(props: Props) {
   const {
-    trigger,
-    overlay,
+    triggerRef,
+    overlayRef,
     open,
     placement = 'top',
     getPopupContainer,
@@ -31,8 +31,8 @@ function usePosition(props: Props) {
   const container = getContainerElement(getPopupContainer);
   const placementRef = useRef<Placement>(placement);
 
-  useLayoutEffect(() => {
-    if (!open || !trigger || !overlay || !container) return;
+  useEffect(() => {
+    if (!open || !triggerRef.current || !overlayRef.current || !container) return;
     const {
       left,
       top,
@@ -40,8 +40,8 @@ function usePosition(props: Props) {
     } = calcPopupPosition(
       placement,
       container,
-      trigger,
-      overlay,
+      triggerRef.current,
+      overlayRef.current,
       offsetX,
       offsetY,
       autoAdjustPlacements,
@@ -60,8 +60,6 @@ function usePosition(props: Props) {
     container,
     overlayStyle,
     placement,
-    trigger,
-    overlay,
     offsetX,
     offsetY,
     autoAdjustPlacements,
@@ -80,8 +78,8 @@ function usePosition(props: Props) {
       }
       timer = setTimeout(() => {
         const {
-          trigger,
-          overlay,
+          triggerRef,
+          overlayRef,
           open,
           placement = 'top',
           getPopupContainer,
@@ -91,7 +89,7 @@ function usePosition(props: Props) {
         } = propsRef.current;
         const container = getContainerElement(getPopupContainer);
         if (!open) return;
-        if (!container || !trigger || !overlay) return;
+        if (!container || !triggerRef.current || !overlayRef.current) return;
         const {
           left,
           top,
@@ -99,8 +97,8 @@ function usePosition(props: Props) {
         } = calcPopupPosition(
           placement,
           container,
-          trigger,
-          overlay,
+          triggerRef.current,
+          overlayRef.current,
           offsetX,
           offsetY,
           autoAdjustPlacements,
@@ -115,7 +113,7 @@ function usePosition(props: Props) {
     }
     document.addEventListener('scroll', onScroll);
     window.addEventListener('resize', onScroll);
-    const offsetParent = trigger?.offsetParent;
+    const offsetParent = triggerRef.current?.offsetParent;
     if (offsetParent && offsetParent !== document.body) {
       offsetParent.addEventListener('scroll', onScroll);
     }
@@ -127,7 +125,7 @@ function usePosition(props: Props) {
         offsetParent.removeEventListener('scroll', onScroll);
       }
     };
-  }, [trigger]);
+  }, []);
   return { overlayStyle };
 }
 

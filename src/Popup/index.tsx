@@ -64,8 +64,8 @@ const Popup = React.forwardRef<HTMLElement, PopupProps>((props: PopupProps, ref)
   }, [open, forceRender, isControlled, visible]);
 
   const { overlayStyle } = usePosition({
-    trigger: triggerRef.current,
-    overlay: overlayRef.current,
+    triggerRef,
+    overlayRef,
     open,
     placement,
     getPopupContainer,

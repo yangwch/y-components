@@ -32,7 +32,6 @@ const Overlay = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
     <Portal open={open} autoDestroy={autoDestroy} getContainer={getPopupContainer}>
       <CSSMotion
         open={!!open}
-        ref={ref}
         transitionName={transitionName}
         transitionTimeout={transitionName ? transitionTimeout : 0}
       >
