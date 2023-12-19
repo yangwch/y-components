@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import React, { PointerEvent, ReactElement, useCallback, useEffect, useRef, useState } from 'react';
 import { settings } from '../_utils/global';
+import useComposedRef from '../_utils/useComposedRef';
 import useForceUpdate from '../_utils/useForceUpate';
 import {
   OFFSETX,
@@ -10,7 +11,6 @@ import {
   TRIGGER_DEFAULT_VALUE,
 } from './constant';
 import usePosition from './hooks/usePosition';
-import useTriggerRef from './hooks/useTriggerRef';
 import { PopupProps } from './interface';
 import Overlay from './Overlay';
 import './style/index.less';
@@ -41,13 +41,16 @@ const Popup = React.forwardRef<HTMLElement, PopupProps>((props: PopupProps, ref)
   } = props;
   const isControlled = 'visible' in props;
 
+  // ref for trigger
+  const triggerRef = useRef<HTMLElement>(null);
+  const composedTriggerRef = useComposedRef<HTMLElement>(ref, triggerRef);
+
   const [open, setOpen] = useState<boolean>(() => {
     if (isControlled) return !!visible;
     if ('defaultVisible' in props) return !!defaultVisible;
     return false;
   });
 
-  const { setRef, ref: triggerRef } = useTriggerRef(ref);
   const overlayRef = useRef<HTMLDivElement | null>(null);
   const forceUpdate = useForceUpdate();
 
@@ -125,7 +128,7 @@ const Popup = React.forwardRef<HTMLElement, PopupProps>((props: PopupProps, ref)
     getWrappedChildProps(
       {
         ...originChildProps,
-        ref: setRef,
+        ref: composedTriggerRef,
       },
       trigger,
       (v?: boolean) => setOpenHandler(v),
