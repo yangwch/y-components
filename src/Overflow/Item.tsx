@@ -21,7 +21,7 @@ function Item(props: ItemProps, ref: React.ForwardedRef<Element>) {
   const { className, style, component: Component = 'div', onSizeChanged, children } = props;
   const compRef = useRef<Element | null>(null);
   const onSetRef = useComposedRef<Element>(compRef, ref);
-  useObserve({ el: compRef.current, onSizeChanged: onSizeChanged || defaultOnSizeChanged });
+  useObserve({ ref: compRef, onSizeChanged: onSizeChanged || defaultOnSizeChanged });
   return (
     <Component className={className} style={style} ref={onSetRef}>
       {children}

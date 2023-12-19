@@ -2,21 +2,21 @@ import { useEffect } from 'react';
 import { observe, unobserve } from './observerUtil';
 
 interface ObserveOptions {
-  el: Element | null;
+  ref: React.RefObject<Element | null>;
   onSizeChanged: (el: Element) => void;
 }
 function useObserve(options: ObserveOptions) {
-  const { el, onSizeChanged } = options;
+  const { ref, onSizeChanged } = options;
   useEffect(() => {
-    if (el) {
-      observe(el, onSizeChanged);
+    if (ref.current) {
+      observe(ref.current, onSizeChanged);
+      return () => {
+        if (ref.current) {
+          unobserve(ref.current, onSizeChanged);
+        }
+      };
     }
-    return () => {
-      if (el) {
-        unobserve(el, onSizeChanged);
-      }
-    };
-  }, [el, onSizeChanged]);
+  }, [onSizeChanged]);
 }
 
 export default useObserve;
