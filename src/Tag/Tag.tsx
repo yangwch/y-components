@@ -3,7 +3,7 @@ import React, { CSSProperties, useState } from 'react';
 import { settings } from '../_utils/global';
 import './style/index.less';
 
-interface TagProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface TagProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * 文字颜色
    */
@@ -33,7 +33,7 @@ interface TagProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 const tagCls = `${settings.prefix}-tag`;
 
-const Tag: React.FC<TagProps> = React.forwardRef<HTMLDivElement, TagProps>(
+export const Tag: React.FC<TagProps> = React.forwardRef<HTMLDivElement, TagProps>(
   (props: TagProps, ref) => {
     const {
       color,
@@ -93,5 +93,3 @@ const Tag: React.FC<TagProps> = React.forwardRef<HTMLDivElement, TagProps>(
     );
   },
 );
-
-export default Tag;

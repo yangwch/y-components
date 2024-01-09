@@ -1,11 +1,11 @@
 import classNames from 'classnames';
-import React, { HTMLInputTypeAttribute } from 'react';
+import React, { ComponentType, HTMLInputTypeAttribute } from 'react';
 import { settings } from '../_utils/global';
 import { sizeClassNameMap, SizeType } from '../_utils/size';
 
 export const inputPrefix = `${settings.prefix}-input`;
 
-interface InputProps extends Omit<React.HTMLAttributes<HTMLInputElement>, 'prefix'> {
+export interface InputProps extends Omit<React.HTMLAttributes<HTMLInputElement>, 'prefix'> {
   type?: HTMLInputTypeAttribute;
   /**
    * 类名
@@ -39,13 +39,31 @@ interface InputProps extends Omit<React.HTMLAttributes<HTMLInputElement>, 'prefi
    * @type ReactNode
    */
   prefix?: React.ReactNode;
+  /**
+   * 最小输入长度
+   */
+  minLength?: number;
+  /**
+   * 最大输入长度
+   */
+  maxLength?: number;
+  prefixComponent?: ComponentType;
 }
 
-const Input = React.forwardRef(function InternalInput(
+export const Input = React.forwardRef(function InternalInput(
   props: InputProps,
   ref: React.ForwardedRef<HTMLInputElement>,
 ) {
-  const { className, bordered, disabled, size, style, prefix, ...rest } = props;
+  const {
+    className,
+    bordered,
+    disabled,
+    size,
+    style,
+    prefix,
+    prefixComponent: PrefixComponent = 'span',
+    ...rest
+  } = props;
 
   const classes = classNames(className, inputPrefix, {
     [`${inputPrefix}-disabled`]: disabled,
@@ -54,7 +72,10 @@ const Input = React.forwardRef(function InternalInput(
   });
   const renderPrefix = () => {
     if (!prefix) return null;
-    return <span className={`${inputPrefix}-prefix`}>{prefix}</span>;
+    if (PrefixComponent === React.Fragment) {
+      return prefix;
+    }
+    return <PrefixComponent className={`${inputPrefix}-prefix`}>{prefix}</PrefixComponent>;
   };
 
   return (
@@ -64,5 +85,3 @@ const Input = React.forwardRef(function InternalInput(
     </span>
   );
 });
-
-export default Input;

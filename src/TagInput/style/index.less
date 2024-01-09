@@ -1,0 +1,15 @@
+@import '../../style/themes/index.less';
+@import '../../style/mixins/reset.less';
+
+@prefix: getPrefix();
+@tag-cls: ~'@{prefix}-tagInput';
+
+.@{tag-cls} {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+
+  input {
+    flex: 1;
+  }
+}

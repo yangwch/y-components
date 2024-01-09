@@ -5,6 +5,27 @@ title: Tag
 toc: content
 ---
 
+```jsx
+import React from 'react';
+import { Input, Tag } from '@yangwch/y-components';
+
+export default () => {
+  return (
+    <div>
+      <Input
+        prefix={
+          <div>
+            <Tag closable>苹果</Tag>
+            <Tag closable>香蕉</Tag>
+            <Tag closable>柿子</Tag>
+          </div>
+        }
+      />
+    </div>
+  );
+};
+```
+
 ## Usage
 
 ```jsx
