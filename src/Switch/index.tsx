@@ -81,8 +81,10 @@ function InternalSwitch(props: SwitchProps, ref: React.ForwardedRef<HTMLInputEle
   });
 
   useEffect(() => {
-    setChecked(!!customChecked);
-  }, [customChecked]);
+    if (isControlled) {
+      setChecked(!!customChecked);
+    }
+  }, [customChecked, isControlled]);
 
   const sizeTypeStr = sizeClassNameMap[size || 'middle'];
 
