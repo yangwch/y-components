@@ -9,6 +9,10 @@ const AdjustData: Record<Placement, AdjustConfig[]> = {
   topRight: [{ placement: 'bottomRight' }],
   bottomLeft: [{ placement: 'topLeft' }],
   bottomRight: [{ placement: 'topRight' }],
+  leftTop: [{ placement: 'rightTop' }],
+  leftBottom: [{ placement: 'rightBottom' }],
+  rightTop: [{ placement: 'leftTop' }],
+  rightBottom: [{ placement: 'leftBottom' }],
 };
 
 export const getAutoAdjustConfig = (placement: Placement): AdjustConfig[] => {
