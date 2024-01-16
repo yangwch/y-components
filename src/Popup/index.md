@@ -2,7 +2,7 @@
 category: Components
 type: 数据展示
 title: Popup
-toc: content
+toc: overlay
 ---
 
 ## 基本
@@ -76,10 +76,10 @@ export default () => {
         style={{ border: '1px solid', backgroundColor: 'lightgreen', padding: '0 10px' }}
         overlay={
           <div>
-            <p> this is the content</p>
-            <p> this is the content</p>
-            <p> this is the content</p>
-            <p> this is the content</p>
+            <p> this is the overlay</p>
+            <p> this is the overlay</p>
+            <p> this is the overlay</p>
+            <p> this is the overlay</p>
           </div>
         }
         autoAdjustPlacements={[
@@ -90,6 +90,78 @@ export default () => {
       >
         <Button>Scroll To The Top</Button>
       </Popup>
+    </div>
+  );
+};
+```
+
+## 位置
+
+```jsx
+import React from 'react';
+import { Popup, Space, Button as YCButton } from '@yangwch/y-components';
+import styled from 'styled-components';
+
+const buttonWidth = 80;
+const Button = styled(YCButton)`
+  width: ${buttonWidth}px;
+  margin: 5px;
+`;
+
+export default () => {
+  const overlay = (
+    <div style={{ border: '1px solid', backgroundColor: 'lightgreen', padding: '0 10px' }}>
+      <p>overlay</p>
+      <p>overlay</p>
+    </div>
+  );
+
+  return (
+    <div className="demo">
+      <div style={{ marginInlineStart: buttonWidth + 4, whiteSpace: 'nowrap' }}>
+        <Popup placement="topLeft" overlay={overlay}>
+          <Button>TL</Button>
+        </Popup>
+        <Popup placement="top" overlay={overlay}>
+          <Button>Top</Button>
+        </Popup>
+        <Popup placement="topRight" overlay={overlay}>
+          <Button>TR</Button>
+        </Popup>
+      </div>
+      <div style={{ width: buttonWidth, float: 'inline-start' }}>
+        <Popup placement="leftTop" overlay={overlay}>
+          <Button>LT</Button>
+        </Popup>
+        <Popup placement="left" overlay={overlay}>
+          <Button>Left</Button>
+        </Popup>
+        <Popup placement="leftBottom" overlay={overlay}>
+          <Button>LB</Button>
+        </Popup>
+      </div>
+      <div style={{ width: buttonWidth, marginInlineStart: buttonWidth * 4 + 24 }}>
+        <Popup placement="rightTop" overlay={overlay}>
+          <Button>RT</Button>
+        </Popup>
+        <Popup placement="right" overlay={overlay}>
+          <Button>Right</Button>
+        </Popup>
+        <Popup placement="rightBottom" overlay={overlay}>
+          <Button>RB</Button>
+        </Popup>
+      </div>
+      <div style={{ marginInlineStart: buttonWidth, clear: 'both', whiteSpace: 'nowrap' }}>
+        <Popup placement="bottomLeft" overlay={overlay}>
+          <Button>BL</Button>
+        </Popup>
+        <Popup placement="bottom" overlay={overlay}>
+          <Button>Bottom</Button>
+        </Popup>
+        <Popup placement="bottomRight" overlay={overlay}>
+          <Button>BR</Button>
+        </Popup>
+      </div>
     </div>
   );
 };
@@ -112,10 +184,10 @@ export default () => {
         style={{ border: '1px solid', backgroundColor: 'lightgreen', padding: '0 10px' }}
         overlay={
           <div>
-            <p> this is the content</p>
-            <p> this is the content</p>
-            <p> this is the content</p>
-            <p> this is the content</p>
+            <p> this is the overlay</p>
+            <p> this is the overlay</p>
+            <p> this is the overlay</p>
+            <p> this is the overlay</p>
           </div>
         }
         autoAdjustPlacements={[

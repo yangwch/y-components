@@ -3,7 +3,11 @@ import { GetContainer } from '../_utils/Portal';
 
 export type Placement =
   | 'left'
+  | 'leftTop'
+  | 'leftBottom'
   | 'right'
+  | 'rightTop'
+  | 'rightBottom'
   | 'top'
   | 'bottom'
   | 'topLeft'

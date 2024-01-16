@@ -73,19 +73,6 @@ export const calcPopupPosition = (
       left = triggerBox.x + triggerBox.width / 2 - overlayBox.width / 2;
       top = triggerBox.y - overlayBox.height;
       break;
-    default:
-    case 'bottom':
-      left = triggerBox.x + triggerBox.width / 2 - overlayBox.width / 2;
-      top = triggerBox.y + triggerBox.height;
-      break;
-    case 'left':
-      left = triggerBox.x - overlayBox.width;
-      top = triggerBox.y + triggerBox.height / 2 - overlayBox.height / 2;
-      break;
-    case 'right':
-      left = triggerBox.x + triggerBox.width;
-      top = triggerBox.y + triggerBox.height / 2 - overlayBox.height / 2;
-      break;
     case 'topLeft':
       left = triggerBox.x;
       top = triggerBox.y - overlayBox.height;
@@ -94,12 +81,41 @@ export const calcPopupPosition = (
       left = triggerBox.x + triggerBox.width - overlayBox.width;
       top = triggerBox.y - overlayBox.height;
       break;
+    case 'left':
+      left = triggerBox.x - overlayBox.width;
+      top = triggerBox.y + triggerBox.height / 2 - overlayBox.height / 2;
+      break;
+    case 'leftTop':
+      left = triggerBox.x - overlayBox.width;
+      top = triggerBox.y;
+      break;
+    case 'leftBottom':
+      left = triggerBox.x - overlayBox.width;
+      top = triggerBox.y + triggerBox.height - overlayBox.height;
+      break;
+    case 'right':
+      left = triggerBox.x + triggerBox.width;
+      top = triggerBox.y + triggerBox.height / 2 - overlayBox.height / 2;
+      break;
+    case 'rightTop':
+      left = triggerBox.x + triggerBox.width;
+      top = triggerBox.y;
+      break;
+    case 'rightBottom':
+      left = triggerBox.x + triggerBox.width;
+      top = triggerBox.y + triggerBox.height - overlayBox.height;
+      break;
     case 'bottomLeft':
       left = triggerBox.x;
       top = triggerBox.y + triggerBox.height;
       break;
     case 'bottomRight':
       left = triggerBox.x + triggerBox.width - overlayBox.width;
+      top = triggerBox.y + triggerBox.height;
+      break;
+    default:
+    case 'bottom':
+      left = triggerBox.x + triggerBox.width / 2 - overlayBox.width / 2;
       top = triggerBox.y + triggerBox.height;
       break;
   }
