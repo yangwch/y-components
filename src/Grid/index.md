@@ -13,9 +13,9 @@ import React from 'react';
 import { Row, Col } from '@yangwch/y-components';
 
 const colStyle = {
-  // border: '1px solid blue',
+  // border: '1px solid lightblue',
   padding: '5px 0',
-  background: 'rgb(119 145 240)',
+  background: 'rgba(234,245,255, 1)',
   marginTop: 10,
 };
 export default () => {
@@ -54,9 +54,9 @@ import React from 'react';
 import { Row, Col } from '@yangwch/y-components';
 
 const colStyle = {
-  border: '1px solid blue',
+  outline: '1px solid lightblue',
   padding: '5px 0',
-  background: 'rgb(119 145 240)',
+  background: 'rgba(234,245,255, 1)',
 };
 export default () => {
   return (
@@ -83,9 +83,9 @@ import React from 'react';
 import { Row, Col, Divider } from '@yangwch/y-components';
 
 const colStyle = {
-  border: '1px solid blue',
+  outline: '1px solid lightblue',
   padding: '5px 0',
-  background: 'rgb(119 145 240)',
+  background: 'rgb(234,245,255)',
 };
 export default () => {
   return (
@@ -145,12 +145,11 @@ import React from 'react';
 import { Row, Col, Divider } from '@yangwch/y-components';
 
 const colStyle = {
-  background: 'rgb(119 145 240)',
+  background: 'rgba(234,245,255, 1)',
   height: 50,
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  color: '#fff',
 };
 
 const ColumnContent = () => <div style={colStyle}>Column</div>;

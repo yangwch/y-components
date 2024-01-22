@@ -15,7 +15,7 @@ const headerStyle = {
   paddingInline: 50,
   lineHeight: '50px',
   height: 50,
-  backgroundColor: 'rgb(125, 188, 234)',
+  backgroundColor: 'rgb(234,245,255)',
 };
 const siderStyle = {
   width: 100,
@@ -27,7 +27,7 @@ const contentStyle = {
 
 export default () => {
   return (
-    <div style={{ background: 'rgb(125, 188, 234)' }}>
+    <div style={{ background: 'rgb(234,245,255)' }}>
       <Layout>
         <Header style={headerStyle}>Header</Header>
         <Layout>
