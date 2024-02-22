@@ -15,7 +15,7 @@ export default defineConfig({
     name: 'y-components',
     nav: [
       { title: '组件', link: '/components/button' },
-      { title: '文档', link: '/api' },
+      // { title: '文档', link: '/api' },
     ],
   },
   apiParser: {},
