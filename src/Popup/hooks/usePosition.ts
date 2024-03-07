@@ -71,7 +71,7 @@ function usePosition(props: Props) {
   }
   // event listeners
   useEffect(() => {
-    let timer: number | NodeJS.Timer;
+    let timer: any;
     function onScroll() {
       if (timer) {
         clearTimeout(timer);
