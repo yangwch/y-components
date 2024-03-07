@@ -1,16 +1,16 @@
 name: Build and Publish to NPM
 
 on:
-  release:
-    types: [created]
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+  # release:
+  #   types: [created]
+  # # Allows you to run this workflow manually from the Actions tab
+  # workflow_dispatch:
 
   # Runs on pushes tags
-  # push:
-  #   tags:
-  #     - v0.*
-  #     - v1.*
+  push:
+    tags:
+      - v0.*
+      - v1.*
 
 jobs:
   build-and-publish:
